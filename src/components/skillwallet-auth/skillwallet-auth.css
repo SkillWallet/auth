@@ -1,0 +1,102 @@
+:host {
+  display: block;
+}
+
+.connect-wallet-button {
+  background-color: black;
+  color: white;
+  border-radius: 40px;
+}
+
+#topDiv {
+  display: block;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(109, 109, 109, 0.95);
+}
+
+#modalWindow {
+  background-color: rgba(0, 0, 0, 0.75);
+  margin: 5% auto;
+  padding:20px;
+  border: 1px solid #888;
+  width: 40%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-window-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.wallet-header > *:last-child {
+  padding-left: 20px;
+}
+
+.wallet-header img {
+  width: 60px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.wallet-header h2 {
+  text-decoration: underline;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  color: rgba(243, 244, 246, 1);
+}
+
+.wallet-modal-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-modal-button > button > *:first-child {
+  width: 70px;
+}
+
+.wallet-modal-button button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 40px;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  padding: 0 10px;
+  width: 50%;
+  margin: 10px 0;
+}
+
+.wallet-modal-button button:hover {
+  cursor: pointer;
+}
+
+.wallet-modal-button button:active {
+  background-color: white;
+  color: black;
+}
+
+.wallet-modal-button p {
+  font-size: 35px;
+  margin-left: 55px;
+}

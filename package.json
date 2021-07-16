@@ -1,0 +1,46 @@
+{
+  "name": "skillwallet-auth-test2",
+  "version": "0.0.1-alpha",
+  "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
+  "author": "Michael Chrupcala <michael.chrupcala@gmail.com> (https://michaelchrupcala.com/)",
+  "keywords": [
+    "skillwallet",
+    "react",
+    "metamask"
+  ],
+  "homepage": "https://skillwallet.id/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SkillWallet/auth"
+  },
+  "bugs": {
+    "email": "michael.chrupcala@gmail.com",
+    "url": "https://github.com/SkillWallet/auth"
+  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/custom-elements/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/custom-elements/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/skillwallet-auth/skillwallet-auth.esm.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "jest",
+    "test:watch": "jest — watch",
+    "generate": "stencil generate"
+  },
+  "dependencies": {
+    "@stencil/core": "2.6.0",
+    "@types/jest": "^26.0.24",
+    "jest": "^27.0.6",
+    "jest-cli": "^27.0.6"
+  },
+  "license": "MIT"
+}
