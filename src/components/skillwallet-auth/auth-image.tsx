@@ -7,7 +7,7 @@ import { Component, Prop, getAssetPath, h } from '@stencil/core';
 })
 export class StencilAsset {
 
-  @Prop() image = "sw-logo.svg";
+  @Prop({mutable: true}) image = "sw-logo.svg";
 
   render() {
    return <img src={getAssetPath(`./images/${this.image}`)} />

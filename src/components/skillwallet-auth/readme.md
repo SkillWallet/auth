@@ -4,20 +4,31 @@
 
 <!-- Auto Generated Below -->
 
-## Import to your React application
-
-1. import { defineCustomElements } from "skillwallet-auth/loader";
-2. defineCustomElements(window) (in index.js)
-
 
 ## Properties
 
-| Property | Attribute | Description     | Type     | Default     |
-| -------- | --------- | --------------- | -------- | ----------- |
-| `first`  | `first`   | The first name  | `string` | `undefined` |
-| `last`   | `last`    | The last name   | `string` | `undefined` |
-| `middle` | `middle`  | The middle name | `string` | `undefined` |
+| Property    | Attribute    | Description | Type      | Default     |
+| ----------- | ------------ | ----------- | --------- | ----------- |
+| `isVisible` | `is-visible` |             | `boolean` | `undefined` |
 
+
+## Dependencies
+
+### Used by
+
+ - [skillwallet-auth](.)
+
+### Depends on
+
+- [auth-image](.)
+
+### Graph
+```mermaid
+graph TD;
+  users-modal --> auth-image
+  skillwallet-auth --> users-modal
+  style users-modal fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 
