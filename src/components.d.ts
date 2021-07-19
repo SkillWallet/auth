@@ -9,6 +9,8 @@ export namespace Components {
     interface AuthImage {
         "image": string;
     }
+    interface NewUser {
+    }
     interface QrModal {
     }
     interface SkillwalletAuth {
@@ -22,6 +24,12 @@ declare global {
     var HTMLAuthImageElement: {
         prototype: HTMLAuthImageElement;
         new (): HTMLAuthImageElement;
+    };
+    interface HTMLNewUserElement extends Components.NewUser, HTMLStencilElement {
+    }
+    var HTMLNewUserElement: {
+        prototype: HTMLNewUserElement;
+        new (): HTMLNewUserElement;
     };
     interface HTMLQrModalElement extends Components.QrModal, HTMLStencilElement {
     }
@@ -43,6 +51,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "auth-image": HTMLAuthImageElement;
+        "new-user": HTMLNewUserElement;
         "qr-modal": HTMLQrModalElement;
         "skillwallet-auth": HTMLSkillwalletAuthElement;
         "users-modal": HTMLUsersModalElement;
@@ -52,16 +61,20 @@ declare namespace LocalJSX {
     interface AuthImage {
         "image"?: string;
     }
+    interface NewUser {
+    }
     interface QrModal {
     }
     interface SkillwalletAuth {
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UsersModal {
+        "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
         "onShowQR"?: (event: CustomEvent<Boolean>) => void;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;
+        "new-user": NewUser;
         "qr-modal": QrModal;
         "skillwallet-auth": SkillwalletAuth;
         "users-modal": UsersModal;
@@ -72,6 +85,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "auth-image": LocalJSX.AuthImage & JSXBase.HTMLAttributes<HTMLAuthImageElement>;
+            "new-user": LocalJSX.NewUser & JSXBase.HTMLAttributes<HTMLNewUserElement>;
             "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;
             "skillwallet-auth": LocalJSX.SkillwalletAuth & JSXBase.HTMLAttributes<HTMLSkillwalletAuthElement>;
             "users-modal": LocalJSX.UsersModal & JSXBase.HTMLAttributes<HTMLUsersModalElement>;

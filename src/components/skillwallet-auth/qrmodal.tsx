@@ -13,7 +13,7 @@ export class QRModal {
 
 componentDidLoad() {
     this.qr = <div style={{backgroundColor: 'red', height: '1000px', width: '1000px'}}>
-    <QRCode
+    {/* <QRCode
     value={"123"}
     logoImage="/metamask.svg"
     logoWidth={140}
@@ -21,8 +21,9 @@ componentDidLoad() {
     bgColor="#FFFFFF"
     size={350}
     // className="qr-code"
-    ></QRCode></div>
-    console.log(this.qr);
+    ></QRCode> */}
+    </div>
+    // console.log(this.qr);
 }
 
   render() {

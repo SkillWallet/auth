@@ -8,6 +8,8 @@ import { Component, h, State, Listen, Event, EventEmitter } from '@stencil/core'
 export class UsersModal {
   @State() usersIsVisible: boolean = false;
   @State() qrIsVisible: boolean = false;
+  @State() newUserIsVisible: boolean = false;
+  
 
   @Event({
     eventName: 'showQR',
@@ -16,24 +18,40 @@ export class UsersModal {
     bubbles: true,
   }) showQR: EventEmitter<Boolean>;
 
+  @Event({
+    eventName: 'showNewUser',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) showNewUser: EventEmitter<Boolean>;
+
   @Listen('showLogin', { target: "body" })
   handleClick(wasClicked) {
-    this.usersIsVisible = wasClicked;
+    this.usersIsVisible = wasClicked.returnValue;
   }
 
   handleQRClick = () => {
-    alert('clicked!');
+    // alert('clicked!');
     // TODO: clear out the create User modal when I open the QR modal
     this.usersIsVisible = false;
     this.qrIsVisible = true;
     // this.showQR.emit(true);
   }
 
+  handleUserClick = () => {
+    // TODO: clear out the create User modal when I open the User modal
+    
+    // this.usersIsVisible = false;
+    this.newUserIsVisible = true;
+    this.showNewUser.emit(true);
+    
+  }
+
   render() {
-    if (this.usersIsVisible) {
+    if (this.usersIsVisible === true) {
       return (
-      <div id="topDiv">
-            <div id="modalWindow">
+      <div class="topDiv">
+            <div class="modalWindow">
                 <div class="modal-window-child">
                     <div class="wallet-header">
                       <auth-image image={"wallet-black.svg"}></auth-image>
@@ -41,23 +59,20 @@ export class UsersModal {
                     </div>
 
                     <div class="wallet-modal-button">
-                        <button
-                            onClick={() => this.handleQRClick()}
-                            >
+                        <button onClick={() => this.handleQRClick()}>
                             <auth-image></auth-image>
                             <p>SkillWallet</p>
                         </button>
-                        <button
-                            // onClick={() => showNewAccountModal()}
-                            >
+                        <button onClick={() => this.handleUserClick()}>
                             <auth-image image={"plus-button-white.svg"}></auth-image>
                             <p>New User</p>
                         </button>
                     </div>
                 </div>
             </div>
+            {this.newUserIsVisible === true ? <new-user></new-user> : null}
         </div>
-    )} else if (this.qrIsVisible) {
+    )} else if (this.qrIsVisible === true) {
       // () => {
 
       // }
@@ -82,17 +97,13 @@ export class UsersModal {
         // <div></div>
 
       // )
-    }  else {
+    } else if (this.newUserIsVisible === true) {
+      <new-user></new-user>
+    }
+     else {
       return (
         <div></div>
       )
     }
   }
 }
-
-// @Component()
-// class QRModal {
-//   render() {
-//     return (
-//   )
-// }}
