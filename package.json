@@ -40,7 +40,10 @@
     "@stencil/core": "2.6.0",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
-    "jest-cli": "^27.0.6"
+    "jest-cli": "^27.0.6",
+    "qrcode-react": "^0.1.16",
+    "qrcode.react": "^1.0.1",
+    "react-qrcode-logo": "^2.4.0"
   },
   "license": "MIT"
 }

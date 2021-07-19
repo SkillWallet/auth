@@ -1,14 +1,36 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, State, Listen, Event, EventEmitter } from '@stencil/core';
+// import {QRCode} from 'qrcode.react';
+// import {QRCode} from 'react-qrcode-logo';
 
 @Component({
   tag: 'users-modal'
 })
 export class UsersModal {
-  // @Listen('click', { capture: true });
-  @Prop({mutable: true}) isVisible: boolean;
+  @State() usersIsVisible: boolean = false;
+  @State() qrIsVisible: boolean = false;
+
+  @Event({
+    eventName: 'showQR',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) showQR: EventEmitter<Boolean>;
+
+  @Listen('showLogin', { target: "body" })
+  handleClick(wasClicked) {
+    this.usersIsVisible = wasClicked;
+  }
+
+  handleQRClick = () => {
+    alert('clicked!');
+    // TODO: clear out the create User modal when I open the QR modal
+    this.usersIsVisible = false;
+    this.qrIsVisible = true;
+    // this.showQR.emit(true);
+  }
 
   render() {
-    if (this.isVisible) {
+    if (this.usersIsVisible) {
       return (
       <div id="topDiv">
             <div id="modalWindow">
@@ -20,7 +42,7 @@ export class UsersModal {
 
                     <div class="wallet-modal-button">
                         <button
-                            // onClick={() => showNewQRModal()}
+                            onClick={() => this.handleQRClick()}
                             >
                             <auth-image></auth-image>
                             <p>SkillWallet</p>
@@ -35,10 +57,42 @@ export class UsersModal {
                 </div>
             </div>
         </div>
-    )} else {
+    )} else if (this.qrIsVisible) {
+      // () => {
+
+      // }
+      return (
+        <qr-modal />
+      )
+      // return (
+        // <QRCode 
+        // value="http://facebook.github.io/react/" 
+        // renderAs="svg" 
+        // size={128}
+        // imageExcavate='true'
+        // imageSettings={{
+        //   src: 'https://static.zpao.com/favicon.png',
+        //   x: 0,
+        //   y: 0,
+        //   height: 24,
+        //   width: 24,
+        //   excavate: true,
+        // }}
+        // />
+        // <div></div>
+
+      // )
+    }  else {
       return (
         <div></div>
       )
     }
   }
 }
+
+// @Component()
+// class QRModal {
+//   render() {
+//     return (
+//   )
+// }}

@@ -9,10 +9,11 @@ export namespace Components {
     interface AuthImage {
         "image": string;
     }
+    interface QrModal {
+    }
     interface SkillwalletAuth {
     }
     interface UsersModal {
-        "isVisible": boolean;
     }
 }
 declare global {
@@ -21,6 +22,12 @@ declare global {
     var HTMLAuthImageElement: {
         prototype: HTMLAuthImageElement;
         new (): HTMLAuthImageElement;
+    };
+    interface HTMLQrModalElement extends Components.QrModal, HTMLStencilElement {
+    }
+    var HTMLQrModalElement: {
+        prototype: HTMLQrModalElement;
+        new (): HTMLQrModalElement;
     };
     interface HTMLSkillwalletAuthElement extends Components.SkillwalletAuth, HTMLStencilElement {
     }
@@ -36,6 +43,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "auth-image": HTMLAuthImageElement;
+        "qr-modal": HTMLQrModalElement;
         "skillwallet-auth": HTMLSkillwalletAuthElement;
         "users-modal": HTMLUsersModalElement;
     }
@@ -44,14 +52,17 @@ declare namespace LocalJSX {
     interface AuthImage {
         "image"?: string;
     }
+    interface QrModal {
+    }
     interface SkillwalletAuth {
-        "onShowQR"?: (event: CustomEvent<Boolean>) => void;
+        "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UsersModal {
-        "isVisible"?: boolean;
+        "onShowQR"?: (event: CustomEvent<Boolean>) => void;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;
+        "qr-modal": QrModal;
         "skillwallet-auth": SkillwalletAuth;
         "users-modal": UsersModal;
     }
@@ -61,6 +72,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "auth-image": LocalJSX.AuthImage & JSXBase.HTMLAttributes<HTMLAuthImageElement>;
+            "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;
             "skillwallet-auth": LocalJSX.SkillwalletAuth & JSXBase.HTMLAttributes<HTMLSkillwalletAuthElement>;
             "users-modal": LocalJSX.UsersModal & JSXBase.HTMLAttributes<HTMLUsersModalElement>;
         }

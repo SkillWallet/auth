@@ -1,4 +1,4 @@
-import { Component, State, Listen, Event, EventEmitter, h } from '@stencil/core';
+import { Component, Event, EventEmitter, h, State } from '@stencil/core';
 
 @Component({
   tag: 'skillwallet-auth',
@@ -6,26 +6,29 @@ import { Component, State, Listen, Event, EventEmitter, h } from '@stencil/core'
   shadow: true,
 })
 export class SkillwalletAuth {
-  @State() showModal: boolean = false;
-  @Event() showQR: EventEmitter<Boolean>;
+  @Event({
+    eventName: 'showLogin',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) showLogin: EventEmitter<Boolean>;
+  @State() clickCount: number = 0;
 
-  @Listen('click', { capture: true })
   handleClick() {
-    this.showModal = !this.showModal;
+    this.clickCount += 1;
+    if (this.clickCount < 2) {
+      this.showLogin.emit(true);
+    }
   }
 
   render() {
     return (
-      <div>
-      <button class="connect-wallet-button">
+      <div onClick={() => this.handleClick()}>
+      <button class="connect-wallet-button" >
         Connect Wallet
       </button>
-      <users-modal
-          isVisible={this.showModal}
-        >
+      <users-modal>
         </users-modal>
-  
-      {this.showModal ? 'Logged in!' : null}
       </div>
     )
   }
