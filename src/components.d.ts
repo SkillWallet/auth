@@ -5,11 +5,21 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ErrorCorrectionLevel, OutputMode } from "./components/skillwallet-auth/enums";
 export namespace Components {
     interface AuthImage {
         "image": string;
     }
     interface NewUser {
+    }
+    interface QrCode {
+        "colorDark": string;
+        "colorLight": string;
+        "contents": string;
+        "errorCorrectionLevel": ErrorCorrectionLevel;
+        "margin": number;
+        "outputMode": OutputMode;
+        "scale": number;
     }
     interface QrModal {
     }
@@ -30,6 +40,12 @@ declare global {
     var HTMLNewUserElement: {
         prototype: HTMLNewUserElement;
         new (): HTMLNewUserElement;
+    };
+    interface HTMLQrCodeElement extends Components.QrCode, HTMLStencilElement {
+    }
+    var HTMLQrCodeElement: {
+        prototype: HTMLQrCodeElement;
+        new (): HTMLQrCodeElement;
     };
     interface HTMLQrModalElement extends Components.QrModal, HTMLStencilElement {
     }
@@ -52,6 +68,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "auth-image": HTMLAuthImageElement;
         "new-user": HTMLNewUserElement;
+        "qr-code": HTMLQrCodeElement;
         "qr-modal": HTMLQrModalElement;
         "skillwallet-auth": HTMLSkillwalletAuthElement;
         "users-modal": HTMLUsersModalElement;
@@ -62,6 +79,15 @@ declare namespace LocalJSX {
         "image"?: string;
     }
     interface NewUser {
+    }
+    interface QrCode {
+        "colorDark"?: string;
+        "colorLight"?: string;
+        "contents"?: string;
+        "errorCorrectionLevel"?: ErrorCorrectionLevel;
+        "margin"?: number;
+        "outputMode"?: OutputMode;
+        "scale"?: number;
     }
     interface QrModal {
     }
@@ -75,6 +101,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "auth-image": AuthImage;
         "new-user": NewUser;
+        "qr-code": QrCode;
         "qr-modal": QrModal;
         "skillwallet-auth": SkillwalletAuth;
         "users-modal": UsersModal;
@@ -86,6 +113,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "auth-image": LocalJSX.AuthImage & JSXBase.HTMLAttributes<HTMLAuthImageElement>;
             "new-user": LocalJSX.NewUser & JSXBase.HTMLAttributes<HTMLNewUserElement>;
+            "qr-code": LocalJSX.QrCode & JSXBase.HTMLAttributes<HTMLQrCodeElement>;
             "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;
             "skillwallet-auth": LocalJSX.SkillwalletAuth & JSXBase.HTMLAttributes<HTMLSkillwalletAuthElement>;
             "users-modal": LocalJSX.UsersModal & JSXBase.HTMLAttributes<HTMLUsersModalElement>;
