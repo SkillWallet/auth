@@ -1,6 +1,4 @@
 import { Component, h, State, Listen, Event, EventEmitter } from '@stencil/core';
-// import {QRCode} from 'qrcode.react';
-// import {QRCode} from 'react-qrcode-logo';
 
 @Component({
   tag: 'users-modal'
@@ -9,6 +7,8 @@ export class UsersModal {
   @State() usersIsVisible: boolean = false;
   @State() qrIsVisible: boolean = false;
   @State() newUserIsVisible: boolean = false;
+  @State() userDetailsAreVisible: boolean = false;
+  @State() userRoleIsVisible: boolean = false;
   
 
   @Event({
@@ -33,7 +33,7 @@ export class UsersModal {
   handleQRClick = () => {
     // alert('clicked!');
     // TODO: clear out the create User modal when I open the QR modal
-    this.usersIsVisible = false;
+    // this.usersIsVisible = false;
     this.qrIsVisible = true;
     // this.showQR.emit(true);
   }
@@ -47,6 +47,22 @@ export class UsersModal {
     
   }
 
+  @Listen('showUserDetails')
+  showUserDetails() {
+    // alert('click 2 bitch');
+    this.newUserIsVisible = false;
+    this.userDetailsAreVisible = true;
+  }
+
+  @Listen('showUserRole')
+  showUserRole() {
+    // alert('click 2 bitch');
+    this.userDetailsAreVisible = false;
+    this.userRoleIsVisible = true;
+  }
+
+
+  // FIX THIS COMMAND FLOW -- USERSISVISIBLE IS ...STILL VISIBLE
   render() {
     if (this.usersIsVisible === true) {
       return (
@@ -70,15 +86,13 @@ export class UsersModal {
                     </div>
                 </div>
             </div>
-            {this.newUserIsVisible === true ? <new-user></new-user> : null}
+            {this.qrIsVisible === true ? <qr-modal></qr-modal> : null}
+    {this.newUserIsVisible === true ? <new-user></new-user> : null}
+    {this.userDetailsAreVisible === true ? <user-details></user-details> : null}
+    {this.userRoleIsVisible === true ? <user-role></user-role> : null}
         </div>
-    )} else if (this.qrIsVisible === true) {
-      // () => {
+    )} 
 
-      // }
-      return (
-        <qr-modal />
-      )
       // return (
         // <QRCode 
         // value="http://facebook.github.io/react/" 
@@ -97,13 +111,10 @@ export class UsersModal {
         // <div></div>
 
       // )
-    } else if (this.newUserIsVisible === true) {
-      <new-user></new-user>
-    }
-     else {
-      return (
-        <div></div>
-      )
-    }
+    // else if (this.newUserIsVisible === true) {
+    //   <new-user></new-user>
+    // } else if (this.userDetailsAreVisible === true) {
+    //   <user-details></user-details>
+    // }
   }
 }

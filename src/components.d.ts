@@ -25,6 +25,10 @@ export namespace Components {
     }
     interface SkillwalletAuth {
     }
+    interface UserDetails {
+    }
+    interface UserRole {
+    }
     interface UsersModal {
     }
 }
@@ -59,6 +63,18 @@ declare global {
         prototype: HTMLSkillwalletAuthElement;
         new (): HTMLSkillwalletAuthElement;
     };
+    interface HTMLUserDetailsElement extends Components.UserDetails, HTMLStencilElement {
+    }
+    var HTMLUserDetailsElement: {
+        prototype: HTMLUserDetailsElement;
+        new (): HTMLUserDetailsElement;
+    };
+    interface HTMLUserRoleElement extends Components.UserRole, HTMLStencilElement {
+    }
+    var HTMLUserRoleElement: {
+        prototype: HTMLUserRoleElement;
+        new (): HTMLUserRoleElement;
+    };
     interface HTMLUsersModalElement extends Components.UsersModal, HTMLStencilElement {
     }
     var HTMLUsersModalElement: {
@@ -71,6 +87,8 @@ declare global {
         "qr-code": HTMLQrCodeElement;
         "qr-modal": HTMLQrModalElement;
         "skillwallet-auth": HTMLSkillwalletAuthElement;
+        "user-details": HTMLUserDetailsElement;
+        "user-role": HTMLUserRoleElement;
         "users-modal": HTMLUsersModalElement;
     }
 }
@@ -79,6 +97,7 @@ declare namespace LocalJSX {
         "image"?: string;
     }
     interface NewUser {
+        "onShowUserDetails"?: (event: CustomEvent<Boolean>) => void;
     }
     interface QrCode {
         "colorDark"?: string;
@@ -94,6 +113,11 @@ declare namespace LocalJSX {
     interface SkillwalletAuth {
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
     }
+    interface UserDetails {
+        "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
+    }
+    interface UserRole {
+    }
     interface UsersModal {
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
         "onShowQR"?: (event: CustomEvent<Boolean>) => void;
@@ -104,6 +128,8 @@ declare namespace LocalJSX {
         "qr-code": QrCode;
         "qr-modal": QrModal;
         "skillwallet-auth": SkillwalletAuth;
+        "user-details": UserDetails;
+        "user-role": UserRole;
         "users-modal": UsersModal;
     }
 }
@@ -116,6 +142,8 @@ declare module "@stencil/core" {
             "qr-code": LocalJSX.QrCode & JSXBase.HTMLAttributes<HTMLQrCodeElement>;
             "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;
             "skillwallet-auth": LocalJSX.SkillwalletAuth & JSXBase.HTMLAttributes<HTMLSkillwalletAuthElement>;
+            "user-details": LocalJSX.UserDetails & JSXBase.HTMLAttributes<HTMLUserDetailsElement>;
+            "user-role": LocalJSX.UserRole & JSXBase.HTMLAttributes<HTMLUserRoleElement>;
             "users-modal": LocalJSX.UsersModal & JSXBase.HTMLAttributes<HTMLUsersModalElement>;
         }
     }
