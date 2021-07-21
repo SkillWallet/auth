@@ -1,10 +1,17 @@
 import { Component, Event, EventEmitter, Listen, h, State } from '@stencil/core';
 
+declare global {
+    interface Window {
+        ethereum:any;
+    }
+}
+
 @Component({
   tag: 'new-user'
 })
-export class NewUser {
+export class NewUser {    
     @State() newUserIsVisible: boolean = true;
+    @State() isAccountDisconnected: boolean = true;
 
     @Event({
         eventName: 'showUserDetails',
@@ -12,6 +19,24 @@ export class NewUser {
         cancelable: true,
         bubbles: true,
       }) showUserDetails: EventEmitter<Boolean>;
+
+      componentWillLoad() {
+        const {ethereum} = window;
+        if (ethereum && ethereum.isMetaMask) {
+            this.isAccountDisconnected = false;
+            return;
+        }
+      }
+
+    handleMetamaskClick = async () => {
+        const {ethereum} = window;
+            try {
+                await ethereum.request({ method: 'eth_requestAccounts'});
+                this.isAccountDisconnected = false;
+            } catch (error) {
+                alert(error);
+            }
+      }
 
     @Listen('showNewUser', { target: "body" })
     handleUserClick(wasClicked) {
@@ -35,7 +60,7 @@ export class NewUser {
 
                     <div class="wallet-modal-button">
                         <button 
-                        // onClick={() => this.handleQRClick()}
+                        onClick={() => this.handleMetamaskClick()}
                         >
                             <auth-image image={"metamask.svg"}></auth-image>
                             <p>Inject from Metamask</p>
@@ -49,7 +74,7 @@ export class NewUser {
                     </div>
 
              {/* ask Alex --> button doesn't seem necessary */}
-                    <button onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
+                    <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
                 </div>
             </div>
         </div>

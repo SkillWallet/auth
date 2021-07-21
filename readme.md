@@ -14,7 +14,7 @@ npm i @skill-wallet/auth
 
 Copy this line into your index.js file's imports:
 ```bash
-import { defineCustomElements } from "@skillwallet/auth/loader";
+import { defineCustomElements } from "@skill-wallet/auth/loader";
 ```
 
 Add this to the last line of your index.js:

@@ -121,7 +121,6 @@ declare namespace LocalJSX {
     }
     interface UsersModal {
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
-        "onShowQR"?: (event: CustomEvent<Boolean>) => void;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;

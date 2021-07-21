@@ -11,12 +11,12 @@ export class UsersModal {
   @State() userRoleIsVisible: boolean = false;
   
 
-  @Event({
-    eventName: 'showQR',
-    composed: true,
-    cancelable: true,
-    bubbles: true,
-  }) showQR: EventEmitter<Boolean>;
+  // @Event({
+  //   eventName: 'showQR',
+  //   composed: true,
+  //   cancelable: true,
+  //   bubbles: true,
+  // }) showQR: EventEmitter<Boolean>;
 
   @Event({
     eventName: 'showNewUser',
