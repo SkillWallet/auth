@@ -2,10 +2,28 @@
   display: block;
 }
 
+button, p, h1, h2, h3, h4 {
+  font-family: Verdana, Helvetica !important;
+}
+
 .connect-wallet-button {
   background-color: black;
   color: white;
   border-radius: 40px;
+  font-weight: bold;
+  font-size: 11px;
+  border: 0px;
+  padding: 4px 8px;
+}
+
+.connect-wallet-button:hover {
+  cursor: pointer;
+  background-color: #36454F;
+  
+}
+
+.connect-wallet-button:active {
+  margin-top: 0.5px;
 }
 
 .topDiv {
@@ -38,11 +56,14 @@
   justify-content: center;
   padding-top: 14px;
   padding-bottom: 14px;
+  width: 75%;
+  margin: 0 auto;
 }
 
 .wallet-header {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   margin-bottom: 12px;
 }
 
@@ -66,8 +87,7 @@
 .wallet-modal-button {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .wallet-modal-button > button > *:first-child {
@@ -78,17 +98,18 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 40px;
+  border-radius: 30px;
   border: 1px solid white;
   background-color: black;
   color: white;
   padding: 0 10px;
-  width: 50%;
+  width: 100%;
   margin: 10px 0;
 }
 
 .wallet-modal-button button:hover {
   cursor: pointer;
+  background-color: #36454F;
 }
 
 .wallet-modal-button button:active {
@@ -97,7 +118,7 @@
 }
 
 .wallet-modal-button p {
-  font-size: 35px;
+  font-size: 27px;
   margin-left: 55px;
 }
 
@@ -121,12 +142,24 @@
   border-radius: 40px;
 }
 
+.qr-modal-window-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  width: 75%;
+  margin: 0 auto;
+}
+
 .wallet-text {
   margin-top: 30px;
-  max-width: 60%;
+  max-width: 70%;
   background-color: white;
-  border-radius: 40px;
+  border-radius: 30px;
   text-align: center;
+  padding: 10px 20px;
 }
 
 .new-user-header > h2 {
@@ -145,8 +178,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding-top: 14px;
   padding-bottom: 14px; 
+  width: 75%;
+  margin: 0 auto;
+}
+
+.new-user-modal-window-child > .wallet-modal-button > button > *:last-child {
+  max-height: 100px;
+  margin-left: 15px;
 }
 
 .new-user-modal-window-child > button {
@@ -178,16 +219,38 @@
 
 .user-details-fields > div {
   background-color: white;
-  border-radius: 40px;
+  border-radius: 30px;
   width: 100%;
+  min-height: 60px;
   text-align: center;
-  margin: 20px auto;
+  margin: 2px auto 20px auto !important;
+}
+
+.user-details-fields > div > form  {
+  background-color: white;
+  border-radius: 30px;
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+}
+
+.user-details-fields > div > form > input {
+  background-color: white;
+  border-radius: 30px;
+  width: 200%;
+  min-height: 60px;
+}
+
+.user-details-fields > div > form > p {
+  font-size: 8px;
+  /* display: */
 }
 
 .user-details-fields  > h4 {
   text-decoration: underline;
   font-weight: bold;
   color: white;
+  margin: 15px 0px 2px 0px !important;
 }
 
 .user-details-fields {
@@ -218,6 +281,25 @@
 .user-details-modal-window-child > button:active, .user-role-modal-window-child > button:active {
   background-color: black;
   color: white;
+}
+
+.avatar-div {
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 30px;
+}
+
+.avatar-div p {
+  width: 50%;
+  font-size: 12px;
+}
+
+.avatar-img {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  margin: 10px 0 0 0;
+  border: 1px solid black;
 }
 
 .user-role-modal-window-child {

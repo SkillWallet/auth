@@ -10,6 +10,7 @@ export class UsersModal {
   @State() userDetailsAreVisible: boolean = false;
   @State() userRoleIsVisible: boolean = false;
   
+  qrText = null;
 
   // @Event({
   //   eventName: 'showQR',
@@ -33,6 +34,7 @@ export class UsersModal {
   handleQRClick = () => {
     // TODO: clear out the create User modal when I open the QR modal
     // this.usersIsVisible = false;
+    this.qrText = 'skillwallet';
     this.qrIsVisible = true;
     // this.showQR.emit(true);
   }
@@ -59,6 +61,7 @@ export class UsersModal {
 
   @Listen('showUserQR')
   showUserQR() {
+    this.qrText = 'role';
     this.userRoleIsVisible = false;
     this.qrIsVisible = true;
   }
@@ -88,7 +91,7 @@ export class UsersModal {
                     </div>
                 </div>
             </div>
-            {this.qrIsVisible === true ? <qr-modal></qr-modal> : null}
+            {this.qrIsVisible === true ? <qr-modal textKey={this.qrText}></qr-modal> : null}
     {this.newUserIsVisible === true ? <new-user></new-user> : null}
     {this.userDetailsAreVisible === true ? <user-details></user-details> : null}
     {this.userRoleIsVisible === true ? <user-role></user-role> : null}

@@ -22,6 +22,7 @@ export namespace Components {
         "scale": number;
     }
     interface QrModal {
+        "textKey": string;
     }
     interface SkillwalletAuth {
     }
@@ -109,6 +110,7 @@ declare namespace LocalJSX {
         "scale"?: number;
     }
     interface QrModal {
+        "textKey"?: string;
     }
     interface SkillwalletAuth {
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
@@ -117,7 +119,7 @@ declare namespace LocalJSX {
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserRole {
-        "onShowUserQR"?: (event: CustomEvent<Boolean>) => void;
+        "onShowUserQR"?: (event: CustomEvent<String>) => void;
     }
     interface UsersModal {
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;

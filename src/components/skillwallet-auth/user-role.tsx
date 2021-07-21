@@ -11,10 +11,10 @@ export class UserRole {
         composed: true,
         cancelable: true,
         bubbles: true,
-      }) showUserQR: EventEmitter<Boolean>;
+      }) showUserQR: EventEmitter<String>;
 
     handleUserQRClick() {
-        this.showUserQR.emit(true); 
+        this.showUserQR.emit(); 
       }
 
     handleRoleClick(role) {

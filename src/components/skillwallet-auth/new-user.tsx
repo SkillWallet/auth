@@ -22,7 +22,8 @@ export class NewUser {
 
       componentWillLoad() {
         const {ethereum} = window;
-        if (ethereum && ethereum.isMetaMask) {
+        console.log(ethereum);
+        if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
             this.isAccountDisconnected = false;
             return;
         }
