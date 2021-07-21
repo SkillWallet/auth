@@ -15,14 +15,11 @@ export class NewUser {
 
     @Listen('showNewUser', { target: "body" })
     handleUserClick(wasClicked) {
-        // console.log('clicked!');
-        alert(wasClicked);
         this.newUserIsVisible = wasClicked;
     }
 
     @Listen('showUserDetails', { target: "body" })
     handleUserDetailsClick() {
-        // alert('click 1 bitch');
         this.showUserDetails.emit(true); 
       }
 

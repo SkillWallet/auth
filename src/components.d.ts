@@ -117,6 +117,7 @@ declare namespace LocalJSX {
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserRole {
+        "onShowUserQR"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UsersModal {
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;

@@ -1,10 +1,21 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'user-role'
 })
 export class UserRole {
     @State() roleSelected: string = null;
+
+    @Event({
+        eventName: 'showUserQR',
+        composed: true,
+        cancelable: true,
+        bubbles: true,
+      }) showUserQR: EventEmitter<Boolean>;
+
+    handleUserQRClick() {
+        this.showUserQR.emit(true); 
+      }
 
     handleRoleClick(role) {
         this.roleSelected = role;
@@ -26,10 +37,19 @@ export class UserRole {
                             <div><div class="filled-in-circle"></div></div>
                             <p>{this.roleSelected}</p>
                         </div>
+
                         <div class="xp-component">
                             <h3>Your XP Level</h3>
                             <p>Tell your Community how experienced you are in this Role!</p>
-                            <div class="slider"></div>
+                            
+                            <div class="bar-chart-first-container">
+                                <div class="bar-chart-container"></div>
+
+                            <div class="bar-chart-metrics">
+                                <p>1</p>
+                                <p>10</p>
+                            </div>
+                            </div>
                         </div>
                     </div> :                     
                     
@@ -49,7 +69,7 @@ export class UserRole {
                     </div>
                     }
 
-                    <button>That's it - join this community!</button>
+                    <button onClick={() => this.handleUserQRClick()}>That's it - join this community!</button>
                 </div>
             </div>
         </div>

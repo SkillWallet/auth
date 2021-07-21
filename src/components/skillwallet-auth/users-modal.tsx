@@ -31,7 +31,6 @@ export class UsersModal {
   }
 
   handleQRClick = () => {
-    // alert('clicked!');
     // TODO: clear out the create User modal when I open the QR modal
     // this.usersIsVisible = false;
     this.qrIsVisible = true;
@@ -40,7 +39,6 @@ export class UsersModal {
 
   handleUserClick = () => {
     // TODO: clear out the create User modal when I open the User modal
-    
     // this.usersIsVisible = false;
     this.newUserIsVisible = true;
     this.showNewUser.emit(true);
@@ -49,16 +47,20 @@ export class UsersModal {
 
   @Listen('showUserDetails')
   showUserDetails() {
-    // alert('click 2 bitch');
     this.newUserIsVisible = false;
     this.userDetailsAreVisible = true;
   }
 
   @Listen('showUserRole')
   showUserRole() {
-    // alert('click 2 bitch');
     this.userDetailsAreVisible = false;
     this.userRoleIsVisible = true;
+  }
+
+  @Listen('showUserQR')
+  showUserQR() {
+    this.userRoleIsVisible = false;
+    this.qrIsVisible = true;
   }
 
 
@@ -81,7 +83,7 @@ export class UsersModal {
                         </button>
                         <button onClick={() => this.handleUserClick()}>
                             <auth-image image={"plus-button-white.svg"}></auth-image>
-                            <p>New User</p>
+                            <p>Create New User</p>
                         </button>
                     </div>
                 </div>
@@ -92,29 +94,5 @@ export class UsersModal {
     {this.userRoleIsVisible === true ? <user-role></user-role> : null}
         </div>
     )} 
-
-      // return (
-        // <QRCode 
-        // value="http://facebook.github.io/react/" 
-        // renderAs="svg" 
-        // size={128}
-        // imageExcavate='true'
-        // imageSettings={{
-        //   src: 'https://static.zpao.com/favicon.png',
-        //   x: 0,
-        //   y: 0,
-        //   height: 24,
-        //   width: 24,
-        //   excavate: true,
-        // }}
-        // />
-        // <div></div>
-
-      // )
-    // else if (this.newUserIsVisible === true) {
-    //   <new-user></new-user>
-    // } else if (this.userDetailsAreVisible === true) {
-    //   <user-details></user-details>
-    // }
   }
 }

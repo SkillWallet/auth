@@ -61,7 +61,6 @@ import {
   
     @Watch('contents')
     changeContentsHandler(newValue: string) {
-      console.log('contents changed', newValue);
       this.computeAndSetData(newValue, this.outputMode);
     }
     @Watch('errorCorrectionLevel')

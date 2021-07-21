@@ -14,7 +14,6 @@ export class UserDetails {
 
     @Listen('showUserRole', { target: "body" })
     handleUserRoleClick() {
-        // alert('click 1 bitch');
         this.showUserRole.emit(true); 
       }
 
