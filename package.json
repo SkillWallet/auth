@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.2-alpha",
+  "version": "0.0.3-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "Michael Chrupcala <michael.chrupcala@gmail.com> (https://michaelchrupcala.com/)",
   "keywords": [
