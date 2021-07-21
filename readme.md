@@ -9,12 +9,12 @@ This is a custom HTML tag (Web Component) for your application to import a Skill
 ## React:
 In your project directory enter the following terminal command:
 ```bash
-npm i skillwallet-auth-test2
+npm i @skill-wallet/auth
 ```
 
 Copy this line into your index.js file's imports:
 ```bash
-import { defineCustomElements } from "skillwallet-auth-test2/loader";
+import { defineCustomElements } from "@skillwallet/auth/loader";
 ```
 
 Add this to the last line of your index.js:
