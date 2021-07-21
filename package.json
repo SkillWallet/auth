@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "Michael Chrupcala <michael.chrupcala@gmail.com> (https://michaelchrupcala.com/)",
   "keywords": [
@@ -27,7 +27,8 @@
   "unpkg": "dist/skillwallet-auth/skillwallet-auth.esm.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "src/components/skillwallet-auth/images"
   ],
   "scripts": {
     "build": "stencil build --docs",
