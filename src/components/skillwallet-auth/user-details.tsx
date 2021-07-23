@@ -1,9 +1,10 @@
-import { Component, Event, EventEmitter, Listen, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Listen, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'user-details'
 })
 export class UserDetails {
+    @Prop() community: any;
 
     @Event({
         eventName: 'showUserRole',
@@ -23,7 +24,7 @@ export class UserDetails {
             <div class="modalWindow">
                 <div class="user-details-modal-window-child">
                     <div class="user-details-header">
-                      <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>Community Name!</span></h2>
+                      <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}!</span></h2>
                       <p>Tell us about yourself</p>
                     </div>
 

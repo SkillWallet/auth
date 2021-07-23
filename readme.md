@@ -23,7 +23,9 @@ defineCustomElements(window);
 ```
 
 Add our custom HTML tag to any component you'd like...no imports! 
-<skillwallet-auth partnerId="<your-partner-ID>"></skillwallet-auth>
+```bash
+<skillwallet-auth communityAddress="<your-community-addr>"></skillwallet-auth>
+```
 
 
 ## Angular

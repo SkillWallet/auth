@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Listen, h, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Listen, h, State, Prop } from '@stencil/core';
 
 declare global {
     interface Window {
@@ -13,6 +13,8 @@ export class NewUser {
     @State() newUserIsVisible: boolean = true;
     @State() isAccountDisconnected: boolean = true;
 
+    @Prop() community: any;
+
     @Event({
         eventName: 'showUserDetails',
         composed: true,
@@ -22,11 +24,12 @@ export class NewUser {
 
       componentWillLoad() {
         const {ethereum} = window;
-        console.log(ethereum);
+
         if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
             this.isAccountDisconnected = false;
             return;
         }
+
       }
 
     handleMetamaskClick = async () => {
@@ -55,7 +58,7 @@ export class NewUser {
             <div class="modalWindow">
                 <div class="new-user-modal-window-child">
                     <div class="new-user-header">
-                      <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>Community Name</span></h2>
+        <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
                       <p>First, import your Wallet, or create a brand new account.</p>
                     </div>
 

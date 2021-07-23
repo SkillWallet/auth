@@ -1,10 +1,11 @@
-import { Component, h, State, Event, EventEmitter } from '@stencil/core';
+import { Component, h, State, Event, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
   tag: 'user-role'
 })
 export class UserRole {
     @State() roleSelected: string = null;
+    @Prop() community: any;
 
     @Event({
         eventName: 'showUserQR',
@@ -27,7 +28,7 @@ export class UserRole {
             <div class="modalWindow">
                 <div class="user-role-modal-window-child">
                     <div class="user-role-header">
-                        <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>Community Name</span></h2>
+                        <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
                         <p>Pick what you're the best at & be rewarded for it!</p>
                     </div>
 

@@ -11,6 +11,7 @@ export namespace Components {
         "image": string;
     }
     interface NewUser {
+        "community": any;
     }
     interface QrCode {
         "colorDark": string;
@@ -22,15 +23,19 @@ export namespace Components {
         "scale": number;
     }
     interface QrModal {
+        "community": any;
         "textKey": string;
     }
     interface SkillwalletAuth {
     }
     interface UserDetails {
+        "community": any;
     }
     interface UserRole {
+        "community": any;
     }
     interface UsersModal {
+        "community": any;
     }
 }
 declare global {
@@ -98,6 +103,7 @@ declare namespace LocalJSX {
         "image"?: string;
     }
     interface NewUser {
+        "community"?: any;
         "onShowUserDetails"?: (event: CustomEvent<Boolean>) => void;
     }
     interface QrCode {
@@ -110,18 +116,22 @@ declare namespace LocalJSX {
         "scale"?: number;
     }
     interface QrModal {
+        "community"?: any;
         "textKey"?: string;
     }
     interface SkillwalletAuth {
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserDetails {
+        "community"?: any;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserRole {
+        "community"?: any;
         "onShowUserQR"?: (event: CustomEvent<String>) => void;
     }
     interface UsersModal {
+        "community"?: any;
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
     }
     interface IntrinsicElements {

@@ -1,4 +1,4 @@
-import { Component, h, State, Listen, Event, EventEmitter } from '@stencil/core';
+import { Component, h, State, Listen, Event, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
   tag: 'users-modal'
@@ -9,6 +9,8 @@ export class UsersModal {
   @State() newUserIsVisible: boolean = false;
   @State() userDetailsAreVisible: boolean = false;
   @State() userRoleIsVisible: boolean = false;
+
+  @Prop() community: any;
   
   qrText = null;
 
@@ -91,10 +93,10 @@ export class UsersModal {
                     </div>
                 </div>
             </div>
-            {this.qrIsVisible === true ? <qr-modal textKey={this.qrText}></qr-modal> : null}
-    {this.newUserIsVisible === true ? <new-user></new-user> : null}
-    {this.userDetailsAreVisible === true ? <user-details></user-details> : null}
-    {this.userRoleIsVisible === true ? <user-role></user-role> : null}
+            {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
+    {this.newUserIsVisible === true ? <new-user community={this.community}></new-user> : null}
+    {this.userDetailsAreVisible === true ? <user-details community={this.community}></user-details> : null}
+    {this.userRoleIsVisible === true ? <user-role community={this.community}></user-role> : null}
         </div>
     )} 
   }

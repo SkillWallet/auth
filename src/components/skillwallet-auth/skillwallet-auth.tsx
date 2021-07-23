@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, State } from '@stencil/core';
+import { getCommunity } from '../../utils/utils';
 
 @Component({
   tag: 'skillwallet-auth',
@@ -6,6 +7,7 @@ import { Component, Event, EventEmitter, h, State } from '@stencil/core';
   shadow: true,
 })
 export class SkillwalletAuth {
+  @State() community: any;
   @Event({
     eventName: 'showLogin',
     composed: true,
@@ -13,6 +15,11 @@ export class SkillwalletAuth {
     bubbles: true,
   }) showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
+
+  async componentWillRender() {
+    const comm = await getCommunity();
+    this.community = comm;
+  }
 
   handleClick() {
     this.clickCount += 1;
@@ -27,7 +34,7 @@ export class SkillwalletAuth {
       <button class="connect-wallet-button" >
         Connect Wallet
       </button>
-      <users-modal>
+      <users-modal community={this.community}>
         </users-modal>
       </div>
     )
