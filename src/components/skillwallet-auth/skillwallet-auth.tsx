@@ -1,5 +1,7 @@
-import { Component, Event, EventEmitter, h, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h,  State } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
+// import Web3 from 'web3';
+import * as buffer from 'buffer';
 
 @Component({
   tag: 'skillwallet-auth',
@@ -15,8 +17,25 @@ export class SkillwalletAuth {
     bubbles: true,
   }) showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
+  // @Prop() communityAddress: any;
+
+  // async loadWeb3(){
+  //   if(window.ethereum){
+  //     window.web3 = new Web3(window.ethereum)
+  //     await window.ethereum.request({ method: 'eth_requestAccounts' })
+  //   }
+  //   else if(window.web3){
+  //     window.web3 = new Web3(window.ethereum)
+  //   }
+  //   else{
+  //     window.alert("Non-Ethereum browser detected. You should consider trying MetaMask!")
+  //   }
+  // }
+
 
   async componentWillRender() {
+    // this.ethEnabled();
+    (window as any).Buffer = buffer;
     const comm = await getCommunity();
     this.community = comm;
   }

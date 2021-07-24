@@ -1,4 +1,5 @@
 import { Component, h, Prop, State } from '@stencil/core';
+import { getSkillWalletNonce } from '../../utils/utils';
 
 
 @Component({
@@ -8,8 +9,13 @@ export class QRModal {
   @Prop({mutable: true}) textKey: string = null;
   @Prop() community: any;
   @State() qrText: any;
+  @State() nonce: string;
   
-  componentWillRender() {
+  async componentWillLoad() {
+    this.nonce = await getSkillWalletNonce();
+  }
+
+  componentWillRender() {    
     this.qrText = {
       'skillwallet': ['Scan with your ', <a href="" key={1} style={{textDecoration: "underline",  fontWeight: "bold"}} >SkillWallet App </a>,  'to ', <b>Login</b>, ' to ',<span style={{textDecoration: "underline",  fontWeight: "bold"}}>{this.community.name}</span>, '!'],
         'role': ['Now just scan with your ', <a href="" key={1} style={{textDecoration: "underline",  fontWeight: "bold"}} >SkillWallet App </a>, ' & Verify your Membership']

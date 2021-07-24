@@ -1,4 +1,5 @@
 import { Component, h, State, Event, EventEmitter, Prop } from '@stencil/core';
+import { joinCommunity } from '../../utils/utils';
 
 @Component({
   tag: 'user-role'
@@ -14,7 +15,8 @@ export class UserRole {
         bubbles: true,
       }) showUserQR: EventEmitter<String>;
 
-    handleUserQRClick() {
+    async handleUserQRClick() {
+        await joinCommunity();
         this.showUserQR.emit(); 
       }
 

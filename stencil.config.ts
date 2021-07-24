@@ -1,5 +1,5 @@
 import { Config } from '@stencil/core';
-import { QRCode } from 'react-qrcode-logo';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 export const config: Config = {
   namespace: 'skillwallet-auth',
@@ -8,7 +8,7 @@ export const config: Config = {
   },
   rollupPlugins: {
     after: [
-      QRCode
+      nodePolyfills(),
     ]
   },
   outputTargets: [
