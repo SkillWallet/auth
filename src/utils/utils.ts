@@ -6,24 +6,14 @@ import { pushJSONDocument } from '../utils/textile.hub';
 export const getCommunity = async () => {
   const res = await fetch('https://api.distributed.town/api/community/0xB433eE0b9F10575218D9ba7A2FA5993cd08cb953', {
     method: 'GET'
-  })   
-    const comm = await res.json();
-    return comm;
+  })
+  const comm = await res.json();
+  return comm;
 }
-// const ethEnabled = async () => {
-//   if (window.ethereum) {
-//     await window.ethereum.send('eth_requestAccounts');
-//     (window as any).web3 = new Web3(window.ethereum);
-//     return true;
-//   }
-//   return false;
-// }
-export const joinCommunity = async () => {
-  try {
-    // await ethEnabled();
-    console.log(await window.ethereum);
-    const provider = new ethers.providers.Web3Provider((window as any).web3.currentProvider);
 
+export const joinCommunity = async (username, skill, level) => {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(
@@ -33,15 +23,15 @@ export const joinCommunity = async () => {
     );
 
     const metadataJson = {
-      name: `Mike's SkillWallet`,
+      name: `${username}'s SkillWallet`,
       description: "Universal, self-sovereign IDs tied to skills & contributions rather than personal data.",
       image: 'https://hub.textile.io/ipfs/bafkreiaks3kjggtxqaj3ixk6ce2difaxj5r6lbemx5kcqdkdtub5vwv5mi',
       properties: {
-        username: 'Mike',
+        username,
         skills: [
           {
-            name: "Creator",
-            value:10
+            name: skill,
+            value: level
           }]
       }
     }
@@ -58,7 +48,19 @@ export const joinCommunity = async () => {
       2006,
     );
 
-    console.log(createTx);
+    const communityTransactionResult = await createTx.wait();
+    console.log(communityTransactionResult);
+    const { events } = communityTransactionResult;
+    const memberJoinedEvent = events.find(
+      e => e.event === 'MemberAdded',
+    );
+    
+    if(memberJoinedEvent) {
+      // return tokenID.
+      return memberJoinedEvent.args[1].toString();
+    } else {
+      throw new Error('Something went wrong');
+    }
   } catch (err) {
     console.log(err);
     return;
@@ -67,7 +69,7 @@ export const joinCommunity = async () => {
 
 export const getSkillWalletNonce = async () => {
   const response = await fetch('https://api.skillwallet.id/api/skillwallet/-1/nonces?action=1', {
-      method: 'POST'
+    method: 'POST'
   })
   const nonce = await response.json();
   return nonce.nonce;
