@@ -16,7 +16,7 @@ export class UserRole {
       }) showUserQR: EventEmitter<String>;
 
     async handleUserQRClick() {
-        await joinCommunity();
+        await joinCommunity(localStorage.getItem('username'), this.roleSelected, 10);
         this.showUserQR.emit(); 
       }
 

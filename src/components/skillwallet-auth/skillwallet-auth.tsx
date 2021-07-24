@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h,  State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, State } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
 // import Web3 from 'web3';
 import * as buffer from 'buffer';
@@ -15,23 +15,9 @@ export class SkillwalletAuth {
     composed: true,
     cancelable: true,
     bubbles: true,
-  }) showLogin: EventEmitter<Boolean>;
+  })
+  showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
-  // @Prop() communityAddress: any;
-
-  // async loadWeb3(){
-  //   if(window.ethereum){
-  //     window.web3 = new Web3(window.ethereum)
-  //     await window.ethereum.request({ method: 'eth_requestAccounts' })
-  //   }
-  //   else if(window.web3){
-  //     window.web3 = new Web3(window.ethereum)
-  //   }
-  //   else{
-  //     window.alert("Non-Ethereum browser detected. You should consider trying MetaMask!")
-  //   }
-  // }
-
 
   async componentWillRender() {
     // this.ethEnabled();
@@ -50,12 +36,9 @@ export class SkillwalletAuth {
   render() {
     return (
       <div onClick={() => this.handleClick()}>
-      <button class="connect-wallet-button" >
-        Connect Wallet
-      </button>
-      <users-modal community={this.community}>
-        </users-modal>
+        <button class="connect-wallet-button">Connect Wallet</button>
+        <users-modal community={this.community}></users-modal>
       </div>
-    )
+    );
   }
 }
