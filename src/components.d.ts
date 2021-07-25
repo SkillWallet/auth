@@ -33,6 +33,7 @@ export namespace Components {
     }
     interface UserRole {
         "community": any;
+        "skill": number;
     }
     interface UsersModal {
         "community": any;
@@ -124,11 +125,13 @@ declare namespace LocalJSX {
     }
     interface UserDetails {
         "community"?: any;
+        "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserRole {
         "community"?: any;
         "onShowUserQR"?: (event: CustomEvent<String>) => void;
+        "skill"?: number;
     }
     interface UsersModal {
         "community"?: any;

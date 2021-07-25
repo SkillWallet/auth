@@ -289,8 +289,8 @@ button, p, h1, h2, h3, h4 {
   border-radius: 30px;
 }
 
-.avatar-div p {
-  width: 50%;
+.avatar-div > p {
+  max-width: 40%;
   font-size: 12px;
 }
 
@@ -386,22 +386,138 @@ button, p, h1, h2, h3, h4 {
   color: white;
 }
 
+
+
+/* **************/
+
+.image-upload {
+  position: relative;
+}
+
+.image-upload__edit {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 1;
+}
+
+.image-upload__edit label,
+.image-upload__edit input {
+  width: 34px;
+  height: 34px;
+}
+
+.image-upload__edit label {
+  display: block;
+
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all .2s ease-in-out;
+
+  z-index: 1;
+}
+
+.image-upload__edit label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+
+.image-upload__edit label:after {
+  content: '✎';
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
+.image-upload__edit input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  width: 0;
+  height: 100%;
+}
+
+.image-upload__preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload__preview > div {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.bar-chart-container {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.bar-chart-container:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.bar-chart-container::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: black; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.bar-chart-container::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: black; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
 .bar-chart-first-container {
   width: 200px;
   height: 24px;
   border: 2px solid white;
   border-radius: 10px;
   margin-bottom: 30px;
+  margin: 0 auto;
 }
 
 .bar-chart-container {  
   background-color: white;
   border-radius: 40px;
-  height: 26px;
-  width: 15px;
-  margin-top: -1px;
-  margin-left: -1px;
-  margin-bottom: -10px;
 }
 
 .bar-chart-metrics {
@@ -411,4 +527,9 @@ button, p, h1, h2, h3, h4 {
   font-family: "Raleway", Helvetica, Arial, serif;
   font-size: 14px;
   font-weight: 700;
+}
+
+.slider-val {
+  color: white;
+  margin-top: 50px;
 }

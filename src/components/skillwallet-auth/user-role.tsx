@@ -1,8 +1,10 @@
-import { Component, h, State, Event, EventEmitter, Prop } from '@stencil/core';
+import { Component, h, State, Event, EventEmitter, Prop, Listen } from '@stencil/core';
 import { joinCommunity } from '../../utils/utils';
 
 @Component({
-  tag: 'user-role'
+  tag: 'user-role',
+  styleUrl: 'skillwallet-auth.css',
+  shadow: true
 })
 export class UserRole {
     @State() roleSelected: string = null;
@@ -16,12 +18,29 @@ export class UserRole {
       }) showUserQR: EventEmitter<String>;
 
     async handleUserQRClick() {
-        await joinCommunity(localStorage.getItem('username'), this.roleSelected, 10);
+        await joinCommunity(localStorage.getItem('username'), this.roleSelected, this.skill);
+        console.log(this.skill);
         this.showUserQR.emit(); 
       }
 
     handleRoleClick(role) {
         this.roleSelected = role;
+    }
+
+    @Prop({mutable: true}) skill: number = 10;
+
+    slider!: HTMLInputElement;
+
+    @Listen('click', { capture: true })
+    handleChangeEvent() {
+        this.slider.addEventListener("change", function () {
+        })
+    }
+
+    updateValue(event: Event) {
+        console.log(this.skill);
+        this.skill = parseInt((event.target as HTMLInputElement).value);
+        console.log(this.skill);
     }
 
     render() {
@@ -46,13 +65,14 @@ export class UserRole {
                             <p>Tell your Community how experienced you are in this Role!</p>
                             
                             <div class="bar-chart-first-container">
-                                <div class="bar-chart-container"></div>
-
+                                <input class="bar-chart-container" type="range" id="myRange" value="0" min="0" max="10" onChange={this.updateValue} ref={ele => this.slider = ele as HTMLInputElement}></input>
+                                
                             <div class="bar-chart-metrics">
                                 <p>1</p>
                                 <p>10</p>
                             </div>
                             </div>
+                            {/* <p class="slider-val">Value: <span>{this.skill}</span></p> */}
                         </div>
                     </div> :                     
                     

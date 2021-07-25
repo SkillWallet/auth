@@ -35,6 +35,7 @@ export const joinCommunity = async (username, skill, level) => {
           }]
       }
     }
+    console.log(metadataJson);
 
     const url = await pushJSONDocument(metadataJson)
     const createTx = await contract.joinNewMember(
