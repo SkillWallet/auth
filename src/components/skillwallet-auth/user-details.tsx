@@ -37,7 +37,7 @@ export class UserDetails {
   @Event() onUploadCompleted: EventEmitter<Blob>;
 
 
-  public onInputChange(files: FileList) {
+  public async onInputChange(files: FileList) {
     if (files.length === 1) {
       const imageFile = files[0];
       if (!this.checkFileSize(imageFile.size)) {
@@ -49,7 +49,8 @@ export class UserDetails {
         return false;
       }
       // localStorage.setItem('image', imageFile);
-      pushImage(imageFile);
+      const imageUrl = await pushImage(imageFile);
+      localStorage.setItem('imageUrl', imageUrl);
       this.uploadImage(imageFile);
     } else {
       console.error(files.length === 0 ? 'No image uploaded' : 'You can oonly upload one image at a time');

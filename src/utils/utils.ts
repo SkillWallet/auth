@@ -25,7 +25,7 @@ export const joinCommunity = async (username, skill, level) => {
     const metadataJson = {
       name: `${username}'s SkillWallet`,
       description: "Universal, self-sovereign IDs tied to skills & contributions rather than personal data.",
-      image: 'https://hub.textile.io/ipfs/bafkreiaks3kjggtxqaj3ixk6ce2difaxj5r6lbemx5kcqdkdtub5vwv5mi',
+      image: localStorage.getItem('imageUrl'),
       properties: {
         username,
         skills: [
