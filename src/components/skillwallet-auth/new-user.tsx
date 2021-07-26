@@ -66,13 +66,11 @@ export class NewUser {
                         <button 
                         onClick={() => this.handleMetamaskClick()}
                         >
-                            <auth-image image={"metamask.svg"}></auth-image>
+                            <auth-image image={"/metamask.svg"}></auth-image>
                             <p>Inject from Metamask</p>
                         </button>
-                        <button 
-                        // onClick={() => this.handleUserClick()}
-                        >
-                            <auth-image image={"torus-new-user.svg"}></auth-image>
+                        <button >
+                            <auth-image image={"/torus-new-user.svg"}></auth-image>
                             <p>Create New Account</p>
                         </button>
                     </div>
