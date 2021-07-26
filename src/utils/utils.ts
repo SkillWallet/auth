@@ -3,8 +3,8 @@ import { ethers } from 'ethers';
 import communityAbi from './communityContractAbi.json';
 import { pushJSONDocument } from '../utils/textile.hub';
 
-export const getCommunity = async () => {
-  const res = await fetch('https://api.distributed.town/api/community/0xB433eE0b9F10575218D9ba7A2FA5993cd08cb953', {
+export const getCommunity = async (address) => {
+  const res = await fetch(`https://api.distributed.town/api/community/${address}`, {
     method: 'GET'
   })
   const comm = await res.json();

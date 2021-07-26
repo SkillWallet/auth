@@ -27,6 +27,7 @@ export namespace Components {
         "textKey": string;
     }
     interface SkillwalletAuth {
+        "communityAddress": string;
     }
     interface UserDetails {
         "community": any;
@@ -121,6 +122,7 @@ declare namespace LocalJSX {
         "textKey"?: string;
     }
     interface SkillwalletAuth {
+        "communityAddress"?: string;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
     }
     interface UserDetails {

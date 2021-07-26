@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, h, State } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
 // import Web3 from 'web3';
 import * as buffer from 'buffer';
@@ -9,6 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
+  @Prop() communityAddress: string;
   @State() community: any;
   @Event({
     eventName: 'showLogin',
@@ -22,7 +23,7 @@ export class SkillwalletAuth {
   async componentWillRender() {
     // this.ethEnabled();
     (window as any).Buffer = buffer;
-    const comm = await getCommunity();
+    const comm = await getCommunity(this.communityAddress);
     this.community = comm;
   }
 
