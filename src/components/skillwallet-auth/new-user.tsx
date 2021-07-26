@@ -66,11 +66,11 @@ export class NewUser {
                         <button 
                         onClick={() => this.handleMetamaskClick()}
                         >
-                            <auth-image image={"/metamask.svg"}></auth-image>
+                            <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
                             <p>Inject from Metamask</p>
                         </button>
                         <button >
-                            <auth-image image={"/torus-new-user.svg"}></auth-image>
+                            <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
                             <p>Create New Account</p>
                         </button>
                     </div>

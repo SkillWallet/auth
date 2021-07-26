@@ -1,4 +1,4 @@
-import { Component, Prop, getAssetPath, h } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'auth-image',
@@ -7,9 +7,9 @@ import { Component, Prop, getAssetPath, h } from '@stencil/core';
 })
 export class StencilAsset {
 
-  @Prop({mutable: true}) image = "/sw-logo.svg";
+  @Prop({mutable: true}) image = "https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw-logo.svg";
 
   render() {
-   return <img src={getAssetPath(`./images/${this.image}`)} />
+   return <img src={this.image} />
   }
 }

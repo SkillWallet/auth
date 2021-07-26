@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.6-alpha",
+  "version": "0.0.9-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "DiTo Labs <team@distributed.town>",
   "keywords": [
@@ -28,7 +28,7 @@
   "files": [
     "dist/",
     "loader/",
-    "src/components/skillwallet-auth/images"
+    "src/"
   ],
   "scripts": {
     "build": "stencil build --docs",

@@ -77,7 +77,7 @@ export class UsersModal {
             <div class="modalWindow">
                 <div class="modal-window-child">
                     <div class="wallet-header">
-                      <auth-image image={"/wallet-black.svg"}></auth-image>
+                      <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-black.svg"}></auth-image>
                         <h2>Login with</h2>
                     </div>
 
@@ -87,7 +87,7 @@ export class UsersModal {
                             <p>SkillWallet</p>
                         </button>
                         <button onClick={() => this.handleUserClick()}>
-                            <auth-image image={"/plus-button-white.svg"}></auth-image>
+                            <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg"}></auth-image>
                             <p>Create New User</p>
                         </button>
                     </div>
