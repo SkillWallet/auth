@@ -9,7 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop() communityAddress: string;
+  @Prop() key: string;
   @State() community: any;
   @Event({
     eventName: 'showLogin',
@@ -23,7 +23,7 @@ export class SkillwalletAuth {
   async componentWillRender() {
     // this.ethEnabled();
     (window as any).Buffer = buffer;
-    const comm = await getCommunity(this.communityAddress);
+    const comm = await getCommunity(this.key);
     this.community = comm;
   }
 

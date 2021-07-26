@@ -24,7 +24,7 @@ defineCustomElements(window);
 
 Add our custom HTML tag to any component you'd like...no imports! 
 ```bash
-<skillwallet-auth communityAddress="<your-community-addr>"></skillwallet-auth>
+<skillwallet-auth key="<your-key>"></skillwallet-auth>
 ```
 
 
