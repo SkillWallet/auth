@@ -1,9 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
 
 @Component({
-  tag: 'auth-image',
-//   styleUrl: 'stencil-asset.css',
-  assetsDirs: ['images']
+  tag: 'auth-image'
 })
 export class StencilAsset {
 

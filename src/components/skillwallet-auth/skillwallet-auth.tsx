@@ -9,7 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop({mutable: true}) key: string = 'd0aa09caba3ee6e60eb4b2724e9909df5328c599';
+  @Prop({mutable: true}) partnerKey: string = "d0aa09caba3ee6e60eb4b2724e9909df5328c599";
   @State() community: any;
   @Event({
     eventName: 'showLogin',
@@ -20,11 +20,11 @@ export class SkillwalletAuth {
   showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
 
-  async componentWillRender() {
+  async componentDidLoad() {
     // this.ethEnabled();
-    console.log(this.key);
+    console.log(this.partnerKey);
     (window as any).Buffer = buffer;
-    const comm = await getCommunity(this.key);
+    const comm = await getCommunity(this.partnerKey);
     this.community = comm;
   }
 
