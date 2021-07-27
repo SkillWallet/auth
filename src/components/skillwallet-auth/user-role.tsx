@@ -79,15 +79,15 @@ export class UserRole {
                     <div class="role-fields">
                         <div class="role-button" onClick={() => this.handleRoleClick('Creator')}>
                             <div></div>
-                            <p>Creator</p>
+                            <p>{this.community.roles[0]}</p>
                         </div>
                         <div class="role-button" onClick={() => this.handleRoleClick('Curator')}>
                             <div></div>
-                            <p>Curator</p>
+                            <p>{this.community.roles[1]}</p>
                         </div>
                         <div class="role-button" onClick={() => this.handleRoleClick('Collector')}>
                             <div></div>
-                            <p>Collector</p>
+                            <p>{this.community.roles[2]}</p>
                         </div>
                     </div>
                     }
