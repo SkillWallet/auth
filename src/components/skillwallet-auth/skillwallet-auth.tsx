@@ -9,7 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop() key: string;
+  @Prop({mutable: true}) key: string;
   @State() community: any;
   @Event({
     eventName: 'showLogin',
@@ -22,6 +22,7 @@ export class SkillwalletAuth {
 
   async componentWillRender() {
     // this.ethEnabled();
+    console.log(this.key);
     (window as any).Buffer = buffer;
     const comm = await getCommunity(this.key);
     this.community = comm;
