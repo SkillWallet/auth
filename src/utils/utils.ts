@@ -11,13 +11,13 @@ export const getCommunity = async (partnerKey) => {
   return comm;
 }
 
-export const joinCommunity = async (username, skill, level) => {
+export const joinCommunity = async (communityAddress, username, skill, level) => {
   try {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(
-      '0x816cCA942547e5741e4c7409D4fa8B62AD9a61e4',
+      communityAddress,
       communityAbi,
       signer,
     );

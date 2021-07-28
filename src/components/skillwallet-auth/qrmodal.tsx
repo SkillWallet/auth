@@ -10,9 +10,11 @@ export class QRModal {
   @Prop() community: any;
   @State() qrText: any;
   @State() nonce: string;
+  @State() tokenId: string;
   
   async componentWillLoad() {
     this.nonce = await getSkillWalletNonce();
+    this.tokenId = localStorage.getItem('tokenId');
   }
 
   componentWillRender() {    
@@ -31,7 +33,7 @@ export class QRModal {
               <div class="wallet-qr">
                   <qr-code
                   output-mode="SVG"
-                  contents="Hello World"
+                  contents={JSON.stringify({tokenId: this.tokenId, nonce: this.nonce })}
                   >
                   </qr-code>
               </div>
