@@ -21,9 +21,10 @@ export class UserRole {
     async handleUserQRClick() {
         // trigger loader...
         this.isLoading = true;
-        await joinCommunity(localStorage.getItem('username'), this.roleSelected, this.skill);
-        this.isLoading = false;
-        console.log(this.skill);
+        // console.log(this.skill);
+        // console.log(this.community);
+        const tokenId = await joinCommunity(this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
+        localStorage.setItem('tokenId', tokenId);
         this.showUserQR.emit(); 
       }
 
@@ -85,15 +86,15 @@ export class UserRole {
                     </div> :                     
                     
                     <div class="role-fields">
-                        <div class="role-button" onClick={() => this.handleRoleClick('Creator')}>
+                        <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
                             <div></div>
                             <p>{this.community.roles[0]}</p>
                         </div>
-                        <div class="role-button" onClick={() => this.handleRoleClick('Curator')}>
+                        <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
                             <div></div>
                             <p>{this.community.roles[1]}</p>
                         </div>
-                        <div class="role-button" onClick={() => this.handleRoleClick('Collector')}>
+                        <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
                             <div></div>
                             <p>{this.community.roles[2]}</p>
                         </div>

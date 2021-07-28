@@ -9,7 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop() partnerKey: string = "d0aa09caba3ee6e60eb4b2724e9909df5328c599";
+  @Prop() partnerKey: string;
   @State() community: any;
   @State() userUploadedImage: any = '';
   @State() icon: any = this.userUploadedImage === '' ? 
