@@ -8,6 +8,7 @@ import { joinCommunity } from '../../utils/utils';
 })
 export class UserRole {
     @State() roleSelected: string = null;
+    @State() isLoading: boolean = false;
     @Prop() community: any;
 
     @Event({
@@ -18,7 +19,10 @@ export class UserRole {
       }) showUserQR: EventEmitter<String>;
 
     async handleUserQRClick() {
+        // trigger loader...
+        this.isLoading = true;
         await joinCommunity(localStorage.getItem('username'), this.roleSelected, this.skill);
+        this.isLoading = false;
         console.log(this.skill);
         this.showUserQR.emit(); 
       }
@@ -46,6 +50,10 @@ export class UserRole {
     render() {
         return (
             <div class="topDiv">
+            {this.isLoading ? <div class="item">
+              <h2>Loading</h2>  
+              <i class="loader two"></i>
+            </div> : <div></div>}
             <div class="modalWindow">
                 <div class="user-role-modal-window-child">
                     <div class="user-role-header">

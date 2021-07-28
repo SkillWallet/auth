@@ -11,6 +11,10 @@ import * as buffer from 'buffer';
 export class SkillwalletAuth {
   @Prop() partnerKey: string = "d0aa09caba3ee6e60eb4b2724e9909df5328c599";
   @State() community: any;
+  @State() userUploadedImage: any = '';
+  @State() icon: any = this.userUploadedImage === '' ? 
+        <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image> :
+        <auth-image class="person-img" image={this.userUploadedImage}></auth-image>
   @Event({
     eventName: 'showLogin',
     composed: true,
@@ -19,6 +23,7 @@ export class SkillwalletAuth {
   })
   showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
+  @State() usersModalIsVisible: boolean = false;
 
   async componentDidLoad() {
     // this.ethEnabled();
@@ -29,6 +34,8 @@ export class SkillwalletAuth {
   }
 
   handleClick() {
+    // this.usersModalIsVisible = true;
+    // this.showLogin.emit(true);
     this.clickCount += 1;
     if (this.clickCount < 2) {
       this.showLogin.emit(true);
@@ -38,8 +45,11 @@ export class SkillwalletAuth {
   render() {
     return (
       <div onClick={() => this.handleClick()}>
-        <button class="connect-wallet-button">Connect Wallet</button>
-        <users-modal community={this.community}></users-modal>
+        <button class="connect-wallet-button">
+          {this.icon}
+          <p>Connect Wallet</p>
+        </button>
+        <users-modal community={this.community} usersModalIsVisible={this.usersModalIsVisible} userUploadedImage={this.userUploadedImage}></users-modal>
       </div>
     );
   }

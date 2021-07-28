@@ -11,6 +11,8 @@ export class UsersModal {
   @State() userRoleIsVisible: boolean = false;
 
   @Prop() community: any;
+  @Prop() userUploadedImage: any;
+  @Prop() usersModalIsVisible: boolean;
   
   qrText = null;
 
@@ -38,7 +40,6 @@ export class UsersModal {
     // this.usersIsVisible = false;
     this.qrText = 'skillwallet';
     this.qrIsVisible = true;
-    // this.showQR.emit(true);
   }
 
   handleUserClick = () => {
@@ -46,7 +47,6 @@ export class UsersModal {
     // this.usersIsVisible = false;
     this.newUserIsVisible = true;
     this.showNewUser.emit(true);
-    
   }
 
   @Listen('showUserDetails')
@@ -95,7 +95,7 @@ export class UsersModal {
             </div>
             {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
     {this.newUserIsVisible === true ? <new-user community={this.community}></new-user> : null}
-    {this.userDetailsAreVisible === true ? <user-details community={this.community}></user-details> : null}
+    {this.userDetailsAreVisible === true ? <user-details community={this.community} userUploadedImage={this.userUploadedImage}></user-details> : null}
     {this.userRoleIsVisible === true ? <user-role community={this.community}></user-role> : null}
         </div>
     )} 

@@ -11,7 +11,8 @@ const ALLOWED_FILE_TYPES = 'image.*';
 })
 export class UserDetails {
   @Prop() community: any;
-
+  @Prop() userUploadedImage: any;
+  @State() isLoading: boolean = false;
   @State() username: string;
   @Event({
     eventName: 'showUserRole',
@@ -36,8 +37,7 @@ export class UserDetails {
   @Element() private elementHost: HTMLElement;
   @Event() onUploadCompleted: EventEmitter<Blob>;
 
-
-  public async onInputChange(files: FileList) {
+  public async onInputChange(files: FileList) {    
     if (files.length === 1) {
       const imageFile = files[0];
       if (!this.checkFileSize(imageFile.size)) {
@@ -51,14 +51,20 @@ export class UserDetails {
       // localStorage.setItem('image', imageFile);
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
-      this.uploadImage(imageFile);
+      this.uploadImage(imageFile, imageUrl);
+      this.isLoading = false;
     } else {
       console.error(files.length === 0 ? 'No image uploaded' : 'You can oonly upload one image at a time');
       return false;
     }
   }
 
-  private uploadImage(file) {
+  handleInputChange(event) {
+    this.isLoading = true;
+    this.onInputChange(event);
+  }
+
+  private uploadImage(file, imageUrl) {
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -66,6 +72,8 @@ export class UserDetails {
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
       console.log('uploading finished, emitting an image blob to the outside world');
+      console.log('herr', imageUrl);
+      this.userUploadedImage=(imageUrl);
       this.onUploadCompleted.emit(file);
     };
 
@@ -86,6 +94,10 @@ export class UserDetails {
   render() {
     return (
       <div class="topDiv">
+            {this.isLoading ? <div class="item">
+              <h2>Loading</h2>  
+              <i class="loader two"></i>
+            </div> : <div></div>}
         <div class="modalWindow">
           <div class="user-details-modal-window-child">
             <div class="user-details-header">
@@ -111,7 +123,7 @@ export class UserDetails {
                     <div class="image-upload__edit">
                       <label htmlFor="file"></label>
                       <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
-                        onChange={($event: any) => this.onInputChange($event.target.files)} />
+                        onChange={($event: any) => this.handleInputChange($event.target.files)} />
                     </div>
 
                     <div class="image-upload__preview">

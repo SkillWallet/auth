@@ -13,7 +13,15 @@ button, p, h1, h2, h3, h4 {
   font-weight: bold;
   font-size: 11px;
   border: 0px;
-  padding: 4px 8px;
+  padding-left: 4px;
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.person-img > img {
+  width: 65%;
+  margin-right: 2px;
 }
 
 .connect-wallet-button:hover {
@@ -532,4 +540,123 @@ button, p, h1, h2, h3, h4 {
 .slider-val {
   color: white;
   margin-top: 50px;
+}
+
+
+
+.loader {
+	--color: black;
+	--size-mid: 6vmin;
+	--size-dot: 1.5vmin;
+	--size-bar: 0.4vmin;
+	--size-square: 3vmin;
+	
+	display: block;
+	position: relative;
+	width: 50%;
+	display: grid;
+	place-items: center;
+}
+
+.loader::before,
+.loader::after {
+	content: '';
+	box-sizing: border-box;
+	position: absolute;
+}
+
+
+/**
+	loader --2
+**/
+.loader.two::before,
+.loader.two::after {
+	width: var(--size-dot);
+	height: var(--size-dot);
+	background-color: var(--color);
+	border-radius: 50%;
+	opacity: 0;
+	animation: loader-2 0.8s cubic-bezier(0.2, 0.32, 0, 0.87) infinite;
+}
+
+.loader.two::after {
+	animation-delay: 0.3s;
+}
+
+@keyframes loader-2 {
+	0%, 80%, 100% {
+		opacity: 0;
+	}
+	
+	33% {
+		opacity: 1;
+	}
+	
+	0%, 100% {
+		transform: translateX(-4vmin);
+	}
+	
+	90% {
+		transform: translateX(4vmin);
+	}
+}
+
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(3, 18vmin);
+	grid-template-rows: repeat(3, 18vmin);
+	grid-gap: 1vmin;
+}
+
+.item	{
+	/* background: rgba(109, 109, 109, 0.95); */
+	display: flex;
+	place-items: center;
+	border-radius: 4px;
+  transition: opacity 0.4s ease;
+  position: absolute;
+  right: 70px;
+  bottom: 10px;
+}
+
+.item h2 {
+  margin-right: 45px;
+}
+
+.container:hover .item {
+	opacity: 0.3;
+}
+
+.container:hover .item:hover {
+	opacity: 1;
+}
+
+.page {
+	margin: auto;
+}
+
+.header {
+	margin-bottom: 4vmin;
+}
+
+.header-title {
+	font-size: 3.75vmin;
+}
+
+.header-subtitle {
+	font-size: 2vmin;
+	text-transform: uppercase;
+	opacity: 0.6;
+}
+
+html, body {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+	font-family: 'Noto Sans', sans-serif;
+	color: white;
+	text-align: center;
+	letter-spacing: 0.3px;
 }
