@@ -19,11 +19,14 @@ export class QRModal {
       this.qrCodeContent = JSON.stringify({
         tokenId: this.tokenId,
         nonce: this.nonce,
+        action: 0
       });
     else
       this.qrCodeContent = JSON.stringify({
         nonce: this.nonce,
+        action: 1
       });
+      console.log(this.qrCodeContent);
   }
 
   componentWillRender() {
