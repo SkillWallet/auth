@@ -38,6 +38,7 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
     console.log(metadataJson);
 
     const url = await pushJSONDocument(metadataJson)
+    console.log(url);
     const createTx = await contract.joinNewMember(
       0,
       0,
@@ -68,8 +69,9 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
   }
 }
 
-export const getSkillWalletNonce = async () => {
-  const response = await fetch('https://api.skillwallet.id/api/skillwallet/-1/nonces?action=1', {
+export const getSkillWalletNonce = async (tokenId) => {
+  const action = tokenId > -1 ? 0 : 1
+  const response = await fetch(`https://api.skillwallet.id/api/skillwallet/${tokenId}/nonces?action=${action}`, {
     method: 'POST'
   })
   const nonce = await response.json();
