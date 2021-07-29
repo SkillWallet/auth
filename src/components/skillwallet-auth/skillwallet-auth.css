@@ -6,6 +6,18 @@ button, p, h1, h2, h3, h4 {
   font-family: Verdana, Helvetica !important;
 }
 
+.background-screen {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(109, 109, 109, 0.95);
+}
+
 .connect-wallet-button {
   background-color: black;
   color: white;
@@ -43,7 +55,6 @@ button, p, h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(109, 109, 109, 0.95);
 }
 
 .modalWindow {
@@ -329,12 +340,15 @@ button, p, h1, h2, h3, h4 {
 .role-button, .role-button-clicked {
   border-radius: 60px;
   border: 2px solid black;
-  width: 55%;
+  width: 65%;
   height: 50px;
   margin: 10px 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+.role-button-clicked {
+  height: 90px;
 }
 
 .role-button:hover {
@@ -347,16 +361,15 @@ button, p, h1, h2, h3, h4 {
 }
 
 .role-button > *, .role-button-clicked > * {
-  margin: 2px 35px;
   font-size: large;
   font-weight: bold;
 }
 
 .role-button > div, .role-button-clicked > div {
-  border-radius: 100%;
-  border: 2px solid black;
-  width: 15px;
-  height: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .role-button-clicked {
@@ -374,6 +387,13 @@ button, p, h1, h2, h3, h4 {
   align-items: center;
 }
 
+.circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: 2px solid black;
+}
+
 .filled-in-circle {
   width: 60%;
   height: 60%;
@@ -388,6 +408,8 @@ button, p, h1, h2, h3, h4 {
   z-index: 5;
   padding: 3% 5%;
   border-radius: 50px;
+  margin-bottom: 20px;
+  height: 190px;
 }
 
 .xp-component p, .xp-component h3 {

@@ -14,6 +14,9 @@ export class UserDetails {
   @Prop() userUploadedImage: any;
   @State() isLoading: boolean = false;
   @State() username: string;
+  @Element() private elementHost: HTMLElement;
+  @Event() onUploadCompleted: EventEmitter<Blob>;
+  
   @Event({
     eventName: 'showUserRole',
     composed: true,
@@ -24,18 +27,13 @@ export class UserDetails {
 
   @Listen('showUserRole', { target: 'body' })
   handleUserRoleClick() {
-      console.log(this.username);
     localStorage.setItem('username', this.username);
-    // console.log(document.getElementById('nickname') as any).value);
     this.showUserRole.emit(true);
   }
 
   handleChange(event) {
     this.username = event.target.value;
   }
-
-  @Element() private elementHost: HTMLElement;
-  @Event() onUploadCompleted: EventEmitter<Blob>;
 
   public async onInputChange(files: FileList) {    
     if (files.length === 1) {
@@ -48,7 +46,7 @@ export class UserDetails {
         console.error('File type is not allowed');
         return false;
       }
-      // localStorage.setItem('image', imageFile);
+
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
       this.uploadImage(imageFile, imageUrl);
@@ -72,7 +70,6 @@ export class UserDetails {
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
       console.log('uploading finished, emitting an image blob to the outside world');
-      console.log('herr', imageUrl);
       this.userUploadedImage=(imageUrl);
       this.onUploadCompleted.emit(file);
     };
@@ -93,55 +90,54 @@ export class UserDetails {
 
   render() {
     return (
-      <div class="topDiv">
-            {this.isLoading ? <div class="item">
-              <h2>Loading</h2>  
-              <i class="loader two"></i>
-            </div> : <div></div>}
-        <div class="modalWindow">
-          <div class="user-details-modal-window-child">
-            <div class="user-details-header">
-              <h2>
-                Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span>
-              </h2>
-              <p>Tell us about yourself</p>
-            </div>
-
-            <div class="user-details-fields">
-              <h4>Nickname</h4>
-              <div>
-                <form>
-                  <input value={this.username} onInput={(event) => this.handleChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
-                </form>
-              </div>
-              <h4>Avatar</h4>
-              <div>
-                <div class="avatar-div">
-                  <p>A public image - that's how others will see you</p>
-                  
-                  <div class="image-upload">
-                    <div class="image-upload__edit">
-                      <label htmlFor="file"></label>
-                      <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
-                        onChange={($event: any) => this.handleInputChange($event.target.files)} />
+        <div class="topDiv">
+            {this.isLoading ? 
+              <div class="item">
+                <h2>Loading</h2>  
+                <i class="loader two"></i>
+              </div> : <div></div>}
+        
+            <div class="modalWindow">
+                <div class="user-details-modal-window-child">
+                    <div class="user-details-header">
+                      <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
+                      <p>Tell us about yourself</p>
                     </div>
 
-                    <div class="image-upload__preview">
-                      <div id="image-preview"></div>
+                    <div class="user-details-fields">
+                        <h4>Nickname</h4>
+                        <div>
+                            <form>
+                              <input value={this.username} onInput={(event) => this.handleChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
+                            </form>
+                        </div>
+
+                        <h4>Avatar</h4>
+                        <div>
+                            <div class="avatar-div">
+                              <p>A public image - that's how others will see you</p>
+                              
+                              <div class="image-upload">
+                                  <div class="image-upload__edit">
+                                    <label htmlFor="file"></label>
+                                    <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
+                                      onChange={($event: any) => this.handleInputChange($event.target.files)} />
+                                  </div>
+
+                                  <div class="image-upload__preview">
+                                    <div id="image-preview"></div>
+                                  </div>
+
+                                  <p>.png or .jpg</p>
+                              </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <p>.png or .jpg</p>
-                  </div>
-
-                  
+                    <button onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
                 </div>
-              </div>
             </div>
-
-            <button onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
-          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}

@@ -40,7 +40,6 @@ export namespace Components {
     interface UsersModal {
         "community": any;
         "userUploadedImage": any;
-        "usersModalIsVisible": boolean;
     }
 }
 declare global {
@@ -143,7 +142,6 @@ declare namespace LocalJSX {
         "community"?: any;
         "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
         "userUploadedImage"?: any;
-        "usersModalIsVisible"?: boolean;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;

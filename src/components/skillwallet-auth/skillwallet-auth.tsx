@@ -1,6 +1,5 @@
 import { Component, Event, EventEmitter, Prop, h, State } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
-// import Web3 from 'web3';
 import * as buffer from 'buffer';
 
 @Component({
@@ -23,19 +22,14 @@ export class SkillwalletAuth {
   })
   showLogin: EventEmitter<Boolean>;
   @State() clickCount: number = 0;
-  @State() usersModalIsVisible: boolean = false;
 
   async componentDidLoad() {
-    // this.ethEnabled();
-    console.log(this.partnerKey);
     (window as any).Buffer = buffer;
     const comm = await getCommunity(this.partnerKey);
     this.community = comm;
   }
 
   handleClick() {
-    // this.usersModalIsVisible = true;
-    // this.showLogin.emit(true);
     this.clickCount += 1;
     if (this.clickCount < 2) {
       this.showLogin.emit(true);
@@ -49,7 +43,7 @@ export class SkillwalletAuth {
           {this.icon}
           <p>Connect Wallet</p>
         </button>
-        <users-modal community={this.community} usersModalIsVisible={this.usersModalIsVisible} userUploadedImage={this.userUploadedImage}></users-modal>
+        <users-modal community={this.community}  userUploadedImage={this.userUploadedImage}></users-modal>
       </div>
     );
   }

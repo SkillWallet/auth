@@ -12,7 +12,6 @@ declare global {
 export class NewUser {    
     @State() newUserIsVisible: boolean = true;
     @State() isAccountDisconnected: boolean = true;
-
     @Prop() community: any;
 
     @Event({
@@ -22,15 +21,14 @@ export class NewUser {
         bubbles: true,
       }) showUserDetails: EventEmitter<Boolean>;
 
-      componentWillLoad() {
-        const {ethereum} = window;
+    componentWillLoad() {
+    const {ethereum} = window;
 
-        if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
-            this.isAccountDisconnected = false;
-            return;
+    if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
+        this.isAccountDisconnected = false;
+        return;
         }
-
-      }
+    }
 
     handleMetamaskClick = async () => {
         const {ethereum} = window;
@@ -39,8 +37,8 @@ export class NewUser {
                 this.isAccountDisconnected = false;
             } catch (error) {
                 alert(error);
-            }
-      }
+        }
+    }
 
     @Listen('showNewUser', { target: "body" })
     handleUserClick(wasClicked) {
@@ -55,31 +53,33 @@ export class NewUser {
   render() {
         return (
             <div class="topDiv">
-            <div class="modalWindow">
-                <div class="new-user-modal-window-child">
-                    <div class="new-user-header">
-        <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
-                      <p>First, import your Wallet, or create a brand new account.</p>
-                    </div>
+                <div class="modalWindow">
+                    <div class="new-user-modal-window-child">
+                        <div class="new-user-header">
+                            <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
+                                {this.community.name}
+                                </span>
+                            </h2>
 
-                    <div class="wallet-modal-button">
-                        <button 
-                        onClick={() => this.handleMetamaskClick()}
-                        >
-                            <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
-                            <p>Inject from Metamask</p>
-                        </button>
-                        <button >
-                            <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
-                            <p>Create New Account</p>
-                        </button>
-                    </div>
+                            <p>First, import your Wallet, or create a brand new account.</p>
+                        </div>
 
-             {/* ask Alex --> button doesn't seem necessary */}
-                    <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
+                        <div class="wallet-modal-button">
+                            <button onClick={() => this.handleMetamaskClick()}>
+                                <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
+                                <p>Inject from Metamask</p>
+                            </button>
+
+                            <button >
+                                <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
+                                <p>Create New Account</p>
+                            </button>
+                        </div>
+
+                        <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
-  }
+        )
+    }
 }
