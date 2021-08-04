@@ -27,6 +27,28 @@ Add our custom HTML tag to any component you'd like...no imports!
 <skillwallet-auth partner-key="<your-key>"></skillwallet-auth>
 ```
 
+## Next.JS:
+Note that for a server-side rendered app, your custom element(s) cannot be defined until your browser window's been defined (after your app's been compiled and built):
+
+In your project directory enter the following terminal command:
+```bash
+npm i @skill-wallet/auth
+```
+
+Copy this line into your index.js file (or wherever you're going to use our HTML tag) imports -- note that you cannot import & define custom elements in _app or _document files:
+```bash
+import { defineCustomElements } from "@skill-wallet/auth/loader";
+```
+
+In the same file, add this line inside a componentDidMount() or useEffect() hook - to wait and render our element AFTER creating the DOM:
+```bash
+defineCustomElements(window);
+```
+
+Add our custom HTML tag to any component you'd like...no imports!
+```bash
+<skillwallet-auth partner-key="<your-key>"></skillwallet-auth>
+```
 
 ## Angular
 

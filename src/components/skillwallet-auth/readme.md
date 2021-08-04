@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property              | Attribute                | Description | Type      | Default     |
-| --------------------- | ------------------------ | ----------- | --------- | ----------- |
-| `community`           | `community`              |             | `any`     | `undefined` |
-| `userUploadedImage`   | `user-uploaded-image`    |             | `any`     | `undefined` |
-| `usersModalIsVisible` | `users-modal-is-visible` |             | `boolean` | `undefined` |
+| Property            | Attribute             | Description | Type  | Default     |
+| ------------------- | --------------------- | ----------- | ----- | ----------- |
+| `community`         | `community`           |             | `any` | `undefined` |
+| `userUploadedImage` | `user-uploaded-image` |             | `any` | `undefined` |
 
 
 ## Events
