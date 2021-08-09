@@ -95,7 +95,7 @@ export class UsersModal {
         {this.userDetailsAreVisible === true ? 
             <user-details 
               community={this.community} 
-              validator={{user: {name: 'length', options: {min: 4}}, file: {name: 'file', options: []}}}
+              validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
             ></user-details> : null}
         {this.userRoleIsVisible     === true ? <user-role community={this.community}></user-role> : null}
       </div>

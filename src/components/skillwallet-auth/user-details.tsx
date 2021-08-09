@@ -111,18 +111,22 @@ export class UserDetails {
 
                     <div class="user-details-fields">
                         <h4>Nickname</h4>
-                        <div>
+                        <div class="username-field">
+                        {!this._userValidator.validate(this.username) ? 
+                              <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
                             <form>
                               <input value={this.username} onInput={(event) => this.handleUsernameChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
                             </form>
-                            {!this._userValidator.validate(this.username) ? 
-                              <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
+                            <p>{this.username ? 17-this.username.length : 17} characters left</p>
+
                         </div>
 
                         <h4>Avatar</h4>
+                        {!getValidator({name: 'file', options: this.files}).validate(this.files) ? 
+                              <span class="validation-error"> {this._imageValidator.errorMessage}</span> : null}
                         <div>
                             <div class="avatar-div">
-                              <p>A public image - that's how others will see you</p>
+                              <p>A public image - that's how others will see you.</p>
                               
                               <div class="image-upload">
                                   <div class="image-upload__edit">
@@ -130,8 +134,6 @@ export class UserDetails {
                                     <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
                                       onChange={($event: any) => this.handleInputChange($event.target.files)} />
                                   </div>
-                                  {!getValidator({name: 'file', options: this.files}).validate(this.files) ? 
-                              <span class="validation-error"> {this._imageValidator.errorMessage}</span> : null}
 
                                   <div class="image-upload__preview">
                                     <div id="image-preview"></div>

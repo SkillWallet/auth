@@ -237,7 +237,6 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-fields > div {
-  background-color: white;
   border-radius: 30px;
   width: 100%;
   min-height: 60px;
@@ -245,24 +244,52 @@ button, p, h1, h2, h3, h4 {
   margin: 2px auto 20px auto !important;
 }
 
+.user-details-fields > .username-field {
+  text-align: right;
+}
+
+.user-details-fields > div:last-child {
+  background-color: #DCDCDC;
+}
+
+.username-field {
+  background-color: none !important;
+}
+
+.validation-error {
+  color: red;
+  font-weight: bold;
+  text-align: right;
+  font-size: 11px;
+  margin-right: 3%;
+}
+
+.user-details-fields > div > p {
+  color: black;
+  font-size: 11px;
+  margin-top: -20px;
+  margin-right: 3%;
+}
+
 .user-details-fields > div > form  {
-  background-color: white;
+  background-color: #DCDCDC;
   border-radius: 30px;
   width: 100%;
   min-height: 60px;
   display: flex;
+  flex-direction: column;
 }
 
 .user-details-fields > div > form > input {
-  background-color: white;
+  background-color: #DCDCDC;
   border-radius: 30px;
-  width: 200%;
+  width: 90%;
   min-height: 60px;
+  padding-left: 10%;
 }
 
 .user-details-fields > div > form > p {
   font-size: 8px;
-  /* display: */
 }
 
 .user-details-fields  > h4 {
@@ -277,6 +304,10 @@ button, p, h1, h2, h3, h4 {
   flex-direction: column;
   width: 75%;
   margin: 0 auto;
+}
+
+.user-details-fields > button:hover:disabled {
+  cursor: default;
 }
 
 .user-details-modal-window-child {
@@ -297,6 +328,10 @@ button, p, h1, h2, h3, h4 {
   cursor: pointer;
 }
 
+.user-details-modal-window-child > button:hover:disabled, .user-role-modal-window-child > button:hover:disabled {
+  cursor: default;
+}
+
 .user-details-modal-window-child > button:active, .user-role-modal-window-child > button:active {
   background-color: black;
   color: white;
@@ -310,7 +345,9 @@ button, p, h1, h2, h3, h4 {
 
 .avatar-div > p {
   max-width: 40%;
-  font-size: 12px;
+  font-size: 13.3333px;
+  color:rgba(109, 109, 109, 0.95);
+  margin-top: 10%;
 }
 
 .avatar-img {
@@ -422,6 +459,11 @@ button, p, h1, h2, h3, h4 {
 
 .image-upload {
   position: relative;
+  margin-top: 15px;
+}
+
+.image-upload > p {
+  margin-top: 2px;
 }
 
 .image-upload__edit {
@@ -670,6 +712,10 @@ button, p, h1, h2, h3, h4 {
 	font-size: 2vmin;
 	text-transform: uppercase;
 	opacity: 0.6;
+}
+
+.username-field {
+  background-color: none !important;
 }
 
 html, body {
