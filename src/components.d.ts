@@ -32,6 +32,7 @@ export namespace Components {
     interface UserDetails {
         "community": any;
         "userUploadedImage": any;
+        "validator": string | any;
     }
     interface UserRole {
         "community": any;
@@ -132,6 +133,7 @@ declare namespace LocalJSX {
         "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
         "userUploadedImage"?: any;
+        "validator"?: string | any;
     }
     interface UserRole {
         "community"?: any;

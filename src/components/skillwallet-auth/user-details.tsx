@@ -1,8 +1,8 @@
 import { Component, Event, EventEmitter, Listen, h, Prop, State, Element } from '@stencil/core';
 import { pushImage } from '../../utils/textile.hub.js';
+import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
+import { Validator } from '../../validators/validator.js';
 
-const MAX_UPLOAD_SIZE = 1024; // bytes
-const ALLOWED_FILE_TYPES = 'image.*';
 
 @Component({
   tag: 'user-details',
@@ -16,7 +16,12 @@ export class UserDetails {
   @State() username: string;
   @Element() private elementHost: HTMLElement;
   @Event() onUploadCompleted: EventEmitter<Blob>;
-  
+
+  @Prop() validator: string | any;
+  @State() files: any = [];
+  _userValidator: Validator<string> = defaultValidator;
+  _imageValidator: Validator<string> = defaultValidator;
+
   @Event({
     eventName: 'showUserRole',
     composed: true,
@@ -30,31 +35,40 @@ export class UserDetails {
     localStorage.setItem('username', this.username);
     this.showUserRole.emit(true);
   }
+  
+  componentWillLoad()  {
+    this._userValidator = getValidator(this.validator['user']);
+    this._imageValidator = getValidator(this.validator['file']);
+  }
 
-  handleChange(event) {
+  componentWillUpdate()  {
+    this._userValidator = getValidator(this.validator['user']);
+    this._imageValidator = getValidator(this.validator['file']);
+  }
+
+  isFormInvalid = () => {
+      if (!this._userValidator.validate(this.username) || 
+          !getValidator({name: 'file', options: this.files}).validate(this.files)) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  handleUsernameChange(event) {
     this.username = event.target.value;
   }
 
   public async onInputChange(files: FileList) {    
-    if (files.length === 1) {
       const imageFile = files[0];
-      if (!this.checkFileSize(imageFile.size)) {
-        console.error('Maximum file size exceeded. Max file size is: ' + MAX_UPLOAD_SIZE);
-        return false;
-      }
-      else if (!this.checkFileType(imageFile.type)) {
-        console.error('File type is not allowed');
-        return false;
-      }
+      this.files = files;
+      this._imageValidator = getValidator({name: 'file', options: files});
 
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
+      
       this.uploadImage(imageFile, imageUrl);
       this.isLoading = false;
-    } else {
-      console.error(files.length === 0 ? 'No image uploaded' : 'You can oonly upload one image at a time');
-      return false;
-    }
   }
 
   handleInputChange(event) {
@@ -69,7 +83,6 @@ export class UserDetails {
       const imagePreviewContainer: HTMLElement = this.elementHost.shadowRoot.querySelector('#image-preview');
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
-      console.log('uploading finished, emitting an image blob to the outside world');
       this.userUploadedImage=(imageUrl);
       this.onUploadCompleted.emit(file);
     };
@@ -78,14 +91,6 @@ export class UserDetails {
       console.error('something went wrong...', err);
     };
     reader.readAsDataURL(file);
-  }
-
-  private checkFileSize(size: number): boolean {
-    return (size / MAX_UPLOAD_SIZE / MAX_UPLOAD_SIZE) <= MAX_UPLOAD_SIZE;
-  }
-
-  private checkFileType(type: string): boolean {
-    return type.match(ALLOWED_FILE_TYPES).length > 0;
   }
 
   render() {
@@ -108,8 +113,10 @@ export class UserDetails {
                         <h4>Nickname</h4>
                         <div>
                             <form>
-                              <input value={this.username} onInput={(event) => this.handleChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
+                              <input value={this.username} onInput={(event) => this.handleUsernameChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
                             </form>
+                            {!this._userValidator.validate(this.username) ? 
+                              <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
                         </div>
 
                         <h4>Avatar</h4>
@@ -123,6 +130,8 @@ export class UserDetails {
                                     <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
                                       onChange={($event: any) => this.handleInputChange($event.target.files)} />
                                   </div>
+                                  {!getValidator({name: 'file', options: this.files}).validate(this.files) ? 
+                              <span class="validation-error"> {this._imageValidator.errorMessage}</span> : null}
 
                                   <div class="image-upload__preview">
                                     <div id="image-preview"></div>
@@ -134,7 +143,7 @@ export class UserDetails {
                         </div>
                     </div>
 
-                    <button onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
+                    <button disabled={this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
                 </div>
             </div>
         </div>

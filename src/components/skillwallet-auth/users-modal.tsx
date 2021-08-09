@@ -92,7 +92,11 @@ export class UsersModal {
 
         {this.qrIsVisible           === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
         {this.newUserIsVisible      === true ? <new-user community={this.community}></new-user> : null}
-        {this.userDetailsAreVisible === true ? <user-details community={this.community}></user-details> : null}
+        {this.userDetailsAreVisible === true ? 
+            <user-details 
+              community={this.community} 
+              validator={{user: {name: 'length', options: {min: 4}}, file: {name: 'file', options: []}}}
+            ></user-details> : null}
         {this.userRoleIsVisible     === true ? <user-role community={this.community}></user-role> : null}
       </div>
     )
