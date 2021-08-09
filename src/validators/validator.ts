@@ -6,12 +6,12 @@ export interface Validator<A> {
 export function FileValidator(files): Validator<any> {
     const allowedFileTypes = 'image.*';
     return {
-        validate: (value: File) => {
-            if (files.length === 0) {
+        validate: (value: FileList) => {
+            if (value.length === 0) {
                 return false;
-            } else if (files.length > 1) {
+            } else if (value.length > 1) {
                 return false;
-            } else if (files[0].type.match(allowedFileTypes).length <= 0) {
+            } else if (value[0].type.match(allowedFileTypes).length <= 0) {
                 return false;
             } else {
                 return true;
