@@ -1,5 +1,5 @@
 import { Component, h, State, Listen, Event, EventEmitter, Prop, Element } from '@stencil/core';
-
+import { fetchSkillWallet } from '../../utils/utils';
 @Component({
   tag: 'users-modal',
 })
@@ -28,7 +28,7 @@ export class UsersModal {
   handleClick(wasClicked) {
     this.usersIsVisible = wasClicked.returnValue;
     const backgroundImage: any = this.elementHost.children[0];
-    backgroundImage.style.display = "block";
+    backgroundImage.style.display = 'block';
   }
 
   @Listen('showUserDetails')
@@ -50,10 +50,16 @@ export class UsersModal {
     this.qrIsVisible = true;
   }
 
-  handleQRClick = () => {
-    this.usersIsVisible = false;
-    this.qrText = 'skillwallet';
-    this.qrIsVisible = true;
+  handleMetamaskClick = async () => {
+    const { ethereum } = window;
+    try {
+      await ethereum.request({ method: 'eth_requestAccounts' });
+      await fetchSkillWallet(ethereum.selectedAddress);
+      // this.showLogin.emit(false);
+
+    } catch (error) {
+      alert(error);
+    }
   };
 
   handleUserClick = () => {
@@ -65,18 +71,17 @@ export class UsersModal {
   render() {
     return (
       <div class="background-screen">
-        {(this.usersIsVisible === true) ? 
-        <div class="topDiv">
+        {this.usersIsVisible === true ? (
+          <div class="topDiv">
             <div class="modalWindow">
               <div class="modal-window-child">
-                
                 <div class="wallet-header">
                   <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-black.svg'}></auth-image>
                   <h2>Login with</h2>
                 </div>
 
                 <div class="wallet-modal-button">
-                  <button onClick={() => this.handleQRClick()}>
+                  <button onClick={() => this.handleMetamaskClick()}>
                     <auth-image></auth-image>
                     <p>SkillWallet</p>
                   </button>
@@ -88,17 +93,16 @@ export class UsersModal {
                 </div>
               </div>
             </div>
-        </div> : null}
+          </div>
+        ) : null}
 
-        {this.qrIsVisible           === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
-        {this.newUserIsVisible      === true ? <new-user community={this.community}></new-user> : null}
-        {this.userDetailsAreVisible === true ? 
-            <user-details 
-              community={this.community} 
-              validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
-            ></user-details> : null}
-        {this.userRoleIsVisible     === true ? <user-role community={this.community}></user-role> : null}
+        {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
+        {this.newUserIsVisible === true ? <new-user community={this.community}></new-user> : null}
+        {this.userDetailsAreVisible === true ? (
+          <user-details community={this.community} validator={{ user: { name: 'length', options: { min: 4, max: 17 } }, file: { name: 'file', options: [] } }}></user-details>
+        ) : null}
+        {this.userRoleIsVisible === true ? <user-role community={this.community}></user-role> : null}
       </div>
-    )
+    );
   }
 }

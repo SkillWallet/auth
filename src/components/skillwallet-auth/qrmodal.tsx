@@ -1,5 +1,5 @@
 import { Component, h, Prop, State } from '@stencil/core';
-import { getSkillWalletNonce } from '../../utils/utils';
+import { getActivationNonce } from '../../utils/utils';
 
 @Component({
   tag: 'qr-modal',
@@ -14,17 +14,12 @@ export class QRModal {
 
   async componentWillLoad() {
     this.tokenId = localStorage.getItem('tokenId');
-    this.nonce = await getSkillWalletNonce(+this.tokenId);
+    this.nonce = await getActivationNonce(+this.tokenId);
     if (this.tokenId)
       this.qrCodeContent = JSON.stringify({
         tokenId: this.tokenId,
         nonce: this.nonce,
         action: 0
-      });
-    else
-      this.qrCodeContent = JSON.stringify({
-        nonce: this.nonce,
-        action: 1
       });
       console.log(this.qrCodeContent);
   }
