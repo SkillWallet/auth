@@ -54,17 +54,13 @@ export class QRModal {
 
   render() {
     return (
-      <div class="topDiv">
-        <div class="modalWindow">
-          <div class="qr-modal-window-child">
-            <div class="wallet-qr">
-              <qr-code output-mode="SVG" contents={this.qrCodeContent}></qr-code>
-            </div>
+      <div class="qr-modal-window-child">
+        <div class="wallet-qr">
+          <qr-code output-mode="SVG" contents={this.qrCodeContent}></qr-code>
+        </div>
 
-            <div class="wallet-text">
-              <p>{this.qrText[this.textKey]}</p>
-            </div>
-          </div>
+        <div class="wallet-text">
+          <p>{this.qrText[this.textKey]}</p>
         </div>
       </div>
     );

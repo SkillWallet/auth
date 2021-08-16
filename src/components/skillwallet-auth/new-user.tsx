@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Listen, h, State, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
 
 declare global {
     interface Window {
@@ -10,7 +10,6 @@ declare global {
   tag: 'new-user'
 })
 export class NewUser {    
-    @State() newUserIsVisible: boolean = true;
     @State() isAccountDisconnected: boolean = true;
     @Prop() community: any;
 
@@ -40,45 +39,35 @@ export class NewUser {
         }
     }
 
-    @Listen('showNewUser', { target: "body" })
-    handleUserClick(wasClicked) {
-        this.newUserIsVisible = wasClicked;
-    }
-
-    @Listen('showUserDetails', { target: "body" })
     handleUserDetailsClick() {
         this.showUserDetails.emit(true); 
       }
 
   render() {
         return (
-            <div class="topDiv">
-                <div class="modalWindow">
-                    <div class="new-user-modal-window-child">
-                        <div class="new-user-header">
-                            <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-                                {this.community.name}
-                                </span>
-                            </h2>
+            <div class="new-user-modal-window-child">
+                <div class="new-user-header">
+                    <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
+                        {this.community.name}
+                        </span>
+                    </h2>
 
-                            <p>First, import your Wallet, or create a brand new account.</p>
-                        </div>
-
-                        <div class="wallet-modal-button">
-                            <button onClick={() => this.handleMetamaskClick()}>
-                                <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
-                                <p>Inject from Metamask</p>
-                            </button>
-
-                            <button >
-                                <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
-                                <p>Create New Account</p>
-                            </button>
-                        </div>
-
-                        <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
-                    </div>
+                    <p>First, import your Wallet, or create a brand new account.</p>
                 </div>
+
+                <div class="wallet-modal-button">
+                    <button onClick={() => this.handleMetamaskClick()}>
+                        <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
+                        <p>Inject from Metamask</p>
+                    </button>
+
+                    <button >
+                        <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
+                        <p>Create New Account</p>
+                    </button>
+                </div>
+
+                <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
             </div>
         )
     }

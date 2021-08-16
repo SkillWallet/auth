@@ -7,9 +7,8 @@ button, p, h1, h2, h3, h4 {
 }
 
 .background-screen {
-  display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;

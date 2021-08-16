@@ -30,7 +30,6 @@ export class UserDetails {
   })
   showUserRole: EventEmitter<Boolean>;
 
-  @Listen('showUserRole', { target: 'body' })
   handleUserRoleClick() {
     localStorage.setItem('username', this.username);
     this.showUserRole.emit(true);
@@ -95,59 +94,54 @@ export class UserDetails {
 
   render() {
     return (
-        <div class="topDiv">
+        <div class="user-details-modal-window-child">
             {this.isLoading ? 
-              <div class="item">
-                <h2>Loading</h2>  
-                <i class="loader two"></i>
-              </div> : <div></div>}
-        
-            <div class="modalWindow">
-                <div class="user-details-modal-window-child">
-                    <div class="user-details-header">
-                      <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
-                      <p>Tell us about yourself</p>
+                <div class="item">
+                  <h2>Loading</h2>  
+                  <i class="loader two"></i>
+                </div> : <div></div>}
+            <div class="user-details-header">
+              <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
+              <p>Tell us about yourself</p>
+            </div>
+
+            <div class="user-details-fields">
+                <h4>Nickname</h4>
+                <div class="username-field">
+                {!this._userValidator.validate(this.username) ? 
+                      <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
+                    <form>
+                      <input value={this.username} onInput={(event) => this.handleUsernameChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
+                    </form>
+                    <p>{this.username ? 17-this.username.length : 17} characters left</p>
+
+                </div>
+
+                <h4>Avatar</h4>
+                {!getValidator({name: 'file', options: this.files}).validate(this.files) ? 
+                      <span class="validation-error"> {this._imageValidator.errorMessage}</span> : null}
+                <div>
+                    <div class="avatar-div">
+                      <p>A public image - that's how others will see you.</p>
+                      
+                      <div class="image-upload">
+                          <div class="image-upload__edit">
+                            <label htmlFor="file"></label>
+                            <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
+                              onChange={($event: any) => this.handleInputChange($event.target.files)} />
+                          </div>
+
+                          <div class="image-upload__preview">
+                            <div id="image-preview"></div>
+                          </div>
+
+                          <p>.png or .jpg</p>
+                      </div>
                     </div>
-
-                    <div class="user-details-fields">
-                        <h4>Nickname</h4>
-                        <div class="username-field">
-                        {!this._userValidator.validate(this.username) ? 
-                              <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
-                            <form>
-                              <input value={this.username} onInput={(event) => this.handleUsernameChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
-                            </form>
-                            <p>{this.username ? 17-this.username.length : 17} characters left</p>
-
-                        </div>
-
-                        <h4>Avatar</h4>
-                        {!getValidator({name: 'file', options: this.files}).validate(this.files) ? 
-                              <span class="validation-error"> {this._imageValidator.errorMessage}</span> : null}
-                        <div>
-                            <div class="avatar-div">
-                              <p>A public image - that's how others will see you.</p>
-                              
-                              <div class="image-upload">
-                                  <div class="image-upload__edit">
-                                    <label htmlFor="file"></label>
-                                    <input type="file" name="files[]" id="file" accept="image/*" class="image-upload__input"
-                                      onChange={($event: any) => this.handleInputChange($event.target.files)} />
-                                  </div>
-
-                                  <div class="image-upload__preview">
-                                    <div id="image-preview"></div>
-                                  </div>
-
-                                  <p>.png or .jpg</p>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button disabled={this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
                 </div>
             </div>
+
+            <button disabled={this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
         </div>
       );
     }
