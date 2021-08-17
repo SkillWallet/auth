@@ -1,4 +1,4 @@
-import { Component, h, Event, EventEmitter, Prop, Element } from '@stencil/core';
+import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
 import { fetchSkillWallet } from '../../utils/utils';
 
 @Component({
@@ -24,6 +24,7 @@ export class UsersModal {
     const { ethereum } = window;
     try {
       await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log(ethereum);
       await fetchSkillWallet(ethereum.selectedAddress);
       this.handleNewScreen('skillwallet')
 
