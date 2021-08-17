@@ -39,7 +39,6 @@ export namespace Components {
         "skill": number;
     }
     interface UsersModal {
-        "community": any;
         "userUploadedImage": any;
     }
 }
@@ -137,12 +136,11 @@ declare namespace LocalJSX {
     }
     interface UserRole {
         "community"?: any;
-        "onShowUserQR"?: (event: CustomEvent<String>) => void;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "skill"?: number;
     }
     interface UsersModal {
-        "community"?: any;
-        "onShowNewUser"?: (event: CustomEvent<Boolean>) => void;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "userUploadedImage"?: any;
     }
     interface IntrinsicElements {
