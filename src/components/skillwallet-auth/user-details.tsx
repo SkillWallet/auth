@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Listen, h, Prop, State, Element } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, State, Element } from '@stencil/core';
 import { pushImage } from '../../utils/textile.hub.js';
 import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
 import { Validator } from '../../validators/validator.js';
@@ -141,7 +141,7 @@ export class UserDetails {
                 </div>
             </div>
 
-            <button disabled={this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
+            <button disabled={this.isLoading || this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
         </div>
       );
     }
