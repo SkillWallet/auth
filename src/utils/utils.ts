@@ -83,6 +83,7 @@ export function format(first: string, middle: string, last: string): string {
 }
 
 export const fetchSkillWallet = async (address: string) => {
+  console.log('fetching...');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
@@ -92,6 +93,8 @@ export const fetchSkillWallet = async (address: string) => {
     skillWalletAbi,
     signer,
   );
+
+  console.log(contract);
 
   const skillWalletId = await contract.getSkillWalletIdByOwner(address);
   console.log(skillWalletId);
