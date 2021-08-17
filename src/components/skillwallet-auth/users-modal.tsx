@@ -1,4 +1,5 @@
 import { Component, h, Event, EventEmitter, Prop, Element } from '@stencil/core';
+import { fetchSkillWallet } from '../../utils/utils';
 
 @Component({
   tag: 'users-modal',
@@ -12,11 +13,24 @@ export class UsersModal {
     cancelable: true,
     bubbles: true,
   })
+
   showNewScreen: EventEmitter<any>;
 
   handleNewScreen(text) {
     this.showNewScreen.emit(text);
   }
+
+  handleMetamaskClick = async () => {
+    const { ethereum } = window;
+    try {
+      await ethereum.request({ method: 'eth_requestAccounts' });
+      await fetchSkillWallet(ethereum.selectedAddress);
+      this.handleNewScreen('skillwallet')
+
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   render() {
     return (
@@ -28,7 +42,7 @@ export class UsersModal {
 
           <div class="wallet-modal-button">
             <button 
-            onClick={() => this.handleNewScreen('skillwallet')}
+            onClick={() => this.handleMetamaskClick()}
             >
               <auth-image></auth-image>
               <p>SkillWallet</p>

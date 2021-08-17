@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 // import Web3 from 'web3';
 import communityAbi from './communityContractAbi.json';
 import { pushJSONDocument } from '../utils/textile.hub';
+import skillWalletAbi from './skillWalletAbi.json';
 
 export const getCommunity = async (partnerKey) => {
   const res = await fetch(`https://api.distributed.town/api/community/key/${partnerKey}`, {
@@ -56,8 +57,8 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
     const memberJoinedEvent = events.find(
       e => e.event === 'MemberAdded',
     );
-    
-    if(memberJoinedEvent) {
+
+    if (memberJoinedEvent) {
       // return tokenID.
       return memberJoinedEvent.args[1].toString();
     } else {
@@ -69,9 +70,8 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
   }
 }
 
-export const getSkillWalletNonce = async (tokenId) => {
-  const action = tokenId > -1 ? 0 : 1
-  const response = await fetch(`https://api.skillwallet.id/api/skillwallet/${tokenId}/nonces?action=${action}`, {
+export const getActivationNonce = async (tokenId) => {
+  const response = await fetch(`https://api.skillwallet.id/api/skillwallet/${tokenId}/nonces?action=0`, {
     method: 'POST'
   })
   const nonce = await response.json();
@@ -80,4 +80,33 @@ export const getSkillWalletNonce = async (tokenId) => {
 
 export function format(first: string, middle: string, last: string): string {
   return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
+}
+
+export const fetchSkillWallet = async (address: string) => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+
+  const skillWalletAddress = '0xD32A4C76805f1Aa8a306c9Af75d28B68090c6c33';
+  const contract = new ethers.Contract(
+    skillWalletAddress,
+    skillWalletAbi,
+    signer,
+  );
+
+  const skillWalletId = await contract.getSkillWalletIdByOwner(address);
+  console.log(skillWalletId);
+
+  const isActive = await contract.isSkillWalletActivated(skillWalletId);
+  if (!isActive) {
+    alert('You should first activate your skillWallet by scanning the QR code!');
+  } else {
+    const res = await fetch(`https://api.skillwallet.id/api/skillwallet?tokenId=${skillWalletId}`, {
+      method: 'GET'
+    })
+    const skillWallet = await res.json();
+    if (skillWallet && skillWallet.nickname) {
+      console.log('setting local storage with SW');
+      localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+    }
+  }
 }
