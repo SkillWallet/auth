@@ -5,8 +5,6 @@ import { fetchSkillWallet } from '../../utils/utils';
   tag: 'users-modal',
 })
 export class UsersModal {
-  @Prop() userUploadedImage: any;
-
   @Event({
     eventName: 'showNewScreen',
     composed: true,

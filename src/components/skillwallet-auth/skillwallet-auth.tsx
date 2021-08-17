@@ -11,10 +11,7 @@ export class SkillwalletAuth {
   @Prop() partnerKey: string;
   @State() community: any;
   @State() displayLogin: boolean;
-  @State() userUploadedImage: any = '';
-  @State() icon: any = this.userUploadedImage === '' ? 
-        <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image> :
-        <auth-image class="person-img" image={this.userUploadedImage}></auth-image>
+  @State() icon: any = <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
   
   @State() usersIsVisible: boolean = false;
   @State() qrIsVisible: boolean = false;
@@ -39,7 +36,8 @@ export class SkillwalletAuth {
 
   handleHideClick() {
     this.displayLogin = false;
-    
+    this.icon = <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
+
     this.usersIsVisible = false;
     this.qrIsVisible = false;
     this.newUserIsVisible = false;
@@ -49,6 +47,11 @@ export class SkillwalletAuth {
 
   handleClickPropagation(e) {
     e.stopPropagation();
+  }
+
+  @Listen('imageUploaded')
+  handleImage(image) {
+    this.icon = <auth-image class="uploaded-img" image={image.detail}></auth-image>;
   }
 
   @Listen('showUserDetails')
@@ -100,7 +103,7 @@ export class SkillwalletAuth {
                 <div class="topDiv">
                   <div class="modalWindow" onClick={(event) => this.handleClickPropagation(event)}>
               
-              {(this.usersIsVisible === true) ? <users-modal userUploadedImage={this.userUploadedImage}></users-modal> : null}
+              {(this.usersIsVisible === true) ? <users-modal></users-modal> : null}
 
               {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
               {this.newUserIsVisible      === true ? <new-user community={this.community}></new-user> : null}

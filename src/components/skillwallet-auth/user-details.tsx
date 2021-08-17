@@ -30,6 +30,14 @@ export class UserDetails {
   })
   showUserRole: EventEmitter<Boolean>;
 
+  @Event({
+    eventName: 'imageUploaded',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  imageUploaded: EventEmitter<Boolean>;
+
   handleUserRoleClick() {
     localStorage.setItem('username', this.username);
     this.showUserRole.emit(true);
@@ -65,6 +73,7 @@ export class UserDetails {
 
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
+      this.imageUploaded.emit(imageUrl);
       
       this.uploadImage(imageFile, imageUrl);
       this.isLoading = false;
@@ -82,7 +91,6 @@ export class UserDetails {
       const imagePreviewContainer: HTMLElement = this.elementHost.shadowRoot.querySelector('#image-preview');
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
-      this.userUploadedImage=(imageUrl);
       this.onUploadCompleted.emit(file);
     };
 
