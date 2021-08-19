@@ -77,7 +77,7 @@ export class UserDetails {
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
       
-      this.uploadImage(imageFile, imageUrl);
+      this.uploadImage(imageFile);
       this.isLoading = false;
   }
 
@@ -86,7 +86,7 @@ export class UserDetails {
     this.onInputChange(event);
   }
 
-  private uploadImage(file, imageUrl) {
+  private uploadImage(file) {
     const reader = new FileReader();
 
     reader.onload = () => {

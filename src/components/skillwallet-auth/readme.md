@@ -5,19 +5,12 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
-
-| Property            | Attribute             | Description | Type  | Default     |
-| ------------------- | --------------------- | ----------- | ----- | ----------- |
-| `community`         | `community`           |             | `any` | `undefined` |
-| `userUploadedImage` | `user-uploaded-image` |             | `any` | `undefined` |
-
-
 ## Events
 
-| Event         | Description | Type                   |
-| ------------- | ----------- | ---------------------- |
-| `showNewUser` |             | `CustomEvent<Boolean>` |
+| Event               | Description | Type               |
+| ------------------- | ----------- | ------------------ |
+| `closeModalOnLogin` |             | `CustomEvent<any>` |
+| `showNewScreen`     |             | `CustomEvent<any>` |
 
 
 ## Dependencies
@@ -29,21 +22,11 @@
 ### Depends on
 
 - [auth-image](.)
-- [qr-modal](.)
-- [new-user](.)
-- [user-details](.)
-- [user-role](.)
 
 ### Graph
 ```mermaid
 graph TD;
   users-modal --> auth-image
-  users-modal --> qr-modal
-  users-modal --> new-user
-  users-modal --> user-details
-  users-modal --> user-role
-  qr-modal --> qr-code
-  new-user --> auth-image
   skillwallet-auth --> users-modal
   style users-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```
