@@ -152,6 +152,25 @@ button, p, h1, h2, h3, h4 {
   color: black;
 }
 
+.activeSelection {
+  background-color: grey !important;
+  margin-top: 0.5px !important;
+}
+
+.activeSelection:hover {
+  background-color: grey;
+  cursor: default !important;
+}
+
+.inactiveSelection > p {
+  color: #282828;
+}
+
+.inactiveSelection:hover {
+  cursor: default !important;
+  background-color: black !important;
+}
+
 .wallet-modal-button p {
   font-size: 27px;
   margin-left: 55px;
@@ -743,4 +762,8 @@ html, body {
 	color: white;
 	text-align: center;
 	letter-spacing: 0.3px;
+}
+
+.disabled:hover {
+  cursor: default !important;
 }

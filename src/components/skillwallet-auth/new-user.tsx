@@ -11,6 +11,7 @@ declare global {
 })
 export class NewUser {    
     @State() isAccountDisconnected: boolean = true;
+    @State() buttonClass: string = 'disabled';
     @Prop() community: any;
 
     @Event({
@@ -25,6 +26,7 @@ export class NewUser {
 
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
         this.isAccountDisconnected = false;
+        this.buttonClass = '';
         return;
         }
     }
@@ -34,6 +36,7 @@ export class NewUser {
             try {
                 await ethereum.request({ method: 'eth_requestAccounts'});
                 this.isAccountDisconnected = false;
+                this.buttonClass = '';
             } catch (error) {
                 alert(error);
         }
@@ -56,18 +59,18 @@ export class NewUser {
                 </div>
 
                 <div class="wallet-modal-button">
-                    <button onClick={() => this.handleMetamaskClick()}>
+                    <button onClick={() => this.handleMetamaskClick()} class={this.isAccountDisconnected ? '' : 'activeSelection'}>
                         <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg"}></auth-image>
                         <p>Inject from Metamask</p>
                     </button>
 
-                    <button >
+                    <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
                         <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
                         <p>Create New Account</p>
                     </button>
                 </div>
 
-                <button disabled={this.isAccountDisconnected} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
+                <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>Next: Introduce yourself</button>
             </div>
         )
     }

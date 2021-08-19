@@ -9,6 +9,7 @@ import { joinCommunity } from '../../utils/utils';
 export class UserRole {
     @State() roleSelected: string = null;
     @State() isLoading: boolean = false;
+    @State() buttonClass: string = 'disabled';
     @Prop() community: any;
     @Prop({mutable: true}) skill: number = 10;
     slider!: HTMLInputElement;
@@ -36,12 +37,11 @@ export class UserRole {
 
     handleRoleClick(role) {
         this.roleSelected = role;
+        this.buttonClass = '';
     }
 
     updateValue(event: Event) {
-        console.log(this.skill);
         this.skill = parseInt((event.target as HTMLInputElement).value);
-        console.log(this.skill);
     }
 
     render() {
@@ -70,7 +70,7 @@ export class UserRole {
                         <p>Tell your Community how experienced you are in this Role!</p>
                         
                         <div class="bar-chart-first-container">
-                            <input class="bar-chart-container" type="range" id="myRange" value="0" min="0" max="10" onChange={this.updateValue} ref={ele => this.slider = ele as HTMLInputElement}></input>
+                            <input class="bar-chart-container" type="range" id="myRange" value="1" min="1" max="10" onChange={this.updateValue} ref={ele => this.slider = ele as HTMLInputElement}></input>
                             
                             <div class="bar-chart-metrics">
                                 <p>1</p>
@@ -99,7 +99,7 @@ export class UserRole {
                 </div>
                 }
 
-                <button onClick={() => this.handleUserQRClick()}>That's it - join this community!</button>
+                <button onClick={() => this.handleUserQRClick()} class={this.buttonClass} disabled={this.roleSelected === null}>That's it - join this community!</button>
             </div>
         )
     }
