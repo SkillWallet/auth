@@ -32,6 +32,7 @@ export class SkillwalletAuth {
     if (this.skillwallet) {
       this.icon = this.skillwallet['imageUrl'];
       this.storedUsername = this.skillwallet['nickname'];
+      this.onSkillwalletLogin.emit(true);
     }
   }
 
