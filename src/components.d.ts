@@ -123,6 +123,7 @@ declare namespace LocalJSX {
         "textKey"?: string;
     }
     interface SkillwalletAuth {
+        "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
         "partnerKey"?: string;
     }

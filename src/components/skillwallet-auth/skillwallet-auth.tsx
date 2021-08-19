@@ -48,6 +48,14 @@ export class SkillwalletAuth {
     bubbles: true,
   })
   showLogin: EventEmitter<Boolean>;
+
+  @Event({
+    eventName: 'onSkillwalletLogin',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  onSkillwalletLogin: EventEmitter<Boolean>;
   
   handleHideClick() {
     this.displayLogin = false;
@@ -84,6 +92,7 @@ export class SkillwalletAuth {
   @Listen('closeModalOnLogin')
   closeModalOnLogin() {
     this.displayLogin = false;
+    this.onSkillwalletLogin.emit(true);
     this.getSkillWallet();
   }
 
