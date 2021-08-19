@@ -128,9 +128,9 @@ declare namespace LocalJSX {
     }
     interface UserDetails {
         "community"?: any;
-        "onImageUploaded"?: (event: CustomEvent<Boolean>) => void;
         "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
+        "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
         "userUploadedImage"?: any;
         "validator"?: string | any;
     }
@@ -140,6 +140,7 @@ declare namespace LocalJSX {
         "skill"?: number;
     }
     interface UsersModal {
+        "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {

@@ -31,15 +31,18 @@ export class UserDetails {
   showUserRole: EventEmitter<Boolean>;
 
   @Event({
-    eventName: 'imageUploaded',
+    eventName: 'userDetailsSaved',
     composed: true,
     cancelable: true,
     bubbles: true,
   })
-  imageUploaded: EventEmitter<Boolean>;
+  userDetailsSaved: EventEmitter<any>;
 
   handleUserRoleClick() {
     localStorage.setItem('username', this.username);
+
+    // removing this call for now...assuming that we don't show the username + image in button until after a successful login
+    // this.userDetailsSaved.emit({image: localStorage.getItem('imageUrl'), username: this.username});
     this.showUserRole.emit(true);
   }
   
@@ -73,7 +76,6 @@ export class UserDetails {
 
       const imageUrl = await pushImage(imageFile);
       localStorage.setItem('imageUrl', imageUrl);
-      this.imageUploaded.emit(imageUrl);
       
       this.uploadImage(imageFile, imageUrl);
       this.isLoading = false;

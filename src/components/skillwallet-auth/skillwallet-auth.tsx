@@ -11,7 +11,6 @@ export class SkillwalletAuth {
   @Prop() partnerKey: string;
   @State() community: any;
   @State() displayLogin: boolean;
-  @State() icon: any = <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
   
   @State() usersIsVisible: boolean = false;
   @State() qrIsVisible: boolean = false;
@@ -19,6 +18,22 @@ export class SkillwalletAuth {
   @State() userDetailsAreVisible: boolean = false;
   @State() userRoleIsVisible: boolean = false;
   @State() qrText: string = null;
+  @State() storedUsername: any = null;
+  @State() skillwallet: object = null;
+  @State() icon: any = null;
+
+  componentWillLoad() {
+    this.getSkillWallet();
+  }
+
+  getSkillWallet() {
+    this.skillwallet = JSON.parse(localStorage.getItem('skillWallet'));
+
+    if (this.skillwallet) {
+      this.icon = this.skillwallet['imageUrl'];
+      this.storedUsername = this.skillwallet['nickname'];
+    }
+  }
 
   async componentDidLoad() {
     (window as any).Buffer = buffer;
@@ -33,10 +48,9 @@ export class SkillwalletAuth {
     bubbles: true,
   })
   showLogin: EventEmitter<Boolean>;
-
+  
   handleHideClick() {
     this.displayLogin = false;
-    this.icon = <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
 
     this.usersIsVisible = false;
     this.qrIsVisible = false;
@@ -49,9 +63,10 @@ export class SkillwalletAuth {
     e.stopPropagation();
   }
 
-  @Listen('imageUploaded')
-  handleImage(image) {
-    this.icon = <auth-image class="uploaded-img" image={image.detail}></auth-image>;
+  @Listen('userDetailsSaved')
+  handleUserDetails(details) {
+    this.icon = details.detail['image'];
+    this.storedUsername = details.detail['username'];
   }
 
   @Listen('showUserDetails')
@@ -64,6 +79,12 @@ export class SkillwalletAuth {
   showUserRole() {
     this.userDetailsAreVisible = false;
     this.userRoleIsVisible = true;
+  }
+
+  @Listen('closeModalOnLogin')
+  closeModalOnLogin() {
+    this.displayLogin = false;
+    this.getSkillWallet();
   }
 
   handleQRClick = () => {
@@ -93,10 +114,17 @@ export class SkillwalletAuth {
   render() {
     return (
         <div>
-          <button class="connect-wallet-button" onClick={() => this.handleClick()}>
-            {this.icon}
-            <p>Connect Wallet</p>
-          </button>
+          {this.storedUsername ? 
+              <button class="connect-wallet-button logged-in" disabled={true}>
+                  <auth-image class="uploaded-img" image={this.icon}></auth-image>
+                  <p>{this.storedUsername}</p>
+              </button> :
+
+              <button class="connect-wallet-button" onClick={() => this.handleClick()}>
+                  <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
+                  <p>Connect Wallet</p>
+              </button>
+            }
 
           {this.displayLogin ?
               <div class="background-screen" onClick={() => this.handleHideClick()}>
