@@ -28,11 +28,19 @@ button, p, h1, h2, h3, h4 {
   padding-right: 8px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  min-width: 100px;
 }
 
 .person-img > img {
   width: 65%;
   margin-right: 2px;
+}
+
+.uploaded-img > img {
+  max-width: 14px;
+  margin-right: 2px;
+  border-radius: 20px;
 }
 
 .connect-wallet-button:hover {
@@ -43,6 +51,15 @@ button, p, h1, h2, h3, h4 {
 
 .connect-wallet-button:active {
   margin-top: 0.5px;
+}
+
+.logged-in:hover {
+  cursor: default;
+  background-color: black;
+}
+
+.logged-in:active {
+  margin-top: 0;
 }
 
 .topDiv {

@@ -1,12 +1,10 @@
-import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
+import { Component, h, Event, EventEmitter } from '@stencil/core';
 import { fetchSkillWallet } from '../../utils/utils';
 
 @Component({
   tag: 'users-modal',
 })
 export class UsersModal {
-  @Prop() userUploadedImage: any;
-
   @Event({
     eventName: 'showNewScreen',
     composed: true,
@@ -15,6 +13,14 @@ export class UsersModal {
   })
 
   showNewScreen: EventEmitter<any>;
+
+  @Event({
+    eventName: 'closeModalOnLogin',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  closeModalOnLogin: EventEmitter<any>;
 
   handleNewScreen(text) {
     this.showNewScreen.emit(text);
@@ -26,7 +32,7 @@ export class UsersModal {
       await ethereum.request({ method: 'eth_requestAccounts' });
       console.log(ethereum);
       await fetchSkillWallet(ethereum.selectedAddress);
-      this.handleNewScreen('skillwallet')
+      this.closeModalOnLogin.emit(); 
 
     } catch (error) {
       alert(error);

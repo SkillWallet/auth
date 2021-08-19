@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Listen, h, Prop, State, Element } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, State, Element } from '@stencil/core';
 import { pushImage } from '../../utils/textile.hub.js';
 import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
 import { Validator } from '../../validators/validator.js';
@@ -30,8 +30,19 @@ export class UserDetails {
   })
   showUserRole: EventEmitter<Boolean>;
 
+  @Event({
+    eventName: 'userDetailsSaved',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  userDetailsSaved: EventEmitter<any>;
+
   handleUserRoleClick() {
     localStorage.setItem('username', this.username);
+
+    // removing this call for now...assuming that we don't show the username + image in button until after a successful login
+    // this.userDetailsSaved.emit({image: localStorage.getItem('imageUrl'), username: this.username});
     this.showUserRole.emit(true);
   }
   
@@ -82,7 +93,6 @@ export class UserDetails {
       const imagePreviewContainer: HTMLElement = this.elementHost.shadowRoot.querySelector('#image-preview');
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
-      this.userUploadedImage=(imageUrl);
       this.onUploadCompleted.emit(file);
     };
 
@@ -141,7 +151,7 @@ export class UserDetails {
                 </div>
             </div>
 
-            <button disabled={this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
+            <button disabled={this.isLoading || this.isFormInvalid()} onClick={() => this.handleUserRoleClick()}>Next: Pick your Role</button>
         </div>
       );
     }

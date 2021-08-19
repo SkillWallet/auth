@@ -39,7 +39,6 @@ export namespace Components {
         "skill": number;
     }
     interface UsersModal {
-        "userUploadedImage": any;
     }
 }
 declare global {
@@ -131,6 +130,7 @@ declare namespace LocalJSX {
         "community"?: any;
         "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
+        "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
         "userUploadedImage"?: any;
         "validator"?: string | any;
     }
@@ -140,8 +140,8 @@ declare namespace LocalJSX {
         "skill"?: number;
     }
     interface UsersModal {
+        "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
-        "userUploadedImage"?: any;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;
