@@ -99,7 +99,7 @@ export class UserRole {
                 </div>
                 }
 
-                <button onClick={() => this.handleUserQRClick()} class={this.buttonClass} disabled={this.roleSelected === null}>That's it - join this community!</button>
+                <button onClick={() => this.handleUserQRClick()} class={this.buttonClass} disabled={this.isLoading}>That's it - join this community!</button>
             </div>
         )
     }

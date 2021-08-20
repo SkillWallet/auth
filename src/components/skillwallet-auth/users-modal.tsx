@@ -1,10 +1,11 @@
-import { Component, h, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Event, EventEmitter, State } from '@stencil/core';
 import { fetchSkillWallet } from '../../utils/utils';
 
 @Component({
   tag: 'users-modal',
 })
 export class UsersModal {
+  @State() isLoading: Boolean = false;
   @Event({
     eventName: 'showNewScreen',
     composed: true,
@@ -27,6 +28,7 @@ export class UsersModal {
   }
 
   handleMetamaskClick = async () => {
+    this.isLoading = true;
     const { ethereum } = window;
     try {
       await ethereum.request({ method: 'eth_requestAccounts' });
@@ -35,6 +37,7 @@ export class UsersModal {
       this.closeModalOnLogin.emit(); 
 
     } catch (error) {
+      this.isLoading = false;
       alert(error);
     }
   };
@@ -42,6 +45,10 @@ export class UsersModal {
   render() {
     return (
         <div class="modal-window-child">
+          {this.isLoading ? <div class="item">
+              <h2>Loading</h2>  
+              <i class="loader two"></i>
+              </div> : <div></div>}
           <div class="wallet-header">
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-black.svg'}></auth-image>
             <h2>Login with</h2>

@@ -29,7 +29,17 @@ button, p, h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  min-width: 100px;
+  min-width: 145px;
+  max-width: 145px;
+  max-height: 30px;
+  white-space: nowrap;
+}
+
+.connect-wallet-button > p {
+  max-height: 25px;
+  overflow: hidden;
+  max-height: 40px;
+  text-overflow: ellipsis;
 }
 
 .person-img > img {
@@ -38,9 +48,13 @@ button, p, h1, h2, h3, h4 {
 }
 
 .uploaded-img > img {
-  max-width: 14px;
-  margin-right: 2px;
+  max-width: 18px;
+  margin: 2px 4px;
   border-radius: 20px;
+}
+
+.logged-in > p {
+  font-size: 14px;
 }
 
 .connect-wallet-button:hover {
