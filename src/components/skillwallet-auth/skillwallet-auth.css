@@ -279,6 +279,8 @@ button, p, h1, h2, h3, h4 {
 
 .user-details-header, .user-role-header {
   text-align: center;
+  width: 75%;
+  margin: 0 auto;
 }
 
 .user-details-header h2, .user-details-header p, .user-role-header h2, .user-role-header p {
@@ -364,7 +366,7 @@ button, p, h1, h2, h3, h4 {
   flex-direction: column;
 }
 
-.user-details-modal-window-child > button, .user-role-modal-window-child > button{
+.user-details-modal-window-child > button, .roles-screen-new-user > button, .roles-screen-partner > button {
   border-radius: 40px;
   background-color: white;
   width: 75%;
@@ -373,15 +375,15 @@ button, p, h1, h2, h3, h4 {
   font-size: 20px;
 }
 
-.user-details-modal-window-child > button:hover, .user-role-modal-window-child > button:hover {
+.user-details-modal-window-child > button:hover, .roles-screen-new-user > button:hover, .roles-screen-partner > button:hover {
   cursor: pointer;
 }
 
-.user-details-modal-window-child > button:hover:disabled, .user-role-modal-window-child > button:hover:disabled {
+.user-details-modal-window-child > button:hover:disabled, .roles-screen-new-user > button:hover:disabled, .roles-screen-partner > button:hover:disabled {
   cursor: default;
 }
 
-.user-details-modal-window-child > button:active, .user-role-modal-window-child > button:active {
+.user-details-modal-window-child > button:active, .roles-screen-new-user > button:active, .roles-screen-partner > button:active {
   background-color: black;
   color: white;
 }
@@ -407,7 +409,7 @@ button, p, h1, h2, h3, h4 {
   border: 1px solid black;
 }
 
-.user-role-modal-window-child {
+.user-role-modal-window-child, .roles-screen-partner, .roles-screen-new-user {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -481,8 +483,8 @@ button, p, h1, h2, h3, h4 {
 }
 
 .filled-in-circle {
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
   border-radius: 100%;
   border: 1px solid black;
   margin: 0 auto;

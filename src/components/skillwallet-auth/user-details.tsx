@@ -12,6 +12,7 @@ import { Validator } from '../../validators/validator.js';
 export class UserDetails {
   @Prop() community: any;
   @Prop() userUploadedImage: any;
+  @Prop() isPartner: Boolean;
   @State() isLoading: boolean = false;
   @State() username: string;
   @Element() private elementHost: HTMLElement;
@@ -110,10 +111,16 @@ export class UserDetails {
                   <h2>Loading</h2>  
                   <i class="loader two"></i>
                 </div> : <div></div>}
-            <div class="user-details-header">
-              <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
-              <p>Tell us about yourself</p>
-            </div>
+            
+            {this.isPartner ? 
+                <div class="user-details-header">
+                    <p style={{color: 'white'}}>Great! Now let's start - tell us about yourself</p>
+                </div> :
+              
+                <div class="user-details-header">]
+                    <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
+                    <p>Tell us about yourself</p>
+                </div> }
 
             <div class="user-details-fields">
                 <h4>Nickname</h4>
