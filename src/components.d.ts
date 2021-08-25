@@ -12,6 +12,7 @@ export namespace Components {
     }
     interface NewUser {
         "community": any;
+        "isPartner": Boolean;
     }
     interface QrCode {
         "colorDark": string;
@@ -26,19 +27,37 @@ export namespace Components {
         "community": any;
         "textKey": string;
     }
+    interface RolesScreenNewUser {
+        "buttonClass": string;
+        "community": any;
+        "isLoading": boolean;
+        "isPartner": Boolean;
+        "roleSelected": string;
+        "skill": number;
+    }
+    interface RolesScreenPartner {
+        "buttonClass": string;
+        "community": any;
+        "isLoading": boolean;
+        "isPartner": Boolean;
+        "roleSelected": string;
+    }
     interface SkillwalletAuth {
         "partnerKey": string;
     }
     interface UserDetails {
         "community": any;
+        "isPartner": Boolean;
         "userUploadedImage": any;
         "validator": string | any;
     }
     interface UserRole {
         "community": any;
+        "isPartner": Boolean;
         "skill": number;
     }
     interface UsersModal {
+        "isPartner": Boolean;
     }
 }
 declare global {
@@ -65,6 +84,18 @@ declare global {
     var HTMLQrModalElement: {
         prototype: HTMLQrModalElement;
         new (): HTMLQrModalElement;
+    };
+    interface HTMLRolesScreenNewUserElement extends Components.RolesScreenNewUser, HTMLStencilElement {
+    }
+    var HTMLRolesScreenNewUserElement: {
+        prototype: HTMLRolesScreenNewUserElement;
+        new (): HTMLRolesScreenNewUserElement;
+    };
+    interface HTMLRolesScreenPartnerElement extends Components.RolesScreenPartner, HTMLStencilElement {
+    }
+    var HTMLRolesScreenPartnerElement: {
+        prototype: HTMLRolesScreenPartnerElement;
+        new (): HTMLRolesScreenPartnerElement;
     };
     interface HTMLSkillwalletAuthElement extends Components.SkillwalletAuth, HTMLStencilElement {
     }
@@ -95,6 +126,8 @@ declare global {
         "new-user": HTMLNewUserElement;
         "qr-code": HTMLQrCodeElement;
         "qr-modal": HTMLQrModalElement;
+        "roles-screen-new-user": HTMLRolesScreenNewUserElement;
+        "roles-screen-partner": HTMLRolesScreenPartnerElement;
         "skillwallet-auth": HTMLSkillwalletAuthElement;
         "user-details": HTMLUserDetailsElement;
         "user-role": HTMLUserRoleElement;
@@ -107,6 +140,7 @@ declare namespace LocalJSX {
     }
     interface NewUser {
         "community"?: any;
+        "isPartner"?: Boolean;
         "onShowUserDetails"?: (event: CustomEvent<Boolean>) => void;
     }
     interface QrCode {
@@ -122,6 +156,23 @@ declare namespace LocalJSX {
         "community"?: any;
         "textKey"?: string;
     }
+    interface RolesScreenNewUser {
+        "buttonClass"?: string;
+        "community"?: any;
+        "isLoading"?: boolean;
+        "isPartner"?: Boolean;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "roleSelected"?: string;
+        "skill"?: number;
+    }
+    interface RolesScreenPartner {
+        "buttonClass"?: string;
+        "community"?: any;
+        "isLoading"?: boolean;
+        "isPartner"?: Boolean;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "roleSelected"?: string;
+    }
     interface SkillwalletAuth {
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
@@ -129,6 +180,7 @@ declare namespace LocalJSX {
     }
     interface UserDetails {
         "community"?: any;
+        "isPartner"?: Boolean;
         "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
         "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
@@ -137,10 +189,11 @@ declare namespace LocalJSX {
     }
     interface UserRole {
         "community"?: any;
-        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "isPartner"?: Boolean;
         "skill"?: number;
     }
     interface UsersModal {
+        "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
     }
@@ -149,6 +202,8 @@ declare namespace LocalJSX {
         "new-user": NewUser;
         "qr-code": QrCode;
         "qr-modal": QrModal;
+        "roles-screen-new-user": RolesScreenNewUser;
+        "roles-screen-partner": RolesScreenPartner;
         "skillwallet-auth": SkillwalletAuth;
         "user-details": UserDetails;
         "user-role": UserRole;
@@ -163,6 +218,8 @@ declare module "@stencil/core" {
             "new-user": LocalJSX.NewUser & JSXBase.HTMLAttributes<HTMLNewUserElement>;
             "qr-code": LocalJSX.QrCode & JSXBase.HTMLAttributes<HTMLQrCodeElement>;
             "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;
+            "roles-screen-new-user": LocalJSX.RolesScreenNewUser & JSXBase.HTMLAttributes<HTMLRolesScreenNewUserElement>;
+            "roles-screen-partner": LocalJSX.RolesScreenPartner & JSXBase.HTMLAttributes<HTMLRolesScreenPartnerElement>;
             "skillwallet-auth": LocalJSX.SkillwalletAuth & JSXBase.HTMLAttributes<HTMLSkillwalletAuthElement>;
             "user-details": LocalJSX.UserDetails & JSXBase.HTMLAttributes<HTMLUserDetailsElement>;
             "user-role": LocalJSX.UserRole & JSXBase.HTMLAttributes<HTMLUserRoleElement>;

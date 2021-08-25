@@ -13,6 +13,7 @@ export class NewUser {
     @State() isAccountDisconnected: boolean = true;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
+    @Prop() isPartner: Boolean;
 
     @Event({
         eventName: 'showUserDetails',
@@ -50,10 +51,12 @@ export class NewUser {
         return (
             <div class="new-user-modal-window-child">
                 <div class="new-user-header">
-                    <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
+                    {this.isPartner ? 
+                    <h2 style={{textDecoration: 'none', fontWeight: '500'}}>Hello, Partner!</h2> :
+                        <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
                         {this.community.name}
                         </span>
-                    </h2>
+                    </h2>}
 
                     <p>First, import your Wallet, or create a brand new account.</p>
                 </div>

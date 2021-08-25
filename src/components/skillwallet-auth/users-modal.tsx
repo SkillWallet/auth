@@ -1,4 +1,4 @@
-import { Component, h, Event, EventEmitter, State } from '@stencil/core';
+import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
 import { fetchSkillWallet } from '../../utils/utils';
 
 @Component({
@@ -6,6 +6,8 @@ import { fetchSkillWallet } from '../../utils/utils';
 })
 export class UsersModal {
   @State() isLoading: Boolean = false;
+  @Prop() isPartner: Boolean;
+  
   @Event({
     eventName: 'showNewScreen',
     composed: true,
@@ -51,7 +53,7 @@ export class UsersModal {
               </div> : <div></div>}
           <div class="wallet-header">
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-black.svg'}></auth-image>
-            <h2>Login with</h2>
+            <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
           </div>
 
           <div class="wallet-modal-button">
@@ -59,14 +61,14 @@ export class UsersModal {
             onClick={() => this.handleMetamaskClick()}
             >
               <auth-image></auth-image>
-              <p>SkillWallet</p>
+              <p>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</p>
             </button>
 
             <button 
             onClick={() => this.handleNewScreen(null)}
             >
               <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <p>Create New User</p>
+              <p>{this.isPartner ? 'New Partner' : 'Create New User'}</p>
             </button>
           </div>
         </div>

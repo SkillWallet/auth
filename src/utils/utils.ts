@@ -12,6 +12,7 @@ export const getCommunity = async (partnerKey) => {
   return comm;
 }
 
+// TODO: do we need to handle a Partner calling this from roles-screen-partner (with 'null' for a skill)?
 export const joinCommunity = async (communityAddress, username, skill, level) => {
   try {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
