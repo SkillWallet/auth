@@ -117,8 +117,10 @@ export class SkillwalletAuth {
     if (text.detail) {
       this.qrText = text.detail;
       this.qrIsVisible = true;
-    } else {
+    } else if (this.isPartner === false) {
       this.newUserIsVisible = true;
+    } else {
+      this.userDetailsAreVisible = true;
     }
   }
 

@@ -1,4 +1,5 @@
-import { Component, h,  Prop } from '@stencil/core';
+import { Component, h,  Prop, Event, EventEmitter } from '@stencil/core';
+import { joinCommunity } from '../../utils/utils';
 
 @Component({
     tag: 'roles-screen-partner',
@@ -12,10 +13,25 @@ export class RolesScreenPartner {
     @Prop() community: any;
     @Prop() isPartner: Boolean;
 
+    @Event({
+        eventName: 'showNewScreen',
+        composed: true,
+        cancelable: true,
+        bubbles: true,
+      })
+      showNewScreen: EventEmitter<any>;
+
     handleRoleClick(role) {
         this.roleSelected = role;
         this.buttonClass = '';
     }
+
+    async handleUserQRClick() {
+        this.isLoading = true;
+        const tokenId = await joinCommunity(this.community.address, localStorage.getItem('username'), this.roleSelected, null);
+        localStorage.setItem('tokenId', tokenId);
+        this.showNewScreen.emit('role'); 
+      }
 
     render() {
         return (
@@ -47,7 +63,7 @@ export class RolesScreenPartner {
         </div>
 
         <button 
-        // onClick={() => this.handleUserQRClick()} 
+        onClick={() => this.handleUserQRClick()} 
         class={this.buttonClass} disabled={this.isLoading}>That's it - join this community!</button></div>
         )
     }

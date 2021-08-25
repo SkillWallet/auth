@@ -170,6 +170,7 @@ declare namespace LocalJSX {
         "community"?: any;
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "roleSelected"?: string;
     }
     interface SkillwalletAuth {
