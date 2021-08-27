@@ -1,5 +1,5 @@
 import { Component, h,  Prop, Event, EventEmitter } from '@stencil/core';
-import { joinCommunity } from '../../utils/utils';
+import { joinCommunity, activatePA } from '../../utils/utils';
 
 @Component({
     tag: 'roles-screen-partner',
@@ -12,6 +12,8 @@ export class RolesScreenPartner {
     @Prop() buttonClass: string;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
+    @Prop() communityAddress: string = null;
+    @Prop() partnersAddress: string = null;
 
     @Event({
         eventName: 'showNewScreen',
@@ -28,7 +30,9 @@ export class RolesScreenPartner {
 
     async handleUserQRClick() {
         this.isLoading = true;
-        const tokenId = await joinCommunity(this.community.address, localStorage.getItem('username'), this.roleSelected, null);
+        const tokenId = await joinCommunity(this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
+        const active = await activatePA(this.partnersAddress);
+        console.log(tokenId, active);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }

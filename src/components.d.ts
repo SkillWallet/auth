@@ -38,8 +38,10 @@ export namespace Components {
     interface RolesScreenPartner {
         "buttonClass": string;
         "community": any;
+        "communityAddress": string;
         "isLoading": boolean;
         "isPartner": Boolean;
+        "partnersAddress": string;
         "roleSelected": string;
     }
     interface SkillwalletAuth {
@@ -53,8 +55,9 @@ export namespace Components {
     }
     interface UserRole {
         "community": any;
+        "communityAddress": string;
         "isPartner": Boolean;
-        "skill": number;
+        "partnersAddress": string;
     }
     interface UsersModal {
         "isPartner": Boolean;
@@ -168,9 +171,11 @@ declare namespace LocalJSX {
     interface RolesScreenPartner {
         "buttonClass"?: string;
         "community"?: any;
+        "communityAddress"?: string;
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "partnersAddress"?: string;
         "roleSelected"?: string;
     }
     interface SkillwalletAuth {
@@ -189,8 +194,9 @@ declare namespace LocalJSX {
     }
     interface UserRole {
         "community"?: any;
+        "communityAddress"?: string;
         "isPartner"?: Boolean;
-        "skill"?: number;
+        "partnersAddress"?: string;
     }
     interface UsersModal {
         "isPartner"?: Boolean;

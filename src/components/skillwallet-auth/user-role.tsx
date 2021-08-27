@@ -10,8 +10,10 @@ export class UserRole {
     @State() isLoading: boolean = false;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
-    @Prop({mutable: true}) skill: number = 10;
+    @State() skill: number = 10;
     @Prop() isPartner: Boolean;
+    @Prop() communityAddress: string = null;
+    @Prop() partnersAddress: string = null;
 
 
 
@@ -25,6 +27,8 @@ export class UserRole {
                     isLoading={this.isLoading}
                     buttonClass={this.buttonClass}
                     roleSelected={this.roleSelected}
+                    communityAddress={this.communityAddress}
+                    partnersAddress={this.partnersAddress}
                 ></roles-screen-partner> : 
                 
                 <roles-screen-new-user

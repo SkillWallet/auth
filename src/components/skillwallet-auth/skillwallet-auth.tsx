@@ -22,6 +22,8 @@ export class SkillwalletAuth {
   @State() skillwallet: object = null;
   @State() icon: any = null;
   @State() isPartner: Boolean = false;
+  @State() partnersAddress: string = null;
+  @State() communityAddress: string = null;
 
   componentWillLoad() {
     this.getSkillWallet();
@@ -125,7 +127,11 @@ export class SkillwalletAuth {
   }
 
   @Listen('activateSkillwalletCommunity')
-  handlePartnerFlow() {
+  handlePartnerFlow(event) {
+      console.log(event.detail);
+      this.communityAddress = event.detail.communityAddr;
+      this.partnersAddress = event.detail.partnersAddr;
+
       this.isPartner = true;
       this.displayLogin = true;
       this.usersIsVisible = true;
@@ -161,7 +167,12 @@ export class SkillwalletAuth {
                     community={this.community} 
                     validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
                   ></user-details> : null}
-              {this.userRoleIsVisible     === true ? <user-role isPartner={this.isPartner} community={this.community}></user-role> : null}
+              {this.userRoleIsVisible     === true ? <user-role 
+                  isPartner={this.isPartner} 
+                  community={this.community}
+                  partnersAddress={this.partnersAddress}
+                  communityAddress={this.communityAddress}
+              ></user-role> : null}
               </div>
 
           </div>
