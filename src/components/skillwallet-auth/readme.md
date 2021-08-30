@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property    | Attribute | Description | Type      | Default     |
+| ----------- | --------- | ----------- | --------- | ----------- |
+| `isPartner` | --        |             | `Boolean` | `undefined` |
+
+
 ## Events
 
 | Event               | Description | Type               |

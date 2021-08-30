@@ -1,8 +1,10 @@
 import { ethers } from 'ethers';
 // import Web3 from 'web3';
-import communityAbi from './communityContractAbi.json';
 import { pushJSONDocument } from '../utils/textile.hub';
 import skillWalletAbi from './skillWalletAbi.json';
+import communityAbi from './communityAbi.json';
+import partnersAbi from './partnersAgreementAbi.json';
+
 
 export const getCommunity = async (partnerKey) => {
   const res = await fetch(`https://api.distributed.town/api/community/key/${partnerKey}`, {
@@ -12,7 +14,6 @@ export const getCommunity = async (partnerKey) => {
   return comm;
 }
 
-// TODO: do we need to handle a Partner calling this from roles-screen-partner (with 'null' for a skill)?
 export const joinCommunity = async (communityAddress, username, skill, level) => {
   try {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -20,7 +21,7 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
 
     const contract = new ethers.Contract(
       communityAddress,
-      communityAbi,
+      JSON.stringify(communityAbi),
       signer,
     );
 
@@ -112,5 +113,41 @@ export const fetchSkillWallet = async (address: string) => {
       console.log('setting local storage with SW');
       localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
     }
+  }
+}
+
+export const activatePA = async (partnersAddress) => {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(
+      partnersAddress,
+      JSON.stringify(partnersAbi),
+      signer,
+    );
+    console.log( 'cntrct: ', contract);
+
+    const createTx = await contract.activatePA();
+
+    const res = await createTx.wait();
+    console.log('res: ', res);
+    // const { events } = communityTransactionResult;
+    // const memberJoinedEvent = events.find(
+    //   e => e.event === 'MemberAdded',
+    // );
+
+  //   if (memberJoinedEvent) {
+  //     // return tokenID.
+  //     return memberJoinedEvent.args[1].toString();
+  //   } else {
+  //     throw new Error('Something went wrong');
+  //   }
+  // } 
+  return true;
+}
+  catch (err) {
+    console.log(err);
+    return;
   }
 }
