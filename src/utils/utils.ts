@@ -16,6 +16,7 @@ export const getCommunity = async (partnerKey) => {
 
 export const joinCommunity = async (communityAddress, username, skill, level) => {
   try {
+    console.log('trying to join community', communityAddress);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 

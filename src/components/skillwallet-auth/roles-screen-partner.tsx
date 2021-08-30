@@ -29,6 +29,7 @@ export class RolesScreenPartner {
     }
 
     async handleUserQRClick() {
+        console.log('button clicked');
         this.isLoading = true;
         const tokenId = await joinCommunity(this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
