@@ -1,9 +1,8 @@
 import { ethers } from 'ethers';
 // import Web3 from 'web3';
-// import communityAbi from './communityContractAbi.json';
 import { pushJSONDocument } from '../utils/textile.hub';
 import skillWalletAbi from './skillWalletAbi.json';
-import newCommunityAbi from './communityAbi.json';   // <-- ???
+import communityAbi from './communityAbi.json';
 import partnersAbi from './partnersAgreementAbi.json';
 
 
@@ -22,7 +21,7 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
 
     const contract = new ethers.Contract(
       communityAddress,
-      newCommunityAbi,
+      communityAbi,
       signer,
     );
 
@@ -129,7 +128,7 @@ export const activatePA = async (partnersAddress) => {
     );
     console.log( 'cntrct: ', contract);
 
-    const createTx = await contract.activatePa();
+    const createTx = await contract.activatePA();
 
     const res = await createTx.wait();
     console.log('res: ', res);

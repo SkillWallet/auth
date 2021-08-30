@@ -1,5 +1,6 @@
-[
-  {
+{ 
+    "abi": [
+    {
       "inputs": [
         {
           "internalType": "string",
@@ -477,3 +478,4 @@
       "type": "function"
     }
   ]
+}
