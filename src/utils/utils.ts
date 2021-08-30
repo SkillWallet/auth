@@ -21,7 +21,7 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
 
     const contract = new ethers.Contract(
       communityAddress,
-      communityAbi,
+      JSON.stringify(communityAbi),
       signer,
     );
 
@@ -123,7 +123,7 @@ export const activatePA = async (partnersAddress) => {
 
     const contract = new ethers.Contract(
       partnersAddress,
-      partnersAbi,
+      JSON.stringify(partnersAbi),
       signer,
     );
     console.log( 'cntrct: ', contract);
