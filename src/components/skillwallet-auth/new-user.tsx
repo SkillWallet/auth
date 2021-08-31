@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
+// import  OpenLogin  from '@toruslabs/openlogin';
 
 declare global {
     interface Window {
@@ -12,8 +13,14 @@ declare global {
 export class NewUser {    
     @State() isAccountDisconnected: boolean = true;
     @State() buttonClass: string = 'disabled';
+    @State() privKey: any;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
+
+    // VERIFIER: {
+    //     loginProvider: "google",
+    //     clientId: "BJXCVeEgsAzBoxgaNbsOqLCPEes6L_sxgt-btQ9LYkLYmwIvyr5lqyu7rO-Go_g5wreSKBZzYcN_WT8YVbMveWM"
+    // }
 
     @Event({
         eventName: 'showUserDetails',
@@ -22,15 +29,37 @@ export class NewUser {
         bubbles: true,
       }) showUserDetails: EventEmitter<Boolean>;
 
-    componentWillLoad() {
-    const {ethereum} = window;
+    //   onMount = async () => {
 
-    if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
-        this.isAccountDisconnected = false;
-        this.buttonClass = '';
-        return;
+        // console.log('init....');
+        // this.privKey = openLogin.privKey;
+        // this.privKey = 4;
+        // console.log(this.privKey);
+    //   }
+
+    componentWillLoad() {        
+        // this.onMount();
+        const {ethereum} = window;    
+
+        if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
+            this.isAccountDisconnected = false;
+            this.buttonClass = '';
+            return;
+            }
         }
-    }
+
+        // async componentDidLoad() {
+        //     const openLogin = new OpenLogin({
+        //         clientId: "BJXCVeEgsAzBoxgaNbsOqLCPEes6L_sxgt-btQ9LYkLYmwIvyr5lqyu7rO-Go_g5wreSKBZzYcN_WT8YVbMveWM",
+        //         network: "mainnet"
+        //     });
+        //     // console.log('openLogin');
+        //     await openLogin.init();
+
+        //     if (openLogin.privKey) {
+        //         console.log("User is already logged in. Private key: " + openLogin.privKey);
+        //      }
+        //   }
 
     handleMetamaskClick = async () => {
         const {ethereum} = window;

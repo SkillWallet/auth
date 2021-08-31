@@ -39,6 +39,7 @@
   "dependencies": {
     "@stencil/core": "2.6.0",
     "@textile/hub": "^6.2.0",
+    "@toruslabs/openlogin": "^0.10.0",
     "@types/jest": "^26.0.24",
     "ethers": "^5.4.1",
     "jest": "^27.0.6",
