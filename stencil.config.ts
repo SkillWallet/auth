@@ -1,8 +1,10 @@
 import { Config } from '@stencil/core';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
+import json from '@rollup/plugin-json';
 
 export const config: Config = {
   namespace: 'skillwallet-auth',
+  plugins: [json()],
   nodeResolve: {
     browser: true
   },

@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
-// import  OpenLogin  from '@toruslabs/openlogin';
+import  OpenLogin  from '@toruslabs/openlogin/dist/openlogin-bundled.cjs.js';
 
 declare global {
     interface Window {
@@ -16,11 +16,7 @@ export class NewUser {
     @State() privKey: any;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
-
-    // VERIFIER: {
-    //     loginProvider: "google",
-    //     clientId: "BJXCVeEgsAzBoxgaNbsOqLCPEes6L_sxgt-btQ9LYkLYmwIvyr5lqyu7rO-Go_g5wreSKBZzYcN_WT8YVbMveWM"
-    // }
+    @State() openLogin: any;
 
     @Event({
         eventName: 'showUserDetails',
@@ -29,16 +25,7 @@ export class NewUser {
         bubbles: true,
       }) showUserDetails: EventEmitter<Boolean>;
 
-    //   onMount = async () => {
-
-        // console.log('init....');
-        // this.privKey = openLogin.privKey;
-        // this.privKey = 4;
-        // console.log(this.privKey);
-    //   }
-
     componentWillLoad() {        
-        // this.onMount();
         const {ethereum} = window;    
 
         if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
@@ -48,18 +35,14 @@ export class NewUser {
             }
         }
 
-        // async componentDidLoad() {
-        //     const openLogin = new OpenLogin({
-        //         clientId: "BJXCVeEgsAzBoxgaNbsOqLCPEes6L_sxgt-btQ9LYkLYmwIvyr5lqyu7rO-Go_g5wreSKBZzYcN_WT8YVbMveWM",
-        //         network: "mainnet"
-        //     });
-        //     // console.log('openLogin');
-        //     await openLogin.init();
+        componentDidLoad() {
+            this.openLogin = new OpenLogin({
+                clientId: "BJXCVeEgsAzBoxgaNbsOqLCPEes6L_sxgt-btQ9LYkLYmwIvyr5lqyu7rO-Go_g5wreSKBZzYcN_WT8YVbMveWM",
+                network: "testnet"
+            });
 
-        //     if (openLogin.privKey) {
-        //         console.log("User is already logged in. Private key: " + openLogin.privKey);
-        //      }
-        //   }
+            console.log('hey');
+          }
 
     handleMetamaskClick = async () => {
         const {ethereum} = window;
@@ -70,6 +53,15 @@ export class NewUser {
             } catch (error) {
                 alert(error);
         }
+    }
+
+    handleOpenLogin = async () => {
+            console.log('openLogin');
+            await this.openLogin.init();
+
+            if (this.openLogin.privKey) {
+                console.log("User is already logged in. Private key: " + this.openLogin.privKey);
+             }
     }
 
     handleUserDetailsClick() {
@@ -83,7 +75,7 @@ export class NewUser {
                     {this.isPartner ? 
                     <h2 style={{textDecoration: 'none', fontWeight: '500'}}>Hello, Partner!</h2> :
                         <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-                        {this.community.name}
+                        {/* {this.community.name} */}
                         </span>
                     </h2>}
 
@@ -96,7 +88,9 @@ export class NewUser {
                         <p>Inject from Metamask</p>
                     </button>
 
-                    <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
+                    <button 
+                    // class={this.isAccountDisconnected ? '' : 'inactiveSelection'} 
+                    onClick={() => this.openLogin()}>
                         <auth-image image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg"}></auth-image>
                         <p>Create New Account</p>
                     </button>

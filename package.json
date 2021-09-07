@@ -52,6 +52,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "rollup-plugin-node-polyfills": "^0.2.1"
   }
 }
