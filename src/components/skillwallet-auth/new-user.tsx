@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
+import { changeNetwork } from '../../utils/utils';
 
 declare global {
     interface Window {
@@ -33,6 +34,7 @@ export class NewUser {
     }
 
     handleMetamaskClick = async () => {
+        await changeNetwork();
         const {ethereum} = window;
             try {
                 await ethereum.request({ method: 'eth_requestAccounts'});
