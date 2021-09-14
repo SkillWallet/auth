@@ -44,12 +44,6 @@ export const joinCommunity = async (communityAddress, username, skill, level) =>
     const url = await pushJSONDocument(metadataJson)
     console.log(url);
     const createTx = await contract.joinNewMember(
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       url,
       2006,
     );
@@ -90,7 +84,7 @@ export const fetchSkillWallet = async (address: string) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
-  const skillWalletAddress = '0x24463BE842CC94199f336B5D1BaEb4Bcb546a18C';
+  const skillWalletAddress = '0x1e79bE396CE37F7eB43aF0Ef0ffb3124F3fD23eF';
   const contract = new ethers.Contract(
     skillWalletAddress,
     skillWalletAbi,

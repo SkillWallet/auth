@@ -68,8 +68,8 @@ export class RolesScreenNewUser {
             </div>
 
             <div class="xp-component">
-                <h3>Your XP Level</h3>
-                <p>Tell your Community how experienced you are in this Role!</p>
+                <h3>Your <u>Commitment Level</u></h3>
+                <p>Tell your Community how much time you commit to this Role! 🔐</p>
                 
                 <div class="bar-chart-first-container">
                     <input class="bar-chart-container" type="range" id="myRange" value="1" min="1" max="10" onChange={this.updateValue} ref={ele => this.slider = ele as HTMLInputElement}></input>
