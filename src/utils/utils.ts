@@ -137,7 +137,7 @@ export const changeNetwork = async () => {
               symbol: 'MATIC',
               decimals: 18
             },
-            rpcUrls: ['https://rpc-mumbai.matic.today'],
+            rpcUrls: ['https://matic-mumbai.chainstacklabs.com', 'https://rpc-mumbai.matic.today'],
             blockExplorerUrls: ['https://explorer-mumbai.maticvigil.com/']
           }]
         });
