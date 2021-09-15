@@ -71,7 +71,7 @@ export class NewUser {
             <p>Inject from Metamask</p>
           </button>
 
-          <button class={this.isAccountDisconnected ? '' : 'activeSelection'}>
+          <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
             <p>Create New Account</p>
           </button>
