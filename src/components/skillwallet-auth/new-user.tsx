@@ -1,6 +1,5 @@
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
 import { changeNetwork } from '../../utils/utils';
-import Torus from '@toruslabs/torus-embed';
 
 declare global {
   interface Window {
@@ -51,18 +50,6 @@ export class NewUser {
     this.showUserDetails.emit(true);
   }
 
-  async torusOnClick() {
-    console.log('torus initializing');
-    const torus = new Torus();
-    await torus.init();
-    await torus.login();
-
-    // const web3 = new Web3(torus.provider);
-    // const address = (await web3.eth.getAccounts())[0];
-    // const balance = await web3.eth.getBalance(address);
-    // setAccount({ address, balance });
-    console.log('torus initialized');
-  }
   render() {
     return (
       <div class="new-user-modal-window-child">
@@ -84,7 +71,7 @@ export class NewUser {
             <p>Inject from Metamask</p>
           </button>
 
-          <button class={this.isAccountDisconnected ? '' : 'activeSelection'} onClick={() => this.torusOnClick()}>
+          <button class={this.isAccountDisconnected ? '' : 'activeSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
             <p>Create New Account</p>
           </button>
