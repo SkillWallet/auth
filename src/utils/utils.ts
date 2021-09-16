@@ -82,28 +82,33 @@ export function format(first: string, middle: string, last: string): string {
 export const fetchSkillWallet = async (address: string) => {
   console.log('fetching...');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-
   const skillWalletAddress = '0x1e79bE396CE37F7eB43aF0Ef0ffb3124F3fD23eF';
+
+  const signer = provider.getSigner();
   const contract = new ethers.Contract(
     skillWalletAddress,
     skillWalletAbi,
     signer,
   );
 
-  console.log(contract);
+  const tokenId = await contract.getSkillWalletIdByOwner(address);
+  console.log(tokenId);
 
-  const skillWalletId = await contract.getSkillWalletIdByOwner(address);
-  console.log(skillWalletId);
+  const isActive = contract.isSkillWalletActivated(tokenId);
+  if (isActive) {
+    const jsonUri = await contract.tokenURI(tokenId);
+    const community = await contract.getActiveCommunity(tokenId);
+    let res = await fetch(jsonUri);
+    const jsonMetadata = await res.json()
+    let skillWallet: any = {
+      imageUrl: jsonMetadata.image,
+      nickname: jsonMetadata.properties.username,
+      skills: jsonMetadata.properties.skills,
+      community: community,
+      diToCredits: 2060,
+      tokenId: tokenId
+    };
 
-  const isActive = await contract.isSkillWalletActivated(skillWalletId);
-  if (!isActive) {
-    alert('You should first activate your skillWallet by scanning the QR code!');
-  } else {
-    const res = await fetch(`https://api.skillwallet.id/api/skillwallet?tokenId=${skillWalletId}`, {
-      method: 'GET'
-    })
-    const skillWallet = await res.json();
     if (skillWallet && skillWallet.nickname) {
       console.log('setting local storage with SW');
       localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
@@ -153,7 +158,7 @@ export const activatePA = async (partnersAddress) => {
       JSON.stringify(partnersAbi),
       signer,
     );
-    console.log( 'cntrct: ', contract);
+    console.log('cntrct: ', contract);
 
     const createTx = await contract.activatePA();
 
@@ -164,15 +169,15 @@ export const activatePA = async (partnersAddress) => {
     //   e => e.event === 'MemberAdded',
     // );
 
-  //   if (memberJoinedEvent) {
-  //     // return tokenID.
-  //     return memberJoinedEvent.args[1].toString();
-  //   } else {
-  //     throw new Error('Something went wrong');
-  //   }
-  // } 
-  return true;
-}
+    //   if (memberJoinedEvent) {
+    //     // return tokenID.
+    //     return memberJoinedEvent.args[1].toString();
+    //   } else {
+    //     throw new Error('Something went wrong');
+    //   }
+    // } 
+    return true;
+  }
   catch (err) {
     console.log(err);
     return;
