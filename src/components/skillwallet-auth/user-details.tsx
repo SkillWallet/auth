@@ -118,7 +118,7 @@ export class UserDetails {
                 </div> :
               
                 <div class="user-details-header">]
-                    <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community.name}!</span></h2>
+                    <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community ? this.community.name : ''}!</span></h2>
                     <p>Tell us about yourself</p>
                 </div> }
 
@@ -128,7 +128,7 @@ export class UserDetails {
                 {!this._userValidator.validate(this.username) ? 
                       <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
                     <form>
-                      <input value={this.username} onInput={(event) => this.handleUsernameChange(event)}    type="text" placeholder="How do you want your community to call you?"></input>
+                      <input type="text" value={this.username} onInput={(event) => this.handleUsernameChange(event)} placeholder="How do you want your community to call you?"></input>
                     </form>
                     <p>{this.username ? 17-this.username.length : 17} characters left</p>
 

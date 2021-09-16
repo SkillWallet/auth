@@ -56,7 +56,7 @@ export class NewUser {
                     {this.isPartner ? 
                     <h2 style={{textDecoration: 'none', fontWeight: '500'}}>Hello, Partner!</h2> :
                         <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-                        {this.community.name}
+                        {this.community ? this.community.name : ''}
                         </span>
                     </h2>}
 

@@ -93,9 +93,16 @@ export const fetchSkillWallet = async (address: string) => {
 
   console.log(contract);
 
-  const skillWalletId = await contract.getSkillWalletIdByOwner(address);
-  console.log(skillWalletId);
-
+  let skillWalletId = null;
+  try {
+    skillWalletId = await contract.getSkillWalletIdByOwner(address);
+    console.log(skillWalletId);
+  } catch(err) {
+    console.log(err);
+    alert('Please create your Skill Wallet at https://app.distributed.town/ before you try to login. ');
+    return false;
+  }
+  
   const isActive = await contract.isSkillWalletActivated(skillWalletId);
   if (!isActive) {
     alert('You should first activate your skillWallet by scanning the QR code!');
@@ -107,6 +114,8 @@ export const fetchSkillWallet = async (address: string) => {
     if (skillWallet && skillWallet.nickname) {
       console.log('setting local storage with SW');
       localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+    } else if (!skillWallet) {
+      alert('Unable to find a Skill Wallet and nickname with your ID')
     }
   }
 }

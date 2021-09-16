@@ -172,6 +172,7 @@ export class SkillwalletAuth {
                   community={this.community}
                   partnersAddress={this.partnersAddress}
                   communityAddress={this.communityAddress}
+                  validator={{user: {name: 'commitment', options: {min: 1}}}}
               ></user-role> : null}
               </div>
 

@@ -34,6 +34,7 @@ export namespace Components {
         "isPartner": Boolean;
         "roleSelected": string;
         "skill": number;
+        "validator": string | any;
     }
     interface RolesScreenPartner {
         "buttonClass": string;
@@ -58,6 +59,7 @@ export namespace Components {
         "communityAddress": string;
         "isPartner": Boolean;
         "partnersAddress": string;
+        "validator": string | any;
     }
     interface UsersModal {
         "isPartner": Boolean;
@@ -167,6 +169,7 @@ declare namespace LocalJSX {
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "roleSelected"?: string;
         "skill"?: number;
+        "validator"?: string | any;
     }
     interface RolesScreenPartner {
         "buttonClass"?: string;
@@ -197,6 +200,7 @@ declare namespace LocalJSX {
         "communityAddress"?: string;
         "isPartner"?: Boolean;
         "partnersAddress"?: string;
+        "validator"?: string | any;
     }
     interface UsersModal {
         "isPartner"?: Boolean;

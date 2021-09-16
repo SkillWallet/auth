@@ -48,3 +48,21 @@ export function getLengthValidator(min: number, max: number): Validator<string> 
             : max ? `You must enter less than ${max} characters` : ''
     }
 }
+
+export function getCommitmentValidator(min: number): Validator<string> {
+
+    return {
+        validate: (value: string) => {
+            if (!value || value === '') {
+                return false;
+            }
+            if (min) {
+                return min <= parseInt(value)
+            } else {
+                return true;
+            }
+        },
+        errorMessage: 
+            min ? `Your commitment level must be atleast ${min}` : ''
+    }
+}
