@@ -106,7 +106,7 @@ export const fetchSkillWallet = async (address: string) => {
       skills: jsonMetadata.properties.skills,
       community: community,
       diToCredits: 2060,
-      tokenId: tokenId
+      tokenId: tokenId.toString()
     };
 
     if (skillWallet && skillWallet.nickname) {
