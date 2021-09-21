@@ -1,5 +1,5 @@
 import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
-import { fetchSkillWallet } from '../../utils/utils';
+import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 
 @Component({
   tag: 'users-modal',
@@ -33,6 +33,7 @@ export class UsersModal {
     this.isLoading = true;
     const { ethereum } = window;
     try {
+      await changeNetwork();
       await ethereum.request({ method: 'eth_requestAccounts' });
       console.log(ethereum);
       await fetchSkillWallet(ethereum.selectedAddress);
