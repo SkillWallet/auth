@@ -52,7 +52,48 @@ Add our custom HTML tag to any component you'd like...no imports!
 
 ## Angular
 
+
 ## Vue.js
 
+In your project directory enter the following terminal command:
+```bash
+npm i @skill-wallet/auth
+```
+
+Add the following to your main.js file:
+```bash
+import { applyPolyfills, defineCustomElements } from '../node_modules/@skill-wallet/auth/loader';
+
+// Tell Vue to ignore all components defined in the test-components
+// package. The regex matches a word at the beginning of a string on most regex flavors (in these flavors \w matches the opposite of \W)
+Vue.config.ignoredElements = [/^\w/];
+
+// Bind the custom elements to the window object
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
+```
+
+Add our custom HTML tag to any component you'd like...no imports!
+```bash
+<skillwallet-auth partner-key="<your-key>"></skillwallet-auth>
+```
+
+
+## HTML
+For any vanilla HTML/CSS/Javascript project, you can import the NPM pack straight through your document
+header via a ```<script>``` tag using the open-source CDN JSDelivr:
+
+```bash
+    <script type="module">
+        import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@skill-wallet/auth@0.0.52-alpha/loader/index.es2017.js";
+        defineCustomElements();
+    </script>
+```
+
+Add our custom HTML tag to any component you'd like...no imports!
+```bash
+<skillwallet-auth partner-key="<your-key>"></skillwallet-auth>
+```
 
 Need help? Join our team Discord [here](https://discord.com/invite/WR7PbswvTr).

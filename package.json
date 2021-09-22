@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.52-alpha",
+  "version": "0.0.53-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "DiTo Labs <team@distributed.town>",
   "keywords": [
@@ -18,9 +18,9 @@
     "email": "team@distributed.town"
   },
   "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
   "types": "dist/custom-elements/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",

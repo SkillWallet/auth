@@ -16,7 +16,7 @@ export class UserDetails {
   @State() isLoading: boolean = false;
   @State() username: string;
   @Element() private elementHost: HTMLElement;
-  @Event() onUploadCompleted: EventEmitter<Blob>;
+  @Event() uploadCompleted: EventEmitter<Blob>;
 
   @Prop() validator: string | any;
   @State() files: any = [];
@@ -94,7 +94,7 @@ export class UserDetails {
       const imagePreviewContainer: HTMLElement = this.elementHost.shadowRoot.querySelector('#image-preview');
       imagePreviewContainer.style.backgroundImage = `url(${reader.result})`;
       
-      this.onUploadCompleted.emit(file);
+      this.uploadCompleted.emit(file);
     };
 
     reader.onerror = (err) => {

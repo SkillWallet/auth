@@ -46,6 +46,7 @@ export namespace Components {
         "roleSelected": string;
     }
     interface SkillwalletAuth {
+        "allowCreateNewUser": string;
         "partnerKey": string;
     }
     interface UserDetails {
@@ -182,6 +183,7 @@ declare namespace LocalJSX {
         "roleSelected"?: string;
     }
     interface SkillwalletAuth {
+        "allowCreateNewUser"?: string;
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
         "partnerKey"?: string;
@@ -189,8 +191,8 @@ declare namespace LocalJSX {
     interface UserDetails {
         "community"?: any;
         "isPartner"?: Boolean;
-        "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
+        "onUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
         "userUploadedImage"?: any;
         "validator"?: string | any;
