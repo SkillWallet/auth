@@ -10,10 +10,11 @@ export class UserRole {
     @State() isLoading: boolean = false;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
-    @State() skill: number = 10;
+    @State() skill: number = 1;
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
     @Prop() partnersAddress: string = null;
+    @Prop() validator: string | any;
 
 
 
@@ -38,6 +39,7 @@ export class UserRole {
                 isLoading={this.isLoading}
                 buttonClass={this.buttonClass}
                 roleSelected={this.roleSelected}
+                validator={this.validator}
                 ></roles-screen-new-user>}
                 </div>
         )

@@ -112,6 +112,8 @@ export const fetchSkillWallet = async (address: string) => {
     if (skillWallet && skillWallet.nickname) {
       console.log('setting local storage with SW');
       localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+    } else if (!skillWallet) {
+      alert('Unable to find a Skill Wallet and nickname with your ID')
     }
   }
 }
