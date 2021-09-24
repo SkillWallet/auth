@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.53-alpha",
+  "version": "0.0.55-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "DiTo Labs <team@distributed.town>",
   "keywords": [
@@ -47,6 +47,7 @@
     "qrcode.react": "^1.0.1",
     "react-qrcode-logo": "^2.4.0",
     "requirejs": "^2.3.6",
+    "rollup-plugin-dotenv": "^0.3.0",
     "sass": "^1.35.2",
     "web3": "^1.4.0"
   },
