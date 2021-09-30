@@ -91,9 +91,8 @@ button, p, h1, h2, h3, h4 {
   background-color: rgba(0, 0, 0, 0.75);
   margin: 5% auto;
   padding:20px;
-  border: 1px solid #888;
+  border: 0.25px solid white;
   width: 40%;
-  border-radius: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,16 +121,17 @@ button, p, h1, h2, h3, h4 {
 
 .wallet-header img {
   width: 60px;
-  margin-left: 1rem;
+
   margin-right: 1rem;
 }
 
-.wallet-header h2 {
+.wallet-header > h2 {
   text-decoration: underline;
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   line-height: 2.25rem;
   color: rgba(243, 244, 246, 1);
-}
+  font-weight: 400;
+} 
 
 .wallet-modal-button {
   display: flex;
@@ -147,7 +147,6 @@ button, p, h1, h2, h3, h4 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 30px;
   border: 1px solid white;
   background-color: black;
   color: white;
@@ -186,7 +185,7 @@ button, p, h1, h2, h3, h4 {
 }
 
 .wallet-modal-button p {
-  font-size: 27px;
+  font-size: 18px;
   margin-left: 55px;
 }
 
@@ -232,14 +231,17 @@ button, p, h1, h2, h3, h4 {
 
 .new-user-header > h2 {
   color: white;
-  text-decoration: underline;
   text-align: center;
+  font-weight: 300;
 }
 
 .new-user-header > p {
   color: white;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  width: 80%;
+  margin: 20px auto;
 }
 
 .new-user-modal-window-child {
@@ -258,13 +260,18 @@ button, p, h1, h2, h3, h4 {
   margin-left: 15px;
 }
 
-.new-user-modal-window-child > button {
-  border-radius: 40px;
+.new-user-modal-window-child > button { 
   background-color: white;
-  width: 75%;
-  height: 80px;
+  width: 89%;
+  height: 65px;
   margin: 20px auto;
   font-size: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  margin: 10px 0;
 }
 
 .new-user-modal-window-child > button:hover {

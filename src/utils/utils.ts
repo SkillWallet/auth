@@ -82,6 +82,7 @@ export function format(first: string, middle: string, last: string): string {
 export const fetchSkillWallet = async (address: string) => {
   console.log('fetching...');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  console.log('env vars: ', process.env.SKILLWALLET_ADDRESS, process.env.PARTNER_KEY);
   const skillWalletAddress = process.env.SKILLWALLET_ADDRESS;
 
   const signer = provider.getSigner();
