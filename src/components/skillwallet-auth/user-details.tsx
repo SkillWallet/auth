@@ -124,13 +124,21 @@ export class UserDetails {
 
             <div class="user-details-fields">
                 <h4>Nickname</h4>
-                <div class="username-field">
+                
                 {!this._userValidator.validate(this.username) ? 
-                      <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
-                    <form>
-                      <input type="text" value={this.username} onInput={(event) => this.handleUsernameChange(event)} placeholder="How do you want your community to call you?"></input>
-                    </form>
-                    <p>{this.username ? 17-this.username.length : 17} characters left</p>
+                    <span class="validation-error"> {this._userValidator.errorMessage}</span> : null}
+
+                <div class="username-field">
+                    <div class="username-div">
+                      <p>How do you want your community to call you?</p>
+
+                      <div>
+                        <form>
+                          <input type="text" value={this.username} onInput={(event) => this.handleUsernameChange(event)}></input>
+                        </form>
+                        <p>{this.username ? 17-this.username.length : 17} characters left</p>
+                      </div>
+                    </div>
 
                 </div>
 

@@ -89,7 +89,7 @@ button, p, h1, h2, h3, h4 {
 
 .modalWindow {
   background-color: rgba(0, 0, 0, 0.75);
-  margin: 5% auto;
+  margin: 2% auto 0 auto;
   padding:20px;
   border: 0.25px solid white;
   width: 40%;
@@ -163,6 +163,17 @@ button, p, h1, h2, h3, h4 {
 .wallet-modal-button button:active {
   background-color: white;
   color: black;
+}
+
+.intro-button {
+  height: 50px;
+  background-color: white !important;
+  color: black !important;
+  justify-content: center !important;
+}
+
+.disabled.intro-button {
+  color: #D3D3D3 !important;
 }
 
 .activeSelection {
@@ -295,7 +306,7 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-fields > div {
-  border-radius: 30px;
+  /* border-radius: 30px; */
   width: 100%;
   min-height: 60px;
   text-align: center;
@@ -303,15 +314,11 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-fields > .username-field {
-  text-align: right;
+  /* text-align: right; */
 }
 
-.user-details-fields > div:last-child {
+.user-details-fields > div {
   background-color: #DCDCDC;
-}
-
-.username-field {
-  background-color: none !important;
 }
 
 .validation-error {
@@ -322,18 +329,28 @@ button, p, h1, h2, h3, h4 {
   margin-right: 3%;
 }
 
-.user-details-fields > div > p {
-  color: black;
-  font-size: 11px;
-  margin-top: -20px;
-  margin-right: 3%;
+.username-div > div {
+  max-width: 200px;
+  margin: auto auto;
 }
 
-.user-details-fields > div > form  {
+.username-div > div > * {
+  padding: 10px 10px;
+}
+
+.username-div > div > p {
+  color: black;
+  font-size: 11px;
+  margin-top: -1px;
+  /* margin-right: 3%; */
+}
+
+.username-div > div > form > input  {
+  margin-top: 10%;
   background-color: #DCDCDC;
-  border-radius: 30px;
-  width: 100%;
-  min-height: 60px;
+  border: 2.5px solid black;
+  width: 80%;
+  height: 35px;
   display: flex;
   flex-direction: column;
 }
@@ -374,12 +391,15 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-modal-window-child > button, .roles-screen-new-user > button, .roles-screen-partner > button {
-  border-radius: 40px;
   background-color: white;
   width: 75%;
   height: 80px;
   margin: 20px auto;
   font-size: 20px;
+}
+
+.roles-screen-new-user > button {
+  width: 85%;
 }
 
 .user-details-modal-window-child > button:hover, .roles-screen-new-user > button:hover, .roles-screen-partner > button:hover {
@@ -395,17 +415,29 @@ button, p, h1, h2, h3, h4 {
   color: white;
 }
 
-.avatar-div {
+.username-div {
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-div, .username-div {
   display: flex;
   justify-content: space-evenly;
   border-radius: 30px;
 }
 
-.avatar-div > p {
+.avatar-div > p, .username-div > p {
   max-width: 40%;
   font-size: 13.3333px;
   color:rgba(109, 109, 109, 0.95);
+}
+
+.avatar-div > p {
   margin-top: 10%;
+}
+
+.username-div > p {
+  margin-left: 10%;
 }
 
 .avatar-img {
@@ -423,9 +455,9 @@ button, p, h1, h2, h3, h4 {
 }
 
 .role-fields {
-  width: 75%;
+  width: 85%;
   background-color: white;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -433,17 +465,50 @@ button, p, h1, h2, h3, h4 {
 }
 
 .role-button, .role-button-clicked {
-  border-radius: 60px;
+  /* border-radius: 60px; */
   border: 2px solid black;
   width: 65%;
   height: 50px;
   margin: 10px 0;
   display: flex;
-  align-items: center;
+  align-items: center;;
+}
+
+.role-fields > *:first-child  {
+  margin-top: 20px;
+}
+
+.role-fields > *:last-child {
+  margin-bottom: 20px;
+}
+
+.role-button > p, .role-button-clicked > p {
+  margin: 0 auto;
 }
 
 .role-button-clicked {
   height: 90px;
+}
+
+.commitment-level-parent-div {
+  width: 85%;
+  padding: 20px 0;
+  background-color: #DCDCDC;
+}
+
+.commitment-level-div {
+  background-color: #DCDCDC;
+  border: 2.5px solid black;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.commitment-level-div > p {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+  margin: -1px -1px 0 -1px !important;
 }
 
 .role-button:hover {
@@ -499,17 +564,23 @@ button, p, h1, h2, h3, h4 {
 }
 
 .xp-component {
-  background-color: black;
+  /* background-color: black; */
   z-index: 5;
-  padding: 3% 5%;
-  border-radius: 50px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  /* border-radius: 50px; */
+  /* margin-bottom: 20px; */
   height: 190px;
 }
 
-.xp-component p, .xp-component h3 {
-  color: white;
+.xp-component h3 {
+  font-size: medium;
 }
+
+.xp-component p {
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
 
 
 
@@ -770,10 +841,6 @@ button, p, h1, h2, h3, h4 {
 	font-size: 2vmin;
 	text-transform: uppercase;
 	opacity: 0.6;
-}
-
-.username-field {
-  background-color: none !important;
 }
 
 html, body {

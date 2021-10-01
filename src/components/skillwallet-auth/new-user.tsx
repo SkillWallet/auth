@@ -12,7 +12,7 @@ declare global {
 })
 export class NewUser {
   @State() isAccountDisconnected: boolean = true;
-  @State() buttonClass: string = 'disabled';
+  @State() buttonClass: string = 'disabled intro-button';
   @Prop() community: any;
   @Prop() isPartner: Boolean;
 
@@ -29,7 +29,7 @@ export class NewUser {
 
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
       this.isAccountDisconnected = false;
-      this.buttonClass = '';
+      this.buttonClass = 'intro-button';
       return;
     }
   }
@@ -40,7 +40,7 @@ export class NewUser {
     try {
       await ethereum.request({ method: 'eth_requestAccounts' });
       this.isAccountDisconnected = false;
-      this.buttonClass = '';
+      this.buttonClass = 'intro-button';
     } catch (error) {
       alert(error);
     }
@@ -74,11 +74,15 @@ export class NewUser {
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
             <p>Import Social Account</p>
           </button>
+
+          <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
+            Next: Introduce yourself
+          </button>
         </div>
 
-        <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
-          Next: Introduce yourself
-        </button>
+        {/* <div> */}
+
+        {/* </div> */}
       </div>
     );
   }
