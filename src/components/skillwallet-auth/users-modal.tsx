@@ -57,7 +57,7 @@ export class UsersModal {
             <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
           </div>
 
-          <div class="wallet-modal-button">
+          <div class="wallet-modal-button users-modal">
             <button 
             onClick={() => this.handleMetamaskClick()}
             >

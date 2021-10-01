@@ -113,7 +113,7 @@ export class RolesScreenNewUser {
         <button 
             onClick={() => this.handleUserQRClick()} 
             class={this.buttonClass} 
-            disabled={this.isInvalid || this.isLoading}
+            disabled={!this.roleSelected || this.isInvalid || this.isLoading}
                 >That's it - join this community!</button>
         </div>
         )
