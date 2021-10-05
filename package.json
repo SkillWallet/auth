@@ -40,6 +40,7 @@
     "@stencil/core": "2.6.0",
     "@textile/hub": "^6.2.0",
     "@types/jest": "^26.0.24",
+    "@portis/web3":"^4.0.5",
     "ethers": "^5.4.1",
     "jest": "^27.0.6",
     "jest-cli": "^27.0.6",

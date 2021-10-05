@@ -12,6 +12,7 @@ export class RolesScreenNewUser {
     @Prop() buttonClass: string;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
+    @Prop({mutable: true}) web3Provider: any;
     @Prop({mutable: true}) skill: number;
     slider!: HTMLInputElement;
 
@@ -40,7 +41,9 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoading = true;
-        const tokenId = await joinCommunity(this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
+        console.log('web3Provider');
+        console.log(this.web3Provider);
+        const tokenId = await joinCommunity(this.web3Provider, this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }

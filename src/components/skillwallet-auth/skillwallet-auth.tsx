@@ -24,6 +24,7 @@ export class SkillwalletAuth {
   @State() isPartner: Boolean = false;
   @State() partnersAddress: string = null;
   @State() communityAddress: string = null;
+  @State() web3Provider: any = null;
 
   componentWillLoad() {
     this.getSkillWallet();
@@ -82,9 +83,10 @@ export class SkillwalletAuth {
   }
 
   @Listen('showUserDetails')
-  showUserDetails() {
+  showUserDetails(provider) {
     this.newUserIsVisible = false;
     this.userDetailsAreVisible = true;
+    this.web3Provider = provider.detail;
   }
 
   @Listen('showUserRole')
@@ -160,7 +162,7 @@ export class SkillwalletAuth {
               {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner}></users-modal> : null}
 
               {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
-              {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community}></new-user> : null}
+              {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
               {this.userDetailsAreVisible === true ? 
                   <user-details 
                     isPartner={this.isPartner}
@@ -172,6 +174,7 @@ export class SkillwalletAuth {
                   community={this.community}
                   partnersAddress={this.partnersAddress}
                   communityAddress={this.communityAddress}
+                  web3Provider={this.web3Provider}
               ></user-role> : null}
               </div>
 

@@ -14,10 +14,12 @@ export class UserRole {
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
     @Prop() partnersAddress: string = null;
+    @Prop({mutable: true}) web3Provider: any;
 
 
 
     render() {
+        {console.log('web3Prov', this.web3Provider)}
         return (
             <div class="user-role-modal-window-child">
                 {this.isPartner ? 
@@ -38,6 +40,7 @@ export class UserRole {
                 isLoading={this.isLoading}
                 buttonClass={this.buttonClass}
                 roleSelected={this.roleSelected}
+                web3Provider={this.web3Provider}
                 ></roles-screen-new-user>}
                 </div>
         )

@@ -1,5 +1,7 @@
+import Portis from '@portis/web3';
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
 import { changeNetwork } from '../../utils/utils';
+import { ethers } from 'ethers';
 
 declare global {
   interface Window {
@@ -13,6 +15,7 @@ declare global {
 export class NewUser {
   @State() isAccountDisconnected: boolean = true;
   @State() buttonClass: string = 'disabled';
+  @Prop({mutable: true}) web3Provider: any;
   @Prop() community: any;
   @Prop() isPartner: Boolean;
 
@@ -22,7 +25,7 @@ export class NewUser {
     cancelable: true,
     bubbles: true,
   })
-  showUserDetails: EventEmitter<Boolean>;
+  showUserDetails: EventEmitter<any>;
 
   componentWillLoad() {
     const { ethereum } = window;
@@ -41,13 +44,28 @@ export class NewUser {
       await ethereum.request({ method: 'eth_requestAccounts' });
       this.isAccountDisconnected = false;
       this.buttonClass = '';
+      this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  handlePortisClick = async () => {
+    try {
+      const portis = new Portis('b86287a9-e792-4722-9487-477419f4470f', {
+        nodeUrl: 'https://matic-mumbai.chainstacklabs.com/',
+        chainId: '80001',
+      });
+      this.web3Provider = new ethers.providers.Web3Provider(portis.provider);
+      this.isAccountDisconnected = false;
+      this.buttonClass = '';
     } catch (error) {
       alert(error);
     }
   };
 
   handleUserDetailsClick() {
-    this.showUserDetails.emit(true);
+    this.showUserDetails.emit(this.web3Provider);
   }
 
   render() {
@@ -71,8 +89,8 @@ export class NewUser {
             <p>Inject from Metamask</p>
           </button>
 
-          <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
-            <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
+          <button class={this.isAccountDisconnected ? '' : 'activeSelection'} onClick={() => this.handlePortisClick()}>
+            <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon_bw.svg'}></auth-image>
             <p>Create New Account</p>
           </button>
         </div>

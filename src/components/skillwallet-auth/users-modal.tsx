@@ -1,5 +1,7 @@
 import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
+import { ethers } from 'ethers';
+import Portis from '@portis/web3';
 
 @Component({
   tag: 'users-modal',
@@ -36,7 +38,14 @@ export class UsersModal {
       await changeNetwork();
       await ethereum.request({ method: 'eth_requestAccounts' });
       console.log(ethereum);
-      await fetchSkillWallet(ethereum.selectedAddress);
+      // const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+      const portis = new Portis('b86287a9-e792-4722-9487-477419f4470f', {
+        nodeUrl: 'https://matic-mumbai.chainstacklabs.com/',
+        chainId: '80001',
+      });
+      const web3Provider = new ethers.providers.Web3Provider(portis.provider);
+      const addresses = await web3Provider.listAccounts();
+      await fetchSkillWallet(web3Provider, addresses[0]);
       this.closeModalOnLogin.emit(); 
 
     } catch (error) {

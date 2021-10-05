@@ -1,5 +1,4 @@
 import { ethers } from 'ethers';
-// import Web3 from 'web3';
 import { pushJSONDocument } from '../utils/textile.hub';
 import skillWalletAbi from './skillWalletAbi.json';
 import communityAbi from './communityAbi.json';
@@ -14,10 +13,10 @@ export const getCommunity = async (partnerKey) => {
   return comm;
 }
 
-export const joinCommunity = async (communityAddress, username, skill, level) => {
+export const joinCommunity = async (provider, communityAddress, username, skill, level) => {
   try {
     console.log('trying to join community', communityAddress);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(
@@ -79,9 +78,9 @@ export function format(first: string, middle: string, last: string): string {
   return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
 }
 
-export const fetchSkillWallet = async (address: string) => {
+export const fetchSkillWallet = async (provider: any, address: string) => {
   console.log('fetching...');
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
   const skillWalletAddress = '0x1e79bE396CE37F7eB43aF0Ef0ffb3124F3fD23eF';
 
   const signer = provider.getSigner();
