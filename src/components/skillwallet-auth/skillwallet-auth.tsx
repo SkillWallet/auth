@@ -8,20 +8,29 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop() partnerKey: string;
+  @State() partnerKey: string = process.env.PARTNER_KEY;
+  @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
+
+  // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
+  // validateAllowCreateNewUser(newValue: string, oldValue: string) {
+  //   const isBlank = typeof newValue !== 'string' || newValue === '';
+  //   const has2chars = typeof newValue === 'string' && newValue.length >= 2;
+  //   if (isBlank) { throw new Error('name: required') };
+  //   if (!has2chars) { throw new Error('name: has2chars') };
+  // }
+
   @State() community: any;
-  @State() displayLogin: Boolean;
-  
-  @State() usersIsVisible: Boolean = false;
-  @State() qrIsVisible: Boolean = false;
-  @State() newUserIsVisible: Boolean = false;
-  @State() userDetailsAreVisible: Boolean = false;
-  @State() userRoleIsVisible: Boolean = false;
+  @State() displayLogin: boolean;
+  @State() usersIsVisible: boolean = false;
+  @State() qrIsVisible: boolean = false;
+  @State() newUserIsVisible: boolean = false;
+  @State() userDetailsAreVisible: boolean = false;
+  @State() userRoleIsVisible: boolean = false;
   @State() qrText: string = null;
   @State() storedUsername: any = null;
   @State() skillwallet: object = null;
   @State() icon: any = null;
-  @State() isPartner: Boolean = false;
+  @State() isPartner: boolean = false;
   @State() partnersAddress: string = null;
   @State() communityAddress: string = null;
   @State() web3Provider: any = null;
@@ -175,6 +184,7 @@ export class SkillwalletAuth {
                   partnersAddress={this.partnersAddress}
                   communityAddress={this.communityAddress}
                   web3Provider={this.web3Provider}
+                  validator={{user: {name: 'commitment', options: {min: 1}}}}
               ></user-role> : null}
               </div>
 

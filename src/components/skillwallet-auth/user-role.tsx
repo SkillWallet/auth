@@ -10,11 +10,12 @@ export class UserRole {
     @State() isLoading: boolean = false;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
-    @State() skill: number = 10;
+    @State() skill: number = 1;
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
     @Prop() partnersAddress: string = null;
     @Prop({mutable: true}) web3Provider: any;
+    @Prop() validator: string | any;
 
 
 
@@ -41,6 +42,7 @@ export class UserRole {
                 buttonClass={this.buttonClass}
                 roleSelected={this.roleSelected}
                 web3Provider={this.web3Provider}
+                validator={this.validator}
                 ></roles-screen-new-user>}
                 </div>
         )

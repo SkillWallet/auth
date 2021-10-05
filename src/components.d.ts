@@ -35,6 +35,7 @@ export namespace Components {
         "isPartner": Boolean;
         "roleSelected": string;
         "skill": number;
+        "validator": string | any;
         "web3Provider": any;
     }
     interface RolesScreenPartner {
@@ -47,7 +48,7 @@ export namespace Components {
         "roleSelected": string;
     }
     interface SkillwalletAuth {
-        "partnerKey": string;
+        "allowCreateNewUser": string;
     }
     interface UserDetails {
         "community": any;
@@ -60,6 +61,7 @@ export namespace Components {
         "communityAddress": string;
         "isPartner": Boolean;
         "partnersAddress": string;
+        "validator": string | any;
         "web3Provider": any;
     }
     interface UsersModal {
@@ -171,6 +173,7 @@ declare namespace LocalJSX {
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "roleSelected"?: string;
         "skill"?: number;
+        "validator"?: string | any;
         "web3Provider"?: any;
     }
     interface RolesScreenPartner {
@@ -184,15 +187,15 @@ declare namespace LocalJSX {
         "roleSelected"?: string;
     }
     interface SkillwalletAuth {
+        "allowCreateNewUser"?: string;
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
-        "partnerKey"?: string;
     }
     interface UserDetails {
         "community"?: any;
         "isPartner"?: Boolean;
-        "onOnUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
+        "onUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
         "userUploadedImage"?: any;
         "validator"?: string | any;
@@ -202,6 +205,7 @@ declare namespace LocalJSX {
         "communityAddress"?: string;
         "isPartner"?: Boolean;
         "partnersAddress"?: string;
+        "validator"?: string | any;
         "web3Provider"?: any;
     }
     interface UsersModal {

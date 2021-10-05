@@ -81,8 +81,7 @@ export function format(first: string, middle: string, last: string): string {
 export const fetchSkillWallet = async (provider: any, address: string) => {
   console.log('fetching...');
 
-  const skillWalletAddress = '0x1e79bE396CE37F7eB43aF0Ef0ffb3124F3fD23eF';
-
+  const skillWalletAddress = process.env.SKILLWALLET_ADDRESS;
   const signer = provider.getSigner();
   const contract = new ethers.Contract(
     skillWalletAddress,
@@ -111,6 +110,8 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     if (skillWallet && skillWallet.nickname) {
       console.log('setting local storage with SW');
       localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+    } else if (!skillWallet) {
+      alert('Unable to find a Skill Wallet and nickname with your ID')
     }
   }
 }

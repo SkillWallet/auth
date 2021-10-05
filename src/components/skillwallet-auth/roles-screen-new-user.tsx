@@ -1,5 +1,7 @@
-import { Component, h,  Prop, Listen, Event, EventEmitter } from '@stencil/core';
+import { Component, h,  Prop, State, Event, EventEmitter } from '@stencil/core';
 import { joinCommunity } from '../../utils/utils';
+import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
+import { Validator } from '../../validators/validator.js';
 
 @Component({
     tag: 'roles-screen-new-user',
@@ -7,14 +9,18 @@ import { joinCommunity } from '../../utils/utils';
     shadow: true
 })
 export class RolesScreenNewUser {
-    @Prop() roleSelected: string;
+    @State() isInvalid: boolean = false;
+    @Prop({mutable: true}) roleSelected: string;
     @Prop() isLoading: boolean;
-    @Prop() buttonClass: string;
+    @Prop({mutable: true}) buttonClass: string;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
     @Prop({mutable: true}) web3Provider: any;
     @Prop({mutable: true}) skill: number;
     slider!: HTMLInputElement;
+    @Prop() validator: string | any;
+    _commitmentValidator: Validator<string> = defaultValidator;
+    
 
     @Event({
         eventName: 'showNewScreen',
@@ -24,14 +30,22 @@ export class RolesScreenNewUser {
       })
       showNewScreen: EventEmitter<any>;
 
+      componentWillLoad()  {
+        this._commitmentValidator = getValidator(this.validator['commitment']);
+      }
+    
+      componentWillUpdate()  {
+        this._commitmentValidator = getValidator(this.validator['commitment']);
+      }
+
     updateValue(event: Event) {
         this.skill = parseInt((event.target as HTMLInputElement).value);
-    }
-
-    @Listen('click', { capture: true })
-    handleChangeEvent() {
-        this.slider.addEventListener("change", function () {
-        })
+            if (!getValidator({name: 'commitment', options: {min: 1}}).validate(this.skill)) {
+          this.isInvalid = true;
+      } else {
+        this.isInvalid = false;
+      }
+      return this.isInvalid;
     }
 
     handleRoleClick(role) {
@@ -73,9 +87,10 @@ export class RolesScreenNewUser {
             <div class="xp-component">
                 <h3>Your <u>Commitment Level</u></h3>
                 <p>Tell your Community how much time you commit to this Role! 🔐</p>
-                
+                {(this.isInvalid) ? <span class="validation-error"> Your commitment level must be atleast 1</span> : null}
+
                 <div class="bar-chart-first-container">
-                    <input class="bar-chart-container" type="range" id="myRange" value="1" min="1" max="10" onChange={this.updateValue} ref={ele => this.slider = ele as HTMLInputElement}></input>
+                    <input class="bar-chart-container" type="range" id="myRange" min="1" max="10" value={this.skill} onChange={(e) => this.updateValue(e)} ref={ele => this.slider = ele as HTMLInputElement}></input>
                     
                     <div class="bar-chart-metrics">
                         <p>1</p>
@@ -106,7 +121,9 @@ export class RolesScreenNewUser {
 
         <button 
             onClick={() => this.handleUserQRClick()} 
-            class={this.buttonClass} disabled={this.isLoading}>That's it - join this community!</button>
+            class={this.buttonClass} 
+            disabled={this.isInvalid || this.isLoading}
+                >That's it - join this community!</button>
         </div>
         )
     }
