@@ -8,7 +8,8 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @State() partnerKey: string = process.env.PARTNER_KEY;
+  @State() partnerKey: string = process.env.SW_PARTNER_ENV === 'production' ? process.env.PROD_PARTNER_KEY : process.env.DEV_PARTNER_KEY;
+
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
@@ -108,6 +109,8 @@ export class SkillwalletAuth {
     this.onSkillwalletLogin.emit(true);
     this.getSkillWallet();
   }
+
+
 
   handleQRClick = () => {
     this.usersIsVisible = false;
