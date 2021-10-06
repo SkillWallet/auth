@@ -69,21 +69,17 @@ export class RolesScreenNewUser {
 
         <div class="user-role-header">
             <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
-            <p>Pick what you're the best at & be rewarded for it!</p>
+            <p>Pick what you're the best at & be rewarded for your commitment!</p>
         </div>
 
         {(this.roleSelected) ? 
-        <div>
-            <div class="role-button-clicked">
-                <div>
-                    <div class="filled-in-circle"></div>
-                </div>
-                <p>{this.roleSelected}</p>
-            </div>
+        <div class="commitment-level-parent-div">
+        <div class="commitment-level-div">
+            <p>{this.roleSelected}</p>
 
             <div class="xp-component">
                 <h3>Your <u>Commitment Level</u></h3>
-                <p>Tell your Community how much time you commit to this Role! 🔐</p>
+                <p>Tell your Community how much time you commit to this Role!</p>
                 {(this.isInvalid) ? <span class="validation-error"> Your commitment level must be atleast 1</span> : null}
 
                 <div class="bar-chart-first-container">
@@ -96,21 +92,19 @@ export class RolesScreenNewUser {
                 </div>
                 {/* <p class="slider-val">Value: <span>{this.skill}</span></p> */}
             </div>
+            </div>
         </div> :                     
         
         <div class="role-fields">
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
-                <div><div class="circle"></div></div>
                 <p>{this.community.roles[0]}</p>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
-                <div><div class="circle"></div></div>
                 <p>{this.community.roles[1]}</p>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
-            <div><div class="circle"></div></div>
                 <p>{this.community.roles[2]}</p>
             </div>
         </div>
@@ -119,7 +113,7 @@ export class RolesScreenNewUser {
         <button 
             onClick={() => this.handleUserQRClick()} 
             class={this.buttonClass} 
-            disabled={this.isInvalid || this.isLoading}
+            disabled={!this.roleSelected || this.isInvalid || this.isLoading}
                 >That's it - join this community!</button>
         </div>
         )

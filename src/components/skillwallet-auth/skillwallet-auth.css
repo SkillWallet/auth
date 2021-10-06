@@ -3,7 +3,7 @@
 }
 
 button, p, h1, h2, h3, h4 {
-  font-family: Verdana, Helvetica !important;
+  font-family: 'Josefin Sans', sans-serif !important;
 }
 
 .background-screen {
@@ -20,9 +20,9 @@ button, p, h1, h2, h3, h4 {
 .connect-wallet-button {
   background-color: black;
   color: white;
-  border-radius: 40px;
-  font-weight: bold;
-  font-size: 11px;
+  /* border-radius: 40px; */
+  font-weight: 300;
+  font-size: 14px;
   border: 0px;
   padding-left: 4px;
   padding-right: 8px;
@@ -31,12 +31,12 @@ button, p, h1, h2, h3, h4 {
   justify-content: space-evenly;
   min-width: 145px;
   max-width: 145px;
-  max-height: 30px;
+  max-height: 35px;
   white-space: nowrap;
 }
 
 .connect-wallet-button > p {
-  max-height: 25px;
+  max-height: 30px;
   overflow: hidden;
   max-height: 40px;
   text-overflow: ellipsis;
@@ -89,11 +89,10 @@ button, p, h1, h2, h3, h4 {
 
 .modalWindow {
   background-color: rgba(0, 0, 0, 0.75);
-  margin: 5% auto;
+  margin: 2% auto 0 auto;
   padding:20px;
-  border: 1px solid #888;
+  border: 0.25px solid white;
   width: 40%;
-  border-radius: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,15 +121,37 @@ button, p, h1, h2, h3, h4 {
 
 .wallet-header img {
   width: 60px;
-  margin-left: 1rem;
+
   margin-right: 1rem;
 }
 
-.wallet-header h2 {
+.wallet-header > h2 {
   text-decoration: underline;
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   line-height: 2.25rem;
   color: rgba(243, 244, 246, 1);
+  font-weight: 400;
+} 
+
+.wallet-modal-button p {
+  font-size: 18px;
+  margin-left: 55px;
+}
+
+@media only screen and (min-width: 1400px) {
+  .wallet-modal-button.users-modal {
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+
+  .wallet-modal-button.users-modal > button {
+    margin: 10px 15px !important;
+    justify-content: center !important;
+  }
+
+  .wallet-modal-button.users-modal p {
+    margin-left: 0 !important;
+  }
 }
 
 .wallet-modal-button {
@@ -147,7 +168,6 @@ button, p, h1, h2, h3, h4 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 30px;
   border: 1px solid white;
   background-color: black;
   color: white;
@@ -164,6 +184,17 @@ button, p, h1, h2, h3, h4 {
 .wallet-modal-button button:active {
   background-color: white;
   color: black;
+}
+
+.intro-button {
+  height: 50px;
+  background-color: white !important;
+  color: black !important;
+  justify-content: center !important;
+}
+
+.disabled.intro-button {
+  color: #D3D3D3 !important;
 }
 
 .activeSelection {
@@ -185,11 +216,6 @@ button, p, h1, h2, h3, h4 {
   background-color: black !important;
 }
 
-.wallet-modal-button p {
-  font-size: 27px;
-  margin-left: 55px;
-}
-
 #topQRDiv {
   display: 'block';
   position: 'fixed';
@@ -207,7 +233,6 @@ button, p, h1, h2, h3, h4 {
   height: 80%;
   width: 80%;
   margin: 0 auto;
-  border-radius: 40px;
 }
 
 .qr-modal-window-child {
@@ -225,21 +250,23 @@ button, p, h1, h2, h3, h4 {
   margin-top: 30px;
   max-width: 70%;
   background-color: white;
-  border-radius: 30px;
   text-align: center;
   padding: 10px 20px;
 }
 
 .new-user-header > h2 {
   color: white;
-  text-decoration: underline;
   text-align: center;
+  font-weight: 300;
 }
 
 .new-user-header > p {
   color: white;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  width: 80%;
+  margin: 20px auto;
 }
 
 .new-user-modal-window-child {
@@ -258,13 +285,18 @@ button, p, h1, h2, h3, h4 {
   margin-left: 15px;
 }
 
-.new-user-modal-window-child > button {
-  border-radius: 40px;
+.new-user-modal-window-child > button { 
   background-color: white;
-  width: 75%;
-  height: 80px;
+  width: 89%;
+  height: 65px;
   margin: 20px auto;
   font-size: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  margin: 10px 0;
 }
 
 .new-user-modal-window-child > button:hover {
@@ -288,7 +320,7 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-fields > div {
-  border-radius: 30px;
+  /* border-radius: 30px; */
   width: 100%;
   min-height: 60px;
   text-align: center;
@@ -296,15 +328,11 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-fields > .username-field {
-  text-align: right;
+  /* text-align: right; */
 }
 
-.user-details-fields > div:last-child {
+.user-details-fields > div {
   background-color: #DCDCDC;
-}
-
-.username-field {
-  background-color: none !important;
 }
 
 .validation-error {
@@ -315,18 +343,28 @@ button, p, h1, h2, h3, h4 {
   margin-right: 3%;
 }
 
-.user-details-fields > div > p {
-  color: black;
-  font-size: 11px;
-  margin-top: -20px;
-  margin-right: 3%;
+.username-div > div {
+  max-width: 200px;
+  margin: auto auto;
 }
 
-.user-details-fields > div > form  {
+.username-div > div > * {
+  padding: 10px 10px;
+}
+
+.username-div > div > p {
+  color: black;
+  font-size: 11px;
+  margin-top: -1px;
+  /* margin-right: 3%; */
+}
+
+.username-div > div > form > input  {
+  margin-top: 10%;
   background-color: #DCDCDC;
-  border-radius: 30px;
-  width: 100%;
-  min-height: 60px;
+  border: 2.5px solid black;
+  width: 80%;
+  height: 35px;
   display: flex;
   flex-direction: column;
 }
@@ -367,12 +405,15 @@ button, p, h1, h2, h3, h4 {
 }
 
 .user-details-modal-window-child > button, .roles-screen-new-user > button, .roles-screen-partner > button {
-  border-radius: 40px;
   background-color: white;
   width: 75%;
   height: 80px;
   margin: 20px auto;
   font-size: 20px;
+}
+
+.roles-screen-new-user > button {
+  width: 85%;
 }
 
 .user-details-modal-window-child > button:hover, .roles-screen-new-user > button:hover, .roles-screen-partner > button:hover {
@@ -388,17 +429,29 @@ button, p, h1, h2, h3, h4 {
   color: white;
 }
 
-.avatar-div {
+.username-div {
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-div, .username-div {
   display: flex;
   justify-content: space-evenly;
   border-radius: 30px;
 }
 
-.avatar-div > p {
+.avatar-div > p, .username-div > p {
   max-width: 40%;
   font-size: 13.3333px;
   color:rgba(109, 109, 109, 0.95);
+}
+
+.avatar-div > p {
   margin-top: 10%;
+}
+
+.username-div > p {
+  margin-left: 10%;
 }
 
 .avatar-img {
@@ -416,9 +469,9 @@ button, p, h1, h2, h3, h4 {
 }
 
 .role-fields {
-  width: 75%;
+  width: 85%;
   background-color: white;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -426,17 +479,50 @@ button, p, h1, h2, h3, h4 {
 }
 
 .role-button, .role-button-clicked {
-  border-radius: 60px;
+  /* border-radius: 60px; */
   border: 2px solid black;
   width: 65%;
   height: 50px;
   margin: 10px 0;
   display: flex;
-  align-items: center;
+  align-items: center;;
+}
+
+.role-fields > *:first-child  {
+  margin-top: 20px;
+}
+
+.role-fields > *:last-child {
+  margin-bottom: 20px;
+}
+
+.role-button > p, .role-button-clicked > p {
+  margin: 0 auto;
 }
 
 .role-button-clicked {
   height: 90px;
+}
+
+.commitment-level-parent-div {
+  width: 85%;
+  padding: 20px 0;
+  background-color: #DCDCDC;
+}
+
+.commitment-level-div {
+  background-color: #DCDCDC;
+  border: 2.5px solid black;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.commitment-level-div > p {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+  margin: -1px -1px 0 -1px !important;
 }
 
 .role-button:hover {
@@ -492,17 +578,23 @@ button, p, h1, h2, h3, h4 {
 }
 
 .xp-component {
-  background-color: black;
+  /* background-color: black; */
   z-index: 5;
-  padding: 3% 5%;
-  border-radius: 50px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  /* border-radius: 50px; */
+  /* margin-bottom: 20px; */
   height: 190px;
 }
 
-.xp-component p, .xp-component h3 {
-  color: white;
+.xp-component h3 {
+  font-size: medium;
 }
+
+.xp-component p {
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
 
 
 
@@ -599,7 +691,7 @@ button, p, h1, h2, h3, h4 {
   appearance: none;
   width: 100%; /* Full-width */
   height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
+  background: black; /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -619,6 +711,7 @@ button, p, h1, h2, h3, h4 {
   height: 25px; /* Slider handle height */
   background: black; /* Green background */
   cursor: pointer; /* Cursor on hover */
+  border: 1px solid black;
 }
 
 .bar-chart-container::-moz-range-thumb {
@@ -626,28 +719,30 @@ button, p, h1, h2, h3, h4 {
   height: 25px; /* Slider handle height */
   background: black; /* Green background */
   cursor: pointer; /* Cursor on hover */
+  border: 1px solid black;
 }
 
 
 .bar-chart-first-container {
   width: 200px;
   height: 24px;
-  border: 2px solid white;
-  border-radius: 10px;
+  border: 2px solid #dcdcdc;
+  /* border-radius: 10px; */
   margin-bottom: 30px;
   margin: 0 auto;
 }
 
 .bar-chart-container {  
   background-color: white;
-  border-radius: 40px;
+  border: 2px solid black;
+  /* border-radius: 40px; */
 }
 
 .bar-chart-metrics {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  font-family: "Raleway", Helvetica, Arial, serif;
+  font-family: 'Josefin Sans', sans-serif !important;
   font-size: 14px;
   font-weight: 700;
 }
@@ -765,16 +860,12 @@ button, p, h1, h2, h3, h4 {
 	opacity: 0.6;
 }
 
-.username-field {
-  background-color: none !important;
-}
-
 html, body {
 	display: flex;
 	width: 100%;
 	height: 100%;
 	background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Josefin Sans', sans-serif !important;
 	color: white;
 	text-align: center;
 	letter-spacing: 0.3px;

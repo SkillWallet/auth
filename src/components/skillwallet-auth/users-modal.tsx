@@ -53,11 +53,11 @@ export class UsersModal {
               <i class="loader two"></i>
               </div> : <div></div>}
           <div class="wallet-header">
-            <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-black.svg'}></auth-image>
+            <auth-image class="white-wallet" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-white.svg'}></auth-image>
             <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
           </div>
 
-          <div class="wallet-modal-button">
+          <div class="wallet-modal-button users-modal">
             <button 
             onClick={() => this.handleMetamaskClick()}
             >
@@ -69,7 +69,7 @@ export class UsersModal {
             onClick={() => this.handleNewScreen(null)}
             >
               <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <p>{this.isPartner ? 'New Partner' : 'Create New User'}</p>
+              <p>{this.isPartner ? 'New Partner' : 'New User'}</p>
             </button>
           </div>
         </div>

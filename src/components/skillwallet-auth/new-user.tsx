@@ -12,7 +12,7 @@ declare global {
 })
 export class NewUser {
   @State() isAccountDisconnected: boolean = true;
-  @State() buttonClass: string = 'disabled';
+  @State() buttonClass: string = 'disabled intro-button';
   @Prop() community: any;
   @Prop() isPartner: Boolean;
 
@@ -29,7 +29,7 @@ export class NewUser {
 
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
       this.isAccountDisconnected = false;
-      this.buttonClass = '';
+      this.buttonClass = 'intro-button';
       return;
     }
   }
@@ -40,7 +40,7 @@ export class NewUser {
     try {
       await ethereum.request({ method: 'eth_requestAccounts' });
       this.isAccountDisconnected = false;
-      this.buttonClass = '';
+      this.buttonClass = 'intro-button';
     } catch (error) {
       alert(error);
     }
@@ -56,8 +56,8 @@ export class NewUser {
                 <div class="new-user-header">
                     {this.isPartner ? 
                     <h2 style={{textDecoration: 'none', fontWeight: '500'}}>Hello, Partner!</h2> :
-                        <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-                        {this.community ? this.community.name : ''}
+                        <h2>Welcome to <span style={{textDecoration: 'underline'}}>
+                        {this.community ? this.community.name : ''}!
                         </span>
                     </h2>}
 
@@ -72,13 +72,17 @@ export class NewUser {
 
           <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
-            <p>Create New Account</p>
+            <p>Import Social Account</p>
+          </button>
+
+          <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
+            Next: Introduce yourself
           </button>
         </div>
 
-        <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
-          Next: Introduce yourself
-        </button>
+        {/* <div> */}
+
+        {/* </div> */}
       </div>
     );
   }
