@@ -2,9 +2,9 @@ import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 
 @Component({
-  tag: 'users-modal',
+  tag: 'login-menu',
 })
-export class UsersModal {
+export class LoginMenu {
   @State() isLoading: Boolean = false;
   @Prop() isPartner: Boolean;
   
@@ -15,14 +15,6 @@ export class UsersModal {
     bubbles: true,
   })
   showNewScreen: EventEmitter<any>;
-
-  @Event({
-    eventName: 'showLoginMenu',
-    composed: true,
-    cancelable: true,
-    bubbles: true,
-  })
-  showLoginMenu: EventEmitter<any>;
 
   @Event({
     eventName: 'closeModalOnLogin',
@@ -59,22 +51,35 @@ export class UsersModal {
               <h2>Loading</h2>  
               <i class="loader two"></i>
               </div> : <div></div>}
-          <div class="wallet-header">
-            <auth-image class="white-wallet" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-white.svg'}></auth-image>
-            <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
+          <div class="wallet-header login-menu">
+            <h2>Welcome back! 🙌</h2>
           </div>
 
-          <div class="wallet-modal-button users-modal">
-            <button onClick={() => this.showLoginMenu.emit()}>
-              <auth-image></auth-image>
-              <p>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</p>
-            </button>
+            <div class="login-menu-buttons-container">
+                <button onClick={() => this.handleMetamaskClick()}>
+                    <div>
+                        <auth-image class="metamask" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
+                        <p>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</p>
+                    </div>
+                </button>
 
-            <button onClick={() => this.handleNewScreen(null)}>
-              <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <p>{this.isPartner ? 'New Partner' : 'New User'}</p>
-            </button>
-          </div>
+                <button 
+                // onClick={() => this.handleMetamaskClick()}
+>
+                    <div>
+                        <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
+                        <p>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</p>
+                    </div>
+                </button>
+
+                <button 
+                // onClick={() => this.handleMetamaskClick()}
+                >
+                    <div>
+                        <p>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</p>
+                    </div>
+                </button>
+            </div>
         </div>
     )
   }
