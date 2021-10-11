@@ -133,6 +133,11 @@ button, p, h1, h2, h3, h4 {
   font-weight: 400;
 } 
 
+.wallet-header.login-menu > h2 {
+  text-decoration: none;
+  margin: 0 auto;
+}
+
 .wallet-modal-button p {
   font-size: 18px;
   margin-left: 55px;
@@ -152,6 +157,53 @@ button, p, h1, h2, h3, h4 {
   .wallet-modal-button.users-modal p {
     margin-left: 0 !important;
   }
+}
+
+.login-menu-buttons-container > button  {
+  background: black;
+  color: white;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  padding: 10px 10px;
+  margin: 20px 0;
+}
+
+.login-menu-buttons-container > button:hover {
+  cursor: pointer;
+}
+
+.login-menu-buttons-container > button:active {
+  background-color: white;
+  color: black;
+}
+
+.login-menu-buttons-container > button > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.login-menu-buttons-container > button > div > p {
+  font-size: 16px;
+}
+
+.login-menu-buttons-container > button:last-child > div > p {
+  margin: 20px auto;
+}
+
+.login-menu-buttons-container > button > div > *:first-child {
+  margin-right: 20px;
+  /* margin-left: 20px; */
+}
+
+.portis > img, .metamask > img {
+  padding: 5px;
+  width: 35px;
 }
 
 .wallet-modal-button {
@@ -325,10 +377,6 @@ button, p, h1, h2, h3, h4 {
   min-height: 60px;
   text-align: center;
   margin: 2px auto 20px auto !important;
-}
-
-.user-details-fields > .username-field {
-  /* text-align: right; */
 }
 
 .user-details-fields > div {

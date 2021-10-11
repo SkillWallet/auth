@@ -8,7 +8,8 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @State() partnerKey: string = process.env.PARTNER_KEY;
+  @State() partnerKey: string = process.env.SW_PARTNER_ENV === 'production' ? process.env.PROD_PARTNER_KEY : process.env.DEV_PARTNER_KEY;
+
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
@@ -22,6 +23,7 @@ export class SkillwalletAuth {
   @State() community: any;
   @State() displayLogin: boolean;
   @State() usersIsVisible: boolean = false;
+  @State() loginMenuIsVisible: boolean = false;
   @State() qrIsVisible: boolean = false;
   @State() newUserIsVisible: boolean = false;
   @State() userDetailsAreVisible: boolean = false;
@@ -74,6 +76,7 @@ export class SkillwalletAuth {
     this.displayLogin = false;
 
     this.usersIsVisible = false;
+    this.loginMenuIsVisible = false;
     this.qrIsVisible = false;
     this.newUserIsVisible = false;
     this.userDetailsAreVisible = false;
@@ -88,6 +91,12 @@ export class SkillwalletAuth {
   handleUserDetails(details) {
     this.icon = details.detail['image'];
     this.storedUsername = details.detail['username'];
+  }
+
+  @Listen('showLoginMenu')
+  showLoginMenu() {
+    this.usersIsVisible = false;
+    this.loginMenuIsVisible = true;
   }
 
   @Listen('showUserDetails')
@@ -108,6 +117,8 @@ export class SkillwalletAuth {
     this.onSkillwalletLogin.emit(true);
     this.getSkillWallet();
   }
+
+
 
   handleQRClick = () => {
     this.usersIsVisible = false;
@@ -167,6 +178,8 @@ export class SkillwalletAuth {
                   <div class="modalWindow" onClick={(event) => this.handleClickPropagation(event)}>
               
               {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner}></users-modal> : null}
+
+              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner}></login-menu> : null}
 
               {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
               {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community}></new-user> : null}
