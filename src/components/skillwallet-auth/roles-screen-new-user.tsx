@@ -1,4 +1,5 @@
 import { Component, h,  Prop, State, Event, EventEmitter } from '@stencil/core';
+import { ethers } from 'ethers';
 import { joinCommunity } from '../../utils/utils';
 import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
 import { Validator } from '../../validators/validator.js';
@@ -55,8 +56,6 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoading = true;
-        console.log('web3Provider');
-        console.log(this.web3Provider);
         const tokenId = await joinCommunity(this.web3Provider, this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 

@@ -181,7 +181,7 @@ export class SkillwalletAuth {
               
               {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner}></users-modal> : null}
 
-              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner}></login-menu> : null}
+              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider}></login-menu> : null}
 
               {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
               {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}

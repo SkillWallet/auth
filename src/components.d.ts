@@ -12,6 +12,7 @@ export namespace Components {
     }
     interface LoginMenu {
         "isPartner": Boolean;
+        "web3Provider": any;
     }
     interface NewUser {
         "community": any;
@@ -160,6 +161,7 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "web3Provider"?: any;
     }
     interface NewUser {
         "community"?: any;

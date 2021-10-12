@@ -20,7 +20,6 @@ export class UserRole {
 
 
     render() {
-        {console.log('web3Prov', this.web3Provider)}
         return (
             <div class="user-role-modal-window-child">
                 {this.isPartner ? 
