@@ -1,4 +1,5 @@
 import { Component, h,  Prop, State, Event, EventEmitter } from '@stencil/core';
+import { ethers } from 'ethers';
 import { joinCommunity } from '../../utils/utils';
 import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
 import { Validator } from '../../validators/validator.js';
@@ -15,6 +16,7 @@ export class RolesScreenNewUser {
     @Prop({mutable: true}) buttonClass: string;
     @Prop() community: any;
     @Prop() isPartner: Boolean;
+    @Prop({mutable: true}) web3Provider: any;
     @Prop({mutable: true}) skill: number;
     slider!: HTMLInputElement;
     @Prop() validator: string | any;
@@ -54,7 +56,7 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoading = true;
-        const tokenId = await joinCommunity(this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
+        const tokenId = await joinCommunity(this.web3Provider, this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }

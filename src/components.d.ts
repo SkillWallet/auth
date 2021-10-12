@@ -12,10 +12,12 @@ export namespace Components {
     }
     interface LoginMenu {
         "isPartner": Boolean;
+        "web3Provider": any;
     }
     interface NewUser {
         "community": any;
         "isPartner": Boolean;
+        "web3Provider": any;
     }
     interface QrCode {
         "colorDark": string;
@@ -38,6 +40,7 @@ export namespace Components {
         "roleSelected": string;
         "skill": number;
         "validator": string | any;
+        "web3Provider": any;
     }
     interface RolesScreenPartner {
         "buttonClass": string;
@@ -63,6 +66,7 @@ export namespace Components {
         "isPartner": Boolean;
         "partnersAddress": string;
         "validator": string | any;
+        "web3Provider": any;
     }
     interface UsersModal {
         "isPartner": Boolean;
@@ -157,11 +161,13 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "web3Provider"?: any;
     }
     interface NewUser {
         "community"?: any;
         "isPartner"?: Boolean;
-        "onShowUserDetails"?: (event: CustomEvent<Boolean>) => void;
+        "onShowUserDetails"?: (event: CustomEvent<any>) => void;
+        "web3Provider"?: any;
     }
     interface QrCode {
         "colorDark"?: string;
@@ -185,6 +191,7 @@ declare namespace LocalJSX {
         "roleSelected"?: string;
         "skill"?: number;
         "validator"?: string | any;
+        "web3Provider"?: any;
     }
     interface RolesScreenPartner {
         "buttonClass"?: string;
@@ -216,6 +223,7 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "partnersAddress"?: string;
         "validator"?: string | any;
+        "web3Provider"?: any;
     }
     interface UsersModal {
         "isPartner"?: Boolean;

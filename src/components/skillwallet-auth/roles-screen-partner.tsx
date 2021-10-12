@@ -1,6 +1,6 @@
 import { Component, h,  Prop, Event, EventEmitter } from '@stencil/core';
 import { joinCommunity, activatePA } from '../../utils/utils';
-
+import { ethers } from 'ethers';
 @Component({
     tag: 'roles-screen-partner',
     styleUrl: 'skillwallet-auth.css',
@@ -31,7 +31,8 @@ export class RolesScreenPartner {
     async handleUserQRClick() {
         console.log('button clicked');
         this.isLoading = true;
-        const tokenId = await joinCommunity(this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const tokenId = await joinCommunity(provider, this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
         console.log(tokenId, active);
         localStorage.setItem('tokenId', tokenId);

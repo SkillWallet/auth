@@ -922,3 +922,21 @@ html, body {
 .disabled:hover {
   cursor: default !important;
 }
+
+.disabled:active {
+  background-color: black !important;
+  color: white !important;
+}
+
+.inactiveSelection {
+  color:rgba(0, 0, 0, 0.12);
+}
+
+.inactiveSelection:hover {
+  cursor: default;
+}
+
+.inactiveSelection:active {
+  background-color: black !important;
+  color: white !important; ;
+}

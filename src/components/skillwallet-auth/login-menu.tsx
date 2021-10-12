@@ -1,5 +1,7 @@
 import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
+import Portis from '@portis/web3';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
+import { ethers } from 'ethers';
 
 @Component({
   tag: 'login-menu',
@@ -7,6 +9,8 @@ import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 export class LoginMenu {
   @State() isLoading: Boolean = false;
   @Prop() isPartner: Boolean;
+  @Prop({mutable: true}) web3Provider: any;
+  @State() buttonClass: string = 'disabled';
   
   @Event({
     eventName: 'showNewScreen',
@@ -34,8 +38,8 @@ export class LoginMenu {
     try {
       await changeNetwork();
       await ethereum.request({ method: 'eth_requestAccounts' });
-      console.log(ethereum);
-      await fetchSkillWallet(ethereum.selectedAddress);
+      this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+      await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       this.closeModalOnLogin.emit(); 
 
     } catch (error) {
@@ -43,6 +47,23 @@ export class LoginMenu {
       alert(error);
     }
   };
+
+  handlePortisClick = async () => {
+    this.isLoading = true;
+    try {
+      const portis = new Portis('b86287a9-e792-4722-9487-477419f4470f', {
+        nodeUrl: 'https://matic-mumbai.chainstacklabs.com/',
+        chainId: '80001',
+      });
+      this.web3Provider = new ethers.providers.Web3Provider(portis.provider);
+      const addresses = await this.web3Provider.listAccounts();
+      await fetchSkillWallet(this.web3Provider, addresses[0]);
+      this.closeModalOnLogin.emit(); 
+    } catch (error) {
+      alert(error);
+    }
+    this.isLoading = false;
+  }
 
   render() {
     return (
@@ -63,9 +84,7 @@ export class LoginMenu {
                     </div>
                 </button>
 
-                <button 
-                // onClick={() => this.handleMetamaskClick()}
->
+                <button onClick={() => this.handlePortisClick()}>
                     <div>
                         <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
                         <p>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</p>
@@ -74,6 +93,8 @@ export class LoginMenu {
 
                 <button 
                 // onClick={() => this.handleMetamaskClick()}
+                disabled={true}
+                class={this.buttonClass}
                 >
                     <div>
                         <p>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</p>

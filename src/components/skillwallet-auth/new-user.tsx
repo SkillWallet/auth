@@ -1,5 +1,7 @@
+import Portis from '@portis/web3';
 import { Component, Event, EventEmitter, h, State, Prop } from '@stencil/core';
 import { changeNetwork } from '../../utils/utils';
+import { ethers } from 'ethers';
 
 declare global {
   interface Window {
@@ -11,8 +13,9 @@ declare global {
   tag: 'new-user',
 })
 export class NewUser {
-  @State() isAccountDisconnected: boolean = true;
-  @State() buttonClass: string = 'disabled intro-button';
+  @State() isAccount: string = null;
+  @State() buttonClass: string = 'disabled';
+  @Prop({mutable: true}) web3Provider: any;
   @Prop() community: any;
   @Prop() isPartner: Boolean;
 
@@ -22,13 +25,13 @@ export class NewUser {
     cancelable: true,
     bubbles: true,
   })
-  showUserDetails: EventEmitter<Boolean>;
+  showUserDetails: EventEmitter<any>;
 
   componentWillLoad() {
     const { ethereum } = window;
 
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
-      this.isAccountDisconnected = false;
+      this.isAccount = 'metamask';
       this.buttonClass = 'intro-button';
       return;
     }
@@ -39,15 +42,30 @@ export class NewUser {
     const { ethereum } = window;
     try {
       await ethereum.request({ method: 'eth_requestAccounts' });
-      this.isAccountDisconnected = false;
-      this.buttonClass = 'intro-button';
+      this.isAccount = 'metamask';
+      this.buttonClass = '';
+      this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  handlePortisClick = async () => {
+    try {
+      const portis = new Portis('b86287a9-e792-4722-9487-477419f4470f', {
+        nodeUrl: 'https://matic-mumbai.chainstacklabs.com/',
+        chainId: '80001',
+      });
+      this.web3Provider = new ethers.providers.Web3Provider(portis.provider);
+      this.isAccount = 'portis';
+      this.buttonClass = '';
     } catch (error) {
       alert(error);
     }
   };
 
   handleUserDetailsClick() {
-    this.showUserDetails.emit(true);
+    this.showUserDetails.emit(this.web3Provider);
   }
 
   render() {
@@ -65,24 +83,22 @@ export class NewUser {
         </div>
 
         <div class="wallet-modal-button">
-          <button onClick={() => this.handleMetamaskClick()} class={this.isAccountDisconnected ? '' : 'activeSelection'}>
+          <button onClick={() => this.handleMetamaskClick()} class={this.isAccount === 'metamask' ? 'activeSelection'  : this.isAccount === null ? '' : 'inactiveSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
             <p>Inject from Metamask</p>
           </button>
 
-          <button class={this.isAccountDisconnected ? '' : 'inactiveSelection'}>
-            <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/torus-new-user.svg'}></auth-image>
-            <p>Import Social Account</p>
-          </button>
-
-          <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
-            Next: Introduce yourself
+          <button class={this.isAccount === 'portis' ? 'activeSelection' : this.isAccount === null ? '' : 'inactiveSelection'}
+           onClick={() => this.handlePortisClick()}
+          >
+            <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
+            <p>Create Social Account</p>
           </button>
         </div>
 
-        {/* <div> */}
-
-        {/* </div> */}
+        <button disabled={this.isAccount === ''} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
+          Next: Introduce yourself
+        </button>
       </div>
     );
   }

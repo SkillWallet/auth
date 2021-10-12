@@ -14,6 +14,7 @@ export class UserRole {
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
     @Prop() partnersAddress: string = null;
+    @Prop({mutable: true}) web3Provider: any;
     @Prop() validator: string | any;
 
 
@@ -39,6 +40,7 @@ export class UserRole {
                 isLoading={this.isLoading}
                 buttonClass={this.buttonClass}
                 roleSelected={this.roleSelected}
+                web3Provider={this.web3Provider}
                 validator={this.validator}
                 ></roles-screen-new-user>}
                 </div>
