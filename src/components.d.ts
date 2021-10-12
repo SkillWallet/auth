@@ -10,6 +10,9 @@ export namespace Components {
     interface AuthImage {
         "image": string;
     }
+    interface LoginMenu {
+        "isPartner": Boolean;
+    }
     interface NewUser {
         "community": any;
         "isPartner": Boolean;
@@ -75,6 +78,12 @@ declare global {
         prototype: HTMLAuthImageElement;
         new (): HTMLAuthImageElement;
     };
+    interface HTMLLoginMenuElement extends Components.LoginMenu, HTMLStencilElement {
+    }
+    var HTMLLoginMenuElement: {
+        prototype: HTMLLoginMenuElement;
+        new (): HTMLLoginMenuElement;
+    };
     interface HTMLNewUserElement extends Components.NewUser, HTMLStencilElement {
     }
     var HTMLNewUserElement: {
@@ -131,6 +140,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "auth-image": HTMLAuthImageElement;
+        "login-menu": HTMLLoginMenuElement;
         "new-user": HTMLNewUserElement;
         "qr-code": HTMLQrCodeElement;
         "qr-modal": HTMLQrModalElement;
@@ -145,6 +155,11 @@ declare global {
 declare namespace LocalJSX {
     interface AuthImage {
         "image"?: string;
+    }
+    interface LoginMenu {
+        "isPartner"?: Boolean;
+        "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
+        "onShowNewScreen"?: (event: CustomEvent<any>) => void;
     }
     interface NewUser {
         "community"?: any;
@@ -211,10 +226,12 @@ declare namespace LocalJSX {
     interface UsersModal {
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
+        "onShowLoginMenu"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;
+        "login-menu": LoginMenu;
         "new-user": NewUser;
         "qr-code": QrCode;
         "qr-modal": QrModal;
@@ -231,6 +248,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "auth-image": LocalJSX.AuthImage & JSXBase.HTMLAttributes<HTMLAuthImageElement>;
+            "login-menu": LocalJSX.LoginMenu & JSXBase.HTMLAttributes<HTMLLoginMenuElement>;
             "new-user": LocalJSX.NewUser & JSXBase.HTMLAttributes<HTMLNewUserElement>;
             "qr-code": LocalJSX.QrCode & JSXBase.HTMLAttributes<HTMLQrCodeElement>;
             "qr-modal": LocalJSX.QrModal & JSXBase.HTMLAttributes<HTMLQrModalElement>;

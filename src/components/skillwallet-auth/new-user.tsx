@@ -32,7 +32,7 @@ export class NewUser {
 
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
       this.isAccountDisconnected = false;
-      this.buttonClass = '';
+      this.buttonClass = 'intro-button';
       return;
     }
   }
@@ -74,8 +74,8 @@ export class NewUser {
                 <div class="new-user-header">
                     {this.isPartner ? 
                     <h2 style={{textDecoration: 'none', fontWeight: '500'}}>Hello, Partner!</h2> :
-                        <h2>Welcome to <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-                        {this.community ? this.community.name : ''}
+                        <h2>Welcome to <span style={{textDecoration: 'underline'}}>
+                        {this.community ? this.community.name : ''}!
                         </span>
                     </h2>}
 
@@ -94,9 +94,9 @@ export class NewUser {
           </button>
         </div>
 
-        <button disabled={this.isAccountDisconnected} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
-          Next: Introduce yourself
-        </button>
+        {/* <div> */}
+
+        {/* </div> */}
       </div>
     );
   }
