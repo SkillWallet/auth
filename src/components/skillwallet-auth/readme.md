@@ -17,6 +17,7 @@
 | Event               | Description | Type               |
 | ------------------- | ----------- | ------------------ |
 | `closeModalOnLogin` |             | `CustomEvent<any>` |
+| `showLoginMenu`     |             | `CustomEvent<any>` |
 | `showNewScreen`     |             | `CustomEvent<any>` |
 
 

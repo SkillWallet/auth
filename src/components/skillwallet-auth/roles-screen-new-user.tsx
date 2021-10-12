@@ -1,5 +1,4 @@
 import { Component, h,  Prop, State, Event, EventEmitter } from '@stencil/core';
-import { ethers } from 'ethers';
 import { joinCommunity } from '../../utils/utils';
 import { defaultValidator, getValidator } from '../../validators/validator.factory.js';
 import { Validator } from '../../validators/validator.js';
