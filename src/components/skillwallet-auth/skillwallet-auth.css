@@ -238,6 +238,10 @@ button, p, h1, h2, h3, h4 {
   color: black;
 }
 
+.wallet-modal-button.new-user {
+  width: 89%;
+}
+
 .intro-button {
   height: 50px;
   background-color: white !important;
