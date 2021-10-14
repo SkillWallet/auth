@@ -33,6 +33,7 @@ export class NewUser {
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
       this.isAccount = 'metamask';
       this.buttonClass = 'intro-button';
+      this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
       return;
     }
   }
