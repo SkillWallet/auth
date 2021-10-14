@@ -33,6 +33,7 @@ export class NewUser {
     if (ethereum && ethereum.isMetaMask && ethereum.selectedAddress) {
       this.isAccount = 'metamask';
       this.buttonClass = 'intro-button';
+      this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
       return;
     }
   }
@@ -82,7 +83,7 @@ export class NewUser {
           <p>First, import your Wallet, or create a brand new account.</p>
         </div>
 
-        <div class="wallet-modal-button">
+        <div class="wallet-modal-button new-user">
           <button onClick={() => this.handleMetamaskClick()} class={this.isAccount === 'metamask' ? 'activeSelection'  : this.isAccount === null ? '' : 'inactiveSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
             <p>Inject from Metamask</p>

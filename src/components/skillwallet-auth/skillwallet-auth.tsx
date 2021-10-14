@@ -74,14 +74,16 @@ export class SkillwalletAuth {
   onSkillwalletLogin: EventEmitter<Boolean>;
   
   handleHideClick() {
-    this.displayLogin = false;
+    if (!this.isPartner) {
+      this.displayLogin = false;
 
-    this.usersIsVisible = false;
-    this.loginMenuIsVisible = false;
-    this.qrIsVisible = false;
-    this.newUserIsVisible = false;
-    this.userDetailsAreVisible = false;
-    this.userRoleIsVisible = false;
+      this.usersIsVisible = false;
+      this.loginMenuIsVisible = false;
+      this.qrIsVisible = false;
+      this.newUserIsVisible = false;
+      this.userDetailsAreVisible = false;
+      this.userRoleIsVisible = false;
+    }
   }
 
   handleClickPropagation(e) {

@@ -61,7 +61,17 @@ export const joinCommunity = async (provider, communityAddress, username, skill,
       throw new Error('Something went wrong');
     }
   } catch (err) {
-    console.log(err);
+    const error = err.data.message;
+
+    if (error.includes("No free spots left")) {
+      alert("There are no available spots in this community.")
+    } else if (error.includes("Already a member")) {
+      alert("You are already a member of this community.")
+    } else if (error.includes("SkillWallet already registered")) {
+      alert("You already registered a SkillWallet for this wallet address.")
+    } else {
+      alert("An error occured - please try again.")
+    }
     return;
   }
 }
