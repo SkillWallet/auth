@@ -89,6 +89,8 @@ export function format(first: string, middle: string, last: string): string {
 }
 
 export const fetchSkillWallet = async (provider: any, address: string) => {
+  try {
+
   console.log('fetching...');
 
   const skillWalletAddress = process.env.SKILLWALLET_ADDRESS;
@@ -123,6 +125,14 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     } else if (!skillWallet) {
       alert('Unable to find a Skill Wallet and nickname with your ID')
     }
+  }
+  } catch (error) {
+    if (error.data.message.includes("invalid")) {
+      alert("The SkillWallet owner is invalid.");
+    } else {
+      alert("An error occured - please try again.");
+    }
+    return;
   }
 }
 

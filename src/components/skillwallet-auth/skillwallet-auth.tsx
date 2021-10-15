@@ -36,6 +36,7 @@ export class SkillwalletAuth {
   @State() partnersAddress: string = null;
   @State() communityAddress: string = null;
   @State() web3Provider: any = null;
+  @State() isLoading: boolean = false;
 
   componentWillLoad() {
     this.getSkillWallet();
@@ -96,6 +97,11 @@ export class SkillwalletAuth {
     this.storedUsername = details.detail['username'];
   }
 
+  @Listen('isLoadingEvent')
+  handleIsLoadingEvent(isLoading) {
+    this.isLoading = isLoading.detail;
+  }
+
   @Listen('showLoginMenu')
   showLoginMenu() {
     this.usersIsVisible = false;
@@ -118,6 +124,7 @@ export class SkillwalletAuth {
   @Listen('closeModalOnLogin')
   closeModalOnLogin() {
     this.displayLogin = false;
+    this.loginMenuIsVisible = false;
     this.onSkillwalletLogin.emit(true);
     this.getSkillWallet();
   }
@@ -178,12 +185,17 @@ export class SkillwalletAuth {
 
           {this.displayLogin ?
               <div class="background-screen" onClick={() => this.handleHideClick()}>
+                          {this.isLoading ? 
+              <div class="item">
+                <h2>Loading</h2>  
+                <i class="loader two"></i>
+              </div> : <div></div>}
                 <div class="topDiv">
                   <div class="modalWindow" onClick={(event) => this.handleClickPropagation(event)}>
               
-              {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner}></users-modal> : null}
+              {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
 
-              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider}></login-menu> : null}
+              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
 
               {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
               {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
@@ -191,6 +203,7 @@ export class SkillwalletAuth {
                   <user-details 
                     isPartner={this.isPartner}
                     community={this.community} 
+                    isLoading={this.isLoading}
                     validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
                   ></user-details> : null}
               {this.userRoleIsVisible     === true ? <user-role 

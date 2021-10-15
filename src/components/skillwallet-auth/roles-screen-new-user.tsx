@@ -30,6 +30,14 @@ export class RolesScreenNewUser {
       })
       showNewScreen: EventEmitter<any>;
 
+      @Event({
+        eventName: 'isLoadingEvent',
+        composed: true,
+        cancelable: true,
+        bubbles: true,
+      })
+      isLoadingEvent: EventEmitter<Boolean>;
+
       componentWillLoad()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
       }
@@ -54,8 +62,9 @@ export class RolesScreenNewUser {
     }
 
     async handleUserQRClick() {
-        this.isLoading = true;
+        this.isLoadingEvent.emit(true);
         const tokenId = await joinCommunity(this.web3Provider, this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
+        this.isLoadingEvent.emit(false);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }
@@ -63,15 +72,10 @@ export class RolesScreenNewUser {
     render() {
         return (
         <div class="roles-screen-new-user">
-            {this.isLoading ? <div class="item">
-            <h2>Loading</h2>  
-            <i class="loader two"></i>
-            </div> : <div></div>}
-
-        <div class="user-role-header">
-            <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
-            <p>Pick what you're the best at & be rewarded for your commitment!</p>
-        </div>
+            <div class="user-role-header">
+                <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
+                <p>Pick what you're the best at & be rewarded for your commitment!</p>
+            </div>
 
         {(this.roleSelected) ? 
         <div class="commitment-level-parent-div">

@@ -7,7 +7,7 @@ import { Component, h, State, Prop } from '@stencil/core';
 })
 export class UserRole {
     @State() roleSelected: string = null;
-    @State() isLoading: boolean = false;
+    @Prop({mutable: true}) isLoading: boolean;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
     @State() skill: number = 1;

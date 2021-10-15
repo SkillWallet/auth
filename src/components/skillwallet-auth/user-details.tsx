@@ -13,7 +13,7 @@ export class UserDetails {
   @Prop() community: any;
   @Prop() userUploadedImage: any;
   @Prop() isPartner: Boolean;
-  @State() isLoading: boolean = false;
+  @Prop({mutable: true}) isLoading: boolean;
   @State() username: string;
   @Element() private elementHost: HTMLElement;
   @Event() uploadCompleted: EventEmitter<Blob>;
@@ -38,6 +38,14 @@ export class UserDetails {
     bubbles: true,
   })
   userDetailsSaved: EventEmitter<any>;
+
+  @Event({
+    eventName: 'isLoadingEvent',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  isLoadingEvent: EventEmitter<Boolean>;
 
   handleUserRoleClick() {
     localStorage.setItem('username', this.username);
@@ -79,11 +87,11 @@ export class UserDetails {
       localStorage.setItem('imageUrl', imageUrl);
       
       this.uploadImage(imageFile);
-      this.isLoading = false;
+      this.isLoadingEvent.emit(false);
   }
 
   handleInputChange(event) {
-    this.isLoading = true;
+    this.isLoadingEvent.emit(true);
     this.onInputChange(event);
   }
 
@@ -105,13 +113,7 @@ export class UserDetails {
 
   render() {
     return (
-        <div class="user-details-modal-window-child">
-            {this.isLoading ? 
-                <div class="item">
-                  <h2>Loading</h2>  
-                  <i class="loader two"></i>
-                </div> : <div></div>}
-            
+        <div class="user-details-modal-window-child">            
             {this.isPartner ? 
                 <div class="user-details-header">
                     <p style={{color: 'white'}}>Great! Now let's start - tell us about yourself</p>

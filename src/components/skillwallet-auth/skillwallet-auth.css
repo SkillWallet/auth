@@ -540,6 +540,7 @@
 
 /********* RESPONSIVE STYLES ***********/
 
+/*** DESKTOP ONLY ***/
 @media only screen and (min-width: 1500px) {
   .wallet-modal-button.users-modal {
     flex-direction: row !important;
@@ -553,5 +554,22 @@
 
   .wallet-modal-button.users-modal p {
     margin-left: 0 !important;
+  }
+}
+
+/*** TABLET ONLY ***/
+
+@media only screen and (min-width: 640px) and (max-width: 1000px) {
+  .modalWindow {
+    width: 60%;
+  }
+}
+
+
+/*** MOBILE ONLY ***/
+@media only screen and (max-width: 640px) {
+  .modalWindow {
+    width: 100%;
+    height: 100%;
   }
 }

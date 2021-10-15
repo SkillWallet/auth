@@ -23,17 +23,25 @@ export class RolesScreenPartner {
       })
       showNewScreen: EventEmitter<any>;
 
+    @Event({
+    eventName: 'isLoadingEvent',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+    })
+    isLoadingEvent: EventEmitter<Boolean>;
+
     handleRoleClick(role) {
         this.roleSelected = role;
         this.buttonClass = '';
     }
 
     async handleUserQRClick() {
-        console.log('button clicked');
-        this.isLoading = true;
+        this.isLoadingEvent.emit(true);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const tokenId = await joinCommunity(provider, this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
+        this.isLoadingEvent.emit(false);
         console.log(tokenId, active);
         localStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
@@ -42,13 +50,9 @@ export class RolesScreenPartner {
     render() {
         return (
             <div class="roles-screen-partner">
-            {this.isLoading ? <div class="item">
-            <h2>Loading</h2>  
-            <i class="loader two"></i>
-            </div> : <div></div>}
-        <div class="user-role-header">
-            <p>Pick your Role in your Community - and let it be known for the generations to come!</p>
-        </div>
+                <div class="user-role-header">
+                    <p>Pick your Role in your Community - and let it be known for the generations to come!</p>
+                </div>
                     
         
         <div class="role-fields">
