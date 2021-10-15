@@ -74,16 +74,16 @@ export class RolesScreenNewUser {
         <div class="roles-screen-new-user">
             <div class="user-role-header">
                 <h2>Your Role in <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>{this.community.name}</span></h2>
-                <p>Pick what you're the best at & be rewarded for your commitment!</p>
+                <h3>Pick what you're the best at & be rewarded for your commitment!</h3>
             </div>
 
         {(this.roleSelected) ? 
         <div class="commitment-level-parent-div">
         <div class="commitment-level-div">
-            <p>{this.roleSelected}</p>
+            <h3>{this.roleSelected}</h3>
 
             <div class="xp-component">
-                <h3>Your <u>Commitment Level</u></h3>
+                <h4>Your <u>Commitment Level</u></h4>
                 <p>Tell your Community how much time you commit to this Role!</p>
                 {(this.isInvalid) ? <span class="validation-error"> Your commitment level must be atleast 1</span> : null}
 
@@ -102,15 +102,15 @@ export class RolesScreenNewUser {
         
         <div class="role-fields">
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
-                <p>{this.community.roles[0]}</p>
+                <h4>{this.community.roles[0]}</h4>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
-                <p>{this.community.roles[1]}</p>
+                <h4>{this.community.roles[1]}</h4>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
-                <p>{this.community.roles[2]}</p>
+                <h4>{this.community.roles[2]}</h4>
             </div>
         </div>
         }

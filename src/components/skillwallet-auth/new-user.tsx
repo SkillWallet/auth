@@ -80,20 +80,20 @@ export class NewUser {
                         </span>
                     </h2>}
 
-          <p>First, import your Wallet, or create a brand new account.</p>
+          <h3>First, import your Wallet, or create a brand new account.</h3>
         </div>
 
         <div class="wallet-modal-button new-user">
           <button onClick={() => this.handleMetamaskClick()} class={this.isAccount === 'metamask' ? 'activeSelection'  : this.isAccount === null ? '' : 'inactiveSelection'}>
             <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
-            <p>Inject from Metamask</p>
+            <h4>Inject from Metamask</h4>
           </button>
 
           <button class={this.isAccount === 'portis' ? 'activeSelection' : this.isAccount === null ? '' : 'inactiveSelection'}
            onClick={() => this.handlePortisClick()}
           >
             <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
-            <p>Create Social Account</p>
+            <h4>Create Social Account</h4>
           </button>
         </div>
 

@@ -80,12 +80,12 @@ export class UsersModal {
           <div class="wallet-modal-button users-modal">
             <button onClick={() => this.showLoginMenu.emit()}>
               <auth-image></auth-image>
-              <p>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</p>
+              <h4>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</h4>
             </button>
 
             <button onClick={() => this.handleNewScreen(null)}>
               <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <p>{this.isPartner ? 'New Partner' : 'New User'}</p>
+              <h4>{this.isPartner ? 'New Partner' : 'New User'}</h4>
             </button>
           </div>
         </div>

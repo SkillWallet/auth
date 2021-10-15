@@ -83,14 +83,14 @@ export class LoginMenu {
                 <button onClick={() => this.handleMetamaskClick()}>
                     <div>
                         <auth-image class="metamask" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
-                        <p>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</p>
+                        <h4>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</h4>
                     </div>
                 </button>
 
                 <button onClick={() => this.handlePortisClick()}>
                     <div>
                         <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
-                        <p>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</p>
+                        <h4>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</h4>
                     </div>
                 </button>
 
@@ -100,7 +100,7 @@ export class LoginMenu {
                 class={this.buttonClass}
                 >
                     <div>
-                        <p>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</p>
+                        <h4>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</h4>
                     </div>
                 </button>
             </div>

@@ -4,6 +4,10 @@
     display: block;
   }
 
+  html {
+    font-size: 100%;    /* base unit (1rem) of 16px */
+  }
+
   html, body {
 	display: flex;
 	width: 100%;
@@ -17,6 +21,27 @@
   
   button, p, h1, h2, h3, h4 {
     font-family: 'Josefin Sans', sans-serif !important;
+  }
+
+  h1 {
+    font-size: calc(2.5rem + 0.2vw);
+  }
+
+  h2 {
+    font-size: calc(1.875rem - 0.4vw);
+  }
+
+  h3 {
+    font-size: calc(1.25rem - 0.3vw);
+    color: white;
+  }
+
+  h4 {
+    font-size: calc(1.4rem - 0.3vw);
+  }
+
+  p {
+    font-size: calc(1.25rem - 0.3vw);
   }
   
   .background-screen {
@@ -64,10 +89,7 @@
     margin: 2px 4px;
     border-radius: 20px;
   }
-  
-  .logged-in > p {
-    font-size: 14px;
-  }
+
   
   .connect-wallet-button:hover {
     cursor: pointer;
@@ -136,7 +158,7 @@
   
   .wallet-header > h2 {
     text-decoration: underline;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     line-height: 2.25rem;
     color: rgba(243, 244, 246, 1);
     font-weight: 400;

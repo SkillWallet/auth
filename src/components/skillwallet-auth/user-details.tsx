@@ -119,9 +119,9 @@ export class UserDetails {
                     <p style={{color: 'white'}}>Great! Now let's start - tell us about yourself</p>
                 </div> :
               
-                <div class="user-details-header">]
+                <div class="user-details-header">
                     <h2>Welcome to <span style={{ textDecoration: 'underline', fontWeight: 'bold' }}>{this.community ? this.community.name : ''}!</span></h2>
-                    <p>Tell us about yourself</p>
+                    <h3>Tell us about yourself</h3>
                 </div> }
 
             <div class="user-details-fields">

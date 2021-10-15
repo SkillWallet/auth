@@ -10,8 +10,7 @@
   margin: 0 auto;
 }
 
-.wallet-modal-button p {
-  font-size: 22px;
+.wallet-modal-button > button > h4 {
   margin-left: 55px;
 }
 
@@ -44,11 +43,7 @@
   margin: 0 auto;
 }
 
-.login-menu-buttons-container > button > div > p {
-  font-size: 16px;
-}
-
-.login-menu-buttons-container > button:last-child > div > p {
+.login-menu-buttons-container > button:last-child > div > h4 {
   margin: 20px auto;
 }
 
@@ -119,7 +114,7 @@
   cursor: default !important;
 }
 
-.inactiveSelection > p {
+.inactiveSelection > h4 {
   color: #282828;
 }
 
@@ -172,10 +167,9 @@
   font-weight: 300;
 }
 
-.new-user-header > p {
+.new-user-header > h3 {
   color: white;
   text-align: center;
-  font-size: 16px;
   font-weight: 300;
   width: 80%;
   margin: 20px auto;
@@ -408,7 +402,7 @@
   margin-bottom: 20px;
 }
 
-.role-button > p, .role-button-clicked > p {
+.role-button > h4, .role-button-clicked > h4 {
   margin: 0 auto;
 }
 
@@ -552,9 +546,7 @@
     justify-content: center !important;
   }
 
-  .wallet-modal-button.users-modal p {
-    margin-left: 0 !important;
-  }
+
 }
 
 /*** TABLET ONLY ***/
