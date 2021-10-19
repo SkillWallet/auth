@@ -166,12 +166,12 @@ export class SkillwalletAuth {
         <div>
           {this.storedUsername ? 
               <button class="connect-wallet-button logged-in" disabled={true}>
-                  {/* <auth-image class="uploaded-img" image={this.icon}></auth-image> */}
+                  <auth-image class="uploaded-img" image={this.icon}></auth-image>
                   <p>{this.storedUsername}</p>
               </button> :
 
               <button class="connect-wallet-button" onClick={() => this.handleClick()}>
-                  {/* <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image> */}
+                  <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
                   <p>Connect Wallet</p>
               </button>
             }
