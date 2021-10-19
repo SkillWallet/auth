@@ -8,7 +8,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @State() partnerKey: string = process.env.SW_PARTNER_ENV === 'production' ? process.env.PROD_PARTNER_KEY : process.env.DEV_PARTNER_KEY;
+  @Prop() partnerKey: string;
 
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
 

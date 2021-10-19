@@ -54,6 +54,7 @@ export namespace Components {
     }
     interface SkillwalletAuth {
         "allowCreateNewUser": string;
+        "partnerKey": string;
     }
     interface UserDetails {
         "community": any;
@@ -215,6 +216,7 @@ declare namespace LocalJSX {
         "allowCreateNewUser"?: string;
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
+        "partnerKey"?: string;
     }
     interface UserDetails {
         "community"?: any;
