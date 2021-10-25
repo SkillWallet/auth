@@ -7,7 +7,7 @@ import { ethers } from 'ethers';
   tag: 'login-menu',
 })
 export class LoginMenu {
-  @State() isLoading: Boolean = false;
+  @Prop({mutable: true}) isLoading: boolean;
   @Prop() isPartner: Boolean;
   @Prop({mutable: true}) web3Provider: any;
   @State() buttonClass: string = 'disabled';
@@ -28,12 +28,20 @@ export class LoginMenu {
   })
   closeModalOnLogin: EventEmitter<any>;
 
+  @Event({
+    eventName: 'isLoadingEvent',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  isLoadingEvent: EventEmitter<Boolean>;
+
   handleNewScreen(text) {
     this.showNewScreen.emit(text);
   }
 
   handleMetamaskClick = async () => {
-    this.isLoading = true;
+    this.isLoadingEvent.emit(true);
     const { ethereum } = window;
     try {
       await changeNetwork();
@@ -41,15 +49,14 @@ export class LoginMenu {
       this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
       await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       this.closeModalOnLogin.emit(); 
-
     } catch (error) {
-      this.isLoading = false;
+      this.isLoadingEvent.emit(false);
       alert(error);
     }
   };
 
   handlePortisClick = async () => {
-    this.isLoading = true;
+    this.isLoadingEvent.emit(true);
     try {
       const portis = new Portis('b86287a9-e792-4722-9487-477419f4470f', {
         nodeUrl: 'https://matic-mumbai.chainstacklabs.com/',
@@ -62,16 +69,12 @@ export class LoginMenu {
     } catch (error) {
       alert(error);
     }
-    this.isLoading = false;
+    this.isLoadingEvent.emit(false);
   }
 
   render() {
     return (
         <div class="modal-window-child">
-          {this.isLoading ? <div class="item">
-              <h2>Loading</h2>  
-              <i class="loader two"></i>
-              </div> : <div></div>}
           <div class="wallet-header login-menu">
             <h2>Welcome back! 🙌</h2>
           </div>
@@ -80,14 +83,14 @@ export class LoginMenu {
                 <button onClick={() => this.handleMetamaskClick()}>
                     <div>
                         <auth-image class="metamask" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
-                        <p>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</p>
+                        <h4>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</h4>
                     </div>
                 </button>
 
                 <button onClick={() => this.handlePortisClick()}>
                     <div>
                         <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
-                        <p>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</p>
+                        <h4>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</h4>
                     </div>
                 </button>
 
@@ -97,7 +100,7 @@ export class LoginMenu {
                 class={this.buttonClass}
                 >
                     <div>
-                        <p>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</p>
+                        <h4>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</h4>
                     </div>
                 </button>
             </div>

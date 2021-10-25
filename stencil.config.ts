@@ -4,6 +4,7 @@ import dotenvPlugin from 'rollup-plugin-dotenv';
 
 export const config: Config = {
   namespace: 'skillwallet-auth',
+  globalStyle: 'src/global/global.css',
   nodeResolve: {
     browser: true
   },

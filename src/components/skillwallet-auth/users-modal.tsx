@@ -1,4 +1,4 @@
-import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
+import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 import { ethers } from 'ethers';
 import Portis from '@portis/web3';
@@ -7,7 +7,7 @@ import Portis from '@portis/web3';
   tag: 'users-modal',
 })
 export class UsersModal {
-  @State() isLoading: Boolean = false;
+  @Prop({mutable: true}) isLoading: boolean;
   @Prop() isPartner: Boolean;
   
   @Event({
@@ -34,12 +34,20 @@ export class UsersModal {
   })
   closeModalOnLogin: EventEmitter<any>;
 
+  @Event({
+    eventName: 'isLoadingEvent',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  isLoadingEvent: EventEmitter<Boolean>;
+
   handleNewScreen(text) {
     this.showNewScreen.emit(text);
   }
 
   handleMetamaskClick = async () => {
-    this.isLoading = true;
+    this.isLoadingEvent.emit(true);
     const { ethereum } = window;
     try {
       await changeNetwork();
@@ -56,7 +64,7 @@ export class UsersModal {
       this.closeModalOnLogin.emit(); 
 
     } catch (error) {
-      this.isLoading = false;
+      this.isLoadingEvent.emit(false);
       alert(error);
     }
   };
@@ -64,10 +72,6 @@ export class UsersModal {
   render() {
     return (
         <div class="modal-window-child">
-          {this.isLoading ? <div class="item">
-              <h2>Loading</h2>  
-              <i class="loader two"></i>
-              </div> : <div></div>}
           <div class="wallet-header">
             <auth-image class="white-wallet" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-white.svg'}></auth-image>
             <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
@@ -76,12 +80,12 @@ export class UsersModal {
           <div class="wallet-modal-button users-modal">
             <button onClick={() => this.showLoginMenu.emit()}>
               <auth-image></auth-image>
-              <p>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</p>
+              <h4>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</h4>
             </button>
 
             <button onClick={() => this.handleNewScreen(null)}>
               <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <p>{this.isPartner ? 'New Partner' : 'New User'}</p>
+              <h4>{this.isPartner ? 'New Partner' : 'New User'}</h4>
             </button>
           </div>
         </div>

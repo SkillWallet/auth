@@ -11,6 +11,7 @@ export namespace Components {
         "image": string;
     }
     interface LoginMenu {
+        "isLoading": boolean;
         "isPartner": Boolean;
         "web3Provider": any;
     }
@@ -57,6 +58,7 @@ export namespace Components {
     }
     interface UserDetails {
         "community": any;
+        "isLoading": boolean;
         "isPartner": Boolean;
         "userUploadedImage": any;
         "validator": string | any;
@@ -64,12 +66,14 @@ export namespace Components {
     interface UserRole {
         "community": any;
         "communityAddress": string;
+        "isLoading": boolean;
         "isPartner": Boolean;
         "partnersAddress": string;
         "validator": string | any;
         "web3Provider": any;
     }
     interface UsersModal {
+        "isLoading": boolean;
         "isPartner": Boolean;
     }
 }
@@ -159,8 +163,10 @@ declare namespace LocalJSX {
         "image"?: string;
     }
     interface LoginMenu {
+        "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
+        "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "web3Provider"?: any;
     }
@@ -188,6 +194,7 @@ declare namespace LocalJSX {
         "community"?: any;
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
+        "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "roleSelected"?: string;
         "skill"?: number;
@@ -200,6 +207,7 @@ declare namespace LocalJSX {
         "communityAddress"?: string;
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
+        "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "partnersAddress"?: string;
         "roleSelected"?: string;
@@ -212,7 +220,9 @@ declare namespace LocalJSX {
     }
     interface UserDetails {
         "community"?: any;
+        "isLoading"?: boolean;
         "isPartner"?: Boolean;
+        "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowUserRole"?: (event: CustomEvent<Boolean>) => void;
         "onUploadCompleted"?: (event: CustomEvent<Blob>) => void;
         "onUserDetailsSaved"?: (event: CustomEvent<any>) => void;
@@ -222,14 +232,17 @@ declare namespace LocalJSX {
     interface UserRole {
         "community"?: any;
         "communityAddress"?: string;
+        "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "partnersAddress"?: string;
         "validator"?: string | any;
         "web3Provider"?: any;
     }
     interface UsersModal {
+        "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
+        "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowLoginMenu"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
     }
