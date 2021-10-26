@@ -40,6 +40,14 @@ export class LoginMenu {
     this.showNewScreen.emit(text);
   }
 
+  @Event({
+    eventName: 'onSkillwalletError',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  onSkillwalletError: EventEmitter<null>;
+
   handleMetamaskClick = async () => {
     this.isLoadingEvent.emit(true);
     const { ethereum } = window;
@@ -50,6 +58,7 @@ export class LoginMenu {
       await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       this.closeModalOnLogin.emit(); 
     } catch (error) {
+      this.onSkillwalletError.emit();
       this.isLoadingEvent.emit(false);
       alert(error);
     }
@@ -67,6 +76,7 @@ export class LoginMenu {
       await fetchSkillWallet(this.web3Provider, addresses[0]);
       this.closeModalOnLogin.emit(); 
     } catch (error) {
+      this.onSkillwalletError.emit();
       alert(error);
     }
     this.isLoadingEvent.emit(false);

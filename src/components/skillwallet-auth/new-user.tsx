@@ -38,6 +38,14 @@ export class NewUser {
     }
   }
 
+  @Event({
+    eventName: 'onSkillwalletError',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  onSkillwalletError: EventEmitter<null>;
+
   handleMetamaskClick = async () => {
     await changeNetwork();
     const { ethereum } = window;
@@ -47,6 +55,7 @@ export class NewUser {
       this.buttonClass = '';
       this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
     } catch (error) {
+      this.onSkillwalletError.emit();
       alert(error);
     }
   };
@@ -61,6 +70,7 @@ export class NewUser {
       this.isAccount = 'portis';
       this.buttonClass = '';
     } catch (error) {
+      this.onSkillwalletError.emit();
       alert(error);
     }
   };
@@ -97,7 +107,7 @@ export class NewUser {
           </button>
         </div>
 
-        <button disabled={this.isAccount === ''} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
+        <button disabled={this.isAccount === null} class={this.buttonClass} onClick={() => this.handleUserDetailsClick()}>
           Next: Introduce yourself
         </button>
       </div>

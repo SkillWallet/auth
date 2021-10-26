@@ -38,6 +38,20 @@ export class SkillwalletAuth {
   @State() web3Provider: any = null;
   @State() isLoading: boolean = false;
 
+  @Event({
+    eventName: "initSkillwalletAuth",
+    composed: true,
+    cancelable: false,
+    bubbles: true,
+  }) initSkillwalletAuth: EventEmitter<null>;
+
+  @Event({
+    eventName: "destroySkillwalletAuth",
+    composed: true,
+    cancelable: false,
+    bubbles: true,
+  }) destroySkillwalletAuth: EventEmitter<null>;
+
   componentWillLoad() {
     this.getSkillWallet();
   }
@@ -53,9 +67,16 @@ export class SkillwalletAuth {
   }
 
   async componentDidLoad() {
+    console.log('sw created...');
+    this.initSkillwalletAuth.emit();
     (window as any).Buffer = buffer;
     const comm = await getCommunity(this.partnerKey);
     this.community = comm;
+  }
+
+  disconnectedCallback() {    //componentDidUnload()
+    console.log('sw destroyed');
+    this.destroySkillwalletAuth.emit();
   }
 
   @Event({
@@ -130,7 +151,6 @@ export class SkillwalletAuth {
   }
 
 
-
   handleQRClick = () => {
     this.usersIsVisible = false;
     this.qrText = 'skillwallet';
@@ -140,6 +160,14 @@ export class SkillwalletAuth {
   handleClick() {
     this.displayLogin = true;
     this.usersIsVisible = true;
+  }
+
+  logOut() {
+    this.handleHideClick();
+    localStorage.removeItem('skillWallet');
+    this.storedUsername = null;
+    this.isLoading = false;
+    this.onSkillwalletLogin.emit(false);
   }
 
   @Listen('showNewScreen')
@@ -172,7 +200,11 @@ export class SkillwalletAuth {
     return (
         <div>
           {this.storedUsername ? 
-              <button class="connect-wallet-button logged-in" disabled={true}>
+              <button 
+              // class="connect-wallet-button logged-in" 
+              class="connect-wallet-button"
+              // disabled={true} 
+              onClick={() => this.logOut()}>
                   <auth-image class="uploaded-img" image={this.icon}></auth-image>
                   <p>{this.storedUsername}</p>
               </button> :

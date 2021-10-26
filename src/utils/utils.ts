@@ -4,6 +4,15 @@ import skillWalletAbi from './skillWalletAbi.json';
 import communityAbi from './communityAbi.json';
 import partnersAbi from './partnersAgreementAbi.json';
 
+const sw = document.querySelector("skillwallet-auth")
+const event = new CustomEvent("onSkillwalletError"
+  // , {
+  //     'detail': {
+  //         communityAddr: partnersDetails.communityAddr,
+  //         partnersAddr: partnersDetails.partnersAddr
+  //     }
+  // }
+)
 
 export const getCommunity = async (partnerKey) => {
   const res = await fetch(`https://api.distributed.town/api/community/key/${partnerKey}`, {
@@ -61,6 +70,7 @@ export const joinCommunity = async (provider, communityAddress, username, skill,
       throw new Error('Something went wrong');
     }
   } catch (err) {
+    sw.dispatchEvent(event);
     const error = err.data.message;
 
     if (error.includes("No free spots left")) {
@@ -127,10 +137,13 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     }
   }
   } catch (error) {
-    if (error.data.message.includes("invalid")) {
+    sw.dispatchEvent(event);
+    if (error.data && error.data.message.includes("invalid")) {
       alert("The SkillWallet owner is invalid.");
+      console.log(error);
     } else {
       alert("An error occured - please try again.");
+      console.log(error);
     }
     return;
   }
@@ -143,6 +156,7 @@ export const changeNetwork = async () => {
       params: [{ chainId: '0x13881' }],
     });
   } catch (switchError) {
+    sw.dispatchEvent(event);
     // This error code indicates that the chain has not been added to MetaMask.
     if (switchError.code === 4902) {
       try {
@@ -199,6 +213,7 @@ export const activatePA = async (partnersAddress) => {
     return true;
   }
   catch (err) {
+    sw.dispatchEvent(event);
     console.log(err);
     return;
   }
