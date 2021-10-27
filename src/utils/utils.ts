@@ -37,7 +37,7 @@ export const joinCommunity = async (provider, communityAddress, username, skill,
     const metadataJson = {
       name: `${username}'s SkillWallet`,
       description: "Universal, self-sovereign IDs tied to skills & contributions rather than personal data.",
-      image: localStorage.getItem('imageUrl'),
+      image: window.sessionStorage.getItem('imageUrl'),
       properties: {
         username,
         skills: [
@@ -131,7 +131,7 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
 
     if (skillWallet && skillWallet.nickname) {
       console.log('setting local storage with SW');
-      localStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+      window.sessionStorage.setItem('skillWallet', JSON.stringify(skillWallet));
     } else if (!skillWallet) {
       alert('Unable to find a Skill Wallet and nickname with your ID')
     }

@@ -63,9 +63,9 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
-        const tokenId = await joinCommunity(this.web3Provider, this.community.address, localStorage.getItem('username'), this.roleSelected, this.skill);
+        const tokenId = await joinCommunity(this.web3Provider, this.community.address, window.sessionStorage.getItem('username'), this.roleSelected, this.skill);
         this.isLoadingEvent.emit(false);
-        localStorage.setItem('tokenId', tokenId);
+        window.sessionStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }
 

@@ -57,7 +57,7 @@ export class SkillwalletAuth {
   }
 
   getSkillWallet() {
-    this.skillwallet = JSON.parse(localStorage.getItem('skillWallet'));
+    this.skillwallet = JSON.parse(window.sessionStorage.getItem('skillWallet'));
 
     if (this.skillwallet) {
       this.icon = this.skillwallet['imageUrl'];
@@ -164,7 +164,7 @@ export class SkillwalletAuth {
 
   logOut() {
     this.handleHideClick();
-    localStorage.removeItem('skillWallet');
+    window.sessionStorage.removeItem('skillWallet');
     this.storedUsername = null;
     this.isLoading = false;
     this.onSkillwalletLogin.emit(false);
