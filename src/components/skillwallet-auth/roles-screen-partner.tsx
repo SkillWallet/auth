@@ -39,11 +39,11 @@ export class RolesScreenPartner {
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const tokenId = await joinCommunity(provider, this.communityAddress, localStorage.getItem('username'), this.roleSelected, 10);
+        const tokenId = await joinCommunity(provider, this.communityAddress, window.sessionStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
         this.isLoadingEvent.emit(false);
         console.log(tokenId, active);
-        localStorage.setItem('tokenId', tokenId);
+        window.sessionStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
       }
 

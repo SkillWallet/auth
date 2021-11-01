@@ -167,12 +167,14 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
+        "onOnSkillwalletError"?: (event: CustomEvent<null>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "web3Provider"?: any;
     }
     interface NewUser {
         "community"?: any;
         "isPartner"?: Boolean;
+        "onOnSkillwalletError"?: (event: CustomEvent<null>) => void;
         "onShowUserDetails"?: (event: CustomEvent<any>) => void;
         "web3Provider"?: any;
     }
@@ -214,6 +216,8 @@ declare namespace LocalJSX {
     }
     interface SkillwalletAuth {
         "allowCreateNewUser"?: string;
+        "onDestroySkillwalletAuth"?: (event: CustomEvent<null>) => void;
+        "onInitSkillwalletAuth"?: (event: CustomEvent<null>) => void;
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
         "onShowLogin"?: (event: CustomEvent<Boolean>) => void;
         "partnerKey"?: string;

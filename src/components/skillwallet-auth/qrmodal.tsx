@@ -13,7 +13,7 @@ export class QRModal {
   @State() qrCodeContent: string;
 
   async componentWillLoad() {
-    this.tokenId = localStorage.getItem('tokenId');
+    this.tokenId = window.sessionStorage.getItem('tokenId');
     this.nonce = await getActivationNonce(+this.tokenId);
     if (this.tokenId)
       this.qrCodeContent = JSON.stringify({
