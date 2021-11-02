@@ -7,18 +7,20 @@
 
 ## Properties
 
-| Property    | Attribute | Description | Type      | Default     |
-| ----------- | --------- | ----------- | --------- | ----------- |
-| `isPartner` | --        |             | `Boolean` | `undefined` |
+| Property    | Attribute    | Description | Type      | Default     |
+| ----------- | ------------ | ----------- | --------- | ----------- |
+| `isLoading` | `is-loading` |             | `boolean` | `undefined` |
+| `isPartner` | --           |             | `Boolean` | `undefined` |
 
 
 ## Events
 
-| Event               | Description | Type               |
-| ------------------- | ----------- | ------------------ |
-| `closeModalOnLogin` |             | `CustomEvent<any>` |
-| `showLoginMenu`     |             | `CustomEvent<any>` |
-| `showNewScreen`     |             | `CustomEvent<any>` |
+| Event               | Description | Type                   |
+| ------------------- | ----------- | ---------------------- |
+| `closeModalOnLogin` |             | `CustomEvent<any>`     |
+| `isLoadingEvent`    |             | `CustomEvent<Boolean>` |
+| `showLoginMenu`     |             | `CustomEvent<any>`     |
+| `showNewScreen`     |             | `CustomEvent<any>`     |
 
 
 ## Dependencies
