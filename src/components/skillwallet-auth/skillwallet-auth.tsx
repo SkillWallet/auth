@@ -9,7 +9,9 @@ import * as buffer from 'buffer';
 })
 export class SkillwalletAuth {
   @Prop() partnerKey: string;
-
+  @Prop() buttonColor: string;
+  @Prop() fontColor: string;
+  @Prop() borderRadius: string;
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
@@ -203,13 +205,17 @@ export class SkillwalletAuth {
               <button 
               // class="connect-wallet-button logged-in" 
               class="connect-wallet-button"
+              style={{backgroundColor: this.buttonColor, fontColor: this.fontColor, borderRadius: this.borderRadius}}
               // disabled={true} 
               onClick={() => this.logOut()}>
                   <auth-image class="uploaded-img" image={this.icon}></auth-image>
                   <p>{this.storedUsername}</p>
               </button> :
 
-              <button class="connect-wallet-button" onClick={() => this.handleClick()}>
+              <button 
+                class="connect-wallet-button" 
+                style={{backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius}}
+                onClick={() => this.handleClick()}>
                   <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
                   <p>Connect Wallet</p>
               </button>

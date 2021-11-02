@@ -54,6 +54,9 @@ export namespace Components {
     }
     interface SkillwalletAuth {
         "allowCreateNewUser": string;
+        "borderRadius": string;
+        "buttonColor": string;
+        "fontColor": string;
         "partnerKey": string;
     }
     interface UserDetails {
@@ -216,6 +219,9 @@ declare namespace LocalJSX {
     }
     interface SkillwalletAuth {
         "allowCreateNewUser"?: string;
+        "borderRadius"?: string;
+        "buttonColor"?: string;
+        "fontColor"?: string;
         "onDestroySkillwalletAuth"?: (event: CustomEvent<null>) => void;
         "onInitSkillwalletAuth"?: (event: CustomEvent<null>) => void;
         "onOnSkillwalletLogin"?: (event: CustomEvent<Boolean>) => void;
