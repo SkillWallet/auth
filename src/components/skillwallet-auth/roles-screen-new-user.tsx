@@ -80,7 +80,9 @@ export class RolesScreenNewUser {
         {(this.roleSelected) ? 
         <div class="commitment-level-parent-div">
         <div class="commitment-level-div">
-            <h3>{this.roleSelected}</h3>
+            <div class="commitment-level-text">
+                <h3>{this.roleSelected}</h3>
+            </div>
 
             <div class="xp-component">
                 <h4>Your <u>Commitment Level</u></h4>

@@ -396,7 +396,8 @@
     border: 2px solid var(--light-grey);
     /* border-radius: 10px; */
     margin-bottom: 30px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    /* margin: auto auto; */
   }
   
   .bar-chart-container {  

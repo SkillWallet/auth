@@ -6,9 +6,9 @@ This is a custom HTML tag (Web Component) for your application to import a Skill
 
 # Getting Started
 
-To integrate your community into this auth flow, just copy/paste the Partner Key you received from https://partners.skillwallet.id/integrate into an environment variable like this:
+To integrate your community into this auth flow, just copy/paste the Partner Key you received from https://partners.skillwallet.id/integrate into an HTML attribute in your skillwallet tag like so:
 ```bash
-PARTNER_KEY=3123a6096101109b665bfa419aa779bded9ea30d
+<skillwallet-auth partner-key="<your-key>"></skillwallet-auth>
 ```
 
 Then follow the below steps for your particular Javascript environment:
