@@ -393,7 +393,7 @@
   .bar-chart-first-container {
     width: 200px;
     height: 24px;
-    border: 2px solid var(--light-grey);
+    border: 2px solid #DCDCDC;
     /* border-radius: 10px; */
     margin-bottom: 30px;
     /* margin: 0 auto; */
