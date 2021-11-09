@@ -3,6 +3,8 @@ declare namespace NodeJS {
     SKILLWALLET_ADDRESS: string,
     DEV_PARTNER_KEY: string,
     PROD_PARTNER_KEY: string,
-    SW_PARTNER_ENV: string
+    SW_PARTNER_ENV: string,
+    TEXTILE_KEY: string,
+    TEXTILE_SECRET: string
   }
 }
