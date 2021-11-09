@@ -2,8 +2,8 @@ import { Buckets } from '@textile/hub'
 
 
 const keyInfo = {
-  key: 'bqbeg4w4u6ewltnejxwmvu6ngwu',
-  secret: 'bh24lv4dxie5dabwnl75y3onzphkvlqhyf56dlba'
+  key: process.env.TEXTILE_KEY, 
+  secret: process.env.TEXTILE_SECRET
 }
 
 var jsonToArray = function(json)
