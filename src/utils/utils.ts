@@ -22,6 +22,18 @@ export const getCommunity = async (partnerKey) => {
   return comm;
 }
 
+
+export const getSkillwalletAddress = async () => {
+  const res = await fetch('https://api.skillwallet.id/api/skillwallet/config', {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+      }
+  });
+  const swAddress = await res.json();
+  return swAddress;
+}
+
 export const joinCommunity = async (provider, communityAddress, username, skill, level) => {
   try {
     console.log('trying to join community', communityAddress);
@@ -103,10 +115,10 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
 
   console.log('fetching...');
 
-  const skillWalletAddress = process.env.SKILLWALLET_ADDRESS;
+  const skillWalletAddress = await getSkillwalletAddress();
   const signer = provider.getSigner();
   const contract = new ethers.Contract(
-    skillWalletAddress,
+    skillWalletAddress.skillWalletAddress,
     skillWalletAbi,
     signer,
   );
