@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
 import * as buffer from 'buffer';
+// import {generateMembershipNFT}  from '../../utils/generateMembership.js';
 
 @Component({
   tag: 'skillwallet-auth',
@@ -12,6 +13,10 @@ export class SkillwalletAuth {
   @Prop() buttonColor: string;
   @Prop() fontColor: string;
   @Prop() borderRadius: string;
+  canvas: any;
+  demoImg: any;
+  downloadedImg: HTMLImageElement;
+
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
@@ -58,6 +63,15 @@ export class SkillwalletAuth {
     this.getSkillWallet();
   }
 
+  startDownload() {
+    let imageURL = "https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189";
+  
+    this.downloadedImg = new Image;
+    this.downloadedImg.crossOrigin = "Anonymous";
+    this.downloadedImg.addEventListener("load", this.generateMembershipNFT, false);
+    this.downloadedImg.src = imageURL;
+  } 
+
   getSkillWallet() {
     this.skillwallet = JSON.parse(window.sessionStorage.getItem('skillWallet'));
 
@@ -65,6 +79,32 @@ export class SkillwalletAuth {
       this.icon = this.skillwallet['imageUrl'];
       this.storedUsername = this.skillwallet['nickname'];
       this.onSkillwalletLogin.emit(true);
+    }
+  }
+
+  generateMembershipNFT() {
+    try {
+      
+      const ctx = this.canvas.getContext('2d');
+      this.canvas.width = this.demoImg.width;
+      this.canvas.height = this.demoImg.height;
+      this.canvas.crossOrigin = "anonymous";
+      ctx.drawImage(this.demoImg, 0, 0);
+      ctx.font = "20pt Verdana";
+      ctx.fillStyle = "white";
+      ctx.fillText('Community Name',25,200);
+      ctx.fillText('Pioneer #001',25,300);
+      const img = this.canvas.toDataURL("image/png");
+
+            // mint as NFT (send img to textile & mint())
+
+      // save as .png(?)
+          //OR - save background image in project folder. reuse for each (just...write text on top)
+
+    
+    } catch (err) {
+      alert('Something went wrong');
+      console.log(err);
     }
   }
 
@@ -201,6 +241,14 @@ export class SkillwalletAuth {
   render() {
     return (
         <div>
+           <img 
+            class="hidden-element" 
+            id="test-demo-img"
+            src="https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw_background.png"
+            ref={(el) => {this.demoImg = el}}
+           />
+            <canvas id="canvas" ref={(el) => {this.canvas = el}} />
+            <button onClick={() => this.generateMembershipNFT()}>ShowImg</button>
           {this.storedUsername ? 
               <button 
               // class="connect-wallet-button logged-in" 

@@ -238,7 +238,7 @@
 }
 
 .user-details-fields > div {
-  background-color: var(--light-grey);
+  background-color: #DCDCDC;
 }
 
 .validation-error {
@@ -267,7 +267,7 @@
 
 .username-div > div > form > input  {
   margin-top: 10%;
-  background-color: var(--light-grey);
+  background-color: #DCDCDC;
   border: 2.5px solid black;
   width: 80%;
   height: 35px;
@@ -276,7 +276,7 @@
 }
 
 .user-details-fields > div > form > input {
-  background-color: var(--light-grey);
+  background-color: #DCDCDC;
   border-radius: 30px;
   width: 90%;
   min-height: 60px;
@@ -413,11 +413,11 @@
 .commitment-level-parent-div {
   width: 85%;
   padding: 20px 0;
-  background-color: var(--light-grey);
+  background-color: #DCDCDC;
 }
 
 .commitment-level-div {
-  background-color: var(--light-grey);
+  background-color: #DCDCDC;
   border: 2.5px solid black;
   width: 75%;
   margin: 0 auto;
@@ -429,6 +429,18 @@
   color: white;
   padding: 10px 0;
   margin: -1px -1px 0 -1px !important;
+}
+
+.commitment-level-text{
+  background-color: black;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.commitment-level-text > h3 {
+  margin: 0 !important;
+  padding: 10px;
 }
 
 .role-button:hover {
@@ -487,6 +499,11 @@
   z-index: 5;
   padding: 0 20px;
   height: 190px;
+  text-align: left;
+}
+
+.xp-component > * {
+  width: 90%;
 }
 
 .xp-component h3 {

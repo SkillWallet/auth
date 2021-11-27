@@ -2,6 +2,16 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_distributedTownAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_isDitoNative",
+        "type": "bool"
+      },
+      {
         "internalType": "string",
         "name": "_url",
         "type": "string"
@@ -20,6 +30,16 @@
         "internalType": "bool",
         "name": "_claimableSkillWallets",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "_migrateFrom",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_version",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
@@ -51,19 +71,6 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "_member",
-        "type": "address"
-      }
-    ],
-    "name": "MemberLeft",
-    "type": "event"
-  },
-  {
     "inputs": [],
     "name": "activeMembersCount",
     "outputs": [
@@ -74,19 +81,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "projectId",
-        "type": "uint256"
-      }
-    ],
-    "name": "addProjectId",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -103,6 +97,71 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "claimableSkillWallets",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "coreActiveMembersCount",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "coreMembersAllowed",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "creditsToTransfer",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "distributedTownAddr",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -136,52 +195,7 @@
   },
   {
     "inputs": [],
-    "name": "getMemberAddresses",
-    "outputs": [
-      {
-        "internalType": "address[]",
-        "name": "",
-        "type": "address[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getMembers",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "projectId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getProjectTreasuryAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getProjects",
     "outputs": [
       {
         "internalType": "uint256[]",
@@ -261,7 +275,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "member",
         "type": "address"
       }
     ],
@@ -274,24 +288,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "skillWalletTokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "credits",
-        "type": "uint256"
-      }
-    ],
-    "name": "join",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -316,32 +312,13 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "memberAddress",
+        "name": "_migratedTo",
         "type": "address"
       }
     ],
-    "name": "leave",
+    "name": "markAsMigrated",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "memberAddresses",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -359,15 +336,48 @@
   },
   {
     "inputs": [],
-    "name": "scarcityScore",
+    "name": "migrateData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "migratedFrom",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "address",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "migratedTo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
+      }
+    ],
+    "name": "setMetadataUri",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -391,7 +401,33 @@
   },
   {
     "inputs": [],
+    "name": "status",
+    "outputs": [
+      {
+        "internalType": "enum ICommunity.STATUS",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "tokenId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalMembersAllowed",
     "outputs": [
       {
         "internalType": "uint256",
@@ -446,6 +482,19 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
