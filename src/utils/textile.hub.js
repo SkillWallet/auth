@@ -26,11 +26,11 @@ export async function pushJSONDocument  (json) {
   return `https://hub.textile.io${links.path.path}`;
 }
 
-export async function pushImage(content) {
-  const buckets = await Buckets.withKeyInfo(keyInfo)
+export async function pushImage(content, path) {
+  const buckets = await Buckets.withKeyInfo(keyInfo);
   const { root } = await buckets.getOrCreate('SkillWallet')
   if (!root) throw new Error('bucket not created')
-  const path = `profile.png`
+  console.log('Failure in the next line: Type not convertible to Uint8Array: ', root.key, path, content.content);
   const links = await buckets.pushPath(root.key, path, content)
   return `https://hub.textile.io${links.path.path}`;
 }

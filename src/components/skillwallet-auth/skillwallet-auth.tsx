@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
+import { pushImage } from '../../utils/textile.hub.js';
 import * as buffer from 'buffer';
 // import {generateMembershipNFT}  from '../../utils/generateMembership.js';
 
@@ -14,7 +15,7 @@ export class SkillwalletAuth {
   @Prop() fontColor: string;
   @Prop() borderRadius: string;
   canvas: any;
-  demoImg: any;
+  demoImg: any = new Image();
   downloadedImg: HTMLImageElement;
 
   @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
@@ -82,31 +83,49 @@ export class SkillwalletAuth {
     }
   }
 
-  generateMembershipNFT() {
-    try {
-      
-      const ctx = this.canvas.getContext('2d');
-      this.canvas.width = this.demoImg.width;
-      this.canvas.height = this.demoImg.height;
-      this.canvas.crossOrigin = "anonymous";
-      ctx.drawImage(this.demoImg, 0, 0);
-      ctx.font = "20pt Verdana";
-      ctx.fillStyle = "white";
-      ctx.fillText('Community Name',25,200);
-      ctx.fillText('Pioneer #001',25,300);
-      const img = this.canvas.toDataURL("image/png");
+  generateMembershipNFT = async () => {
+    this.demoImg.src = 'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw_background.png';
+    this.demoImg.crossOrigin = 'Anonymous';
+    const ctx = this.canvas.getContext('2d');
+    console.log('dimensions: ', this.demoImg.height, this.demoImg.width); // if these are 0, canvas export as .png will fail
+    this.canvas.width = this.demoImg.width;
+    this.canvas.height = this.demoImg.height;
+    // @ts-ignore
+    this.canvas.crossOrigin = 'Anonymous';
+    ctx.drawImage(this.demoImg, 0, 0);
+    ctx.font = '20pt Verdana';
+    ctx.fillStyle = 'white';
+    ctx.fillText('Community Name', 25, 200);
+    ctx.fillText('Pioneer #001', 25, 300);
+    console.log('dimensions: ', this.canvas.height, this.canvas.width);  // if these are 0, canvas export as .png will fail
+    
+    // download some sort of image - this works correctly, but doesn't export a .png
+      // var image = this.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+      // window.location.href = image;
 
-            // mint as NFT (send img to textile & mint())
+    // OR...is blob better than a DataURI for Textile export? pushPath() expects an object?
+      // const imageBlob: any = await new Promise(resolve => this.canvas.toBlob(resolve, 'image/png'));
+      // let formData = new FormData();
+      // formData.append("image", imageBlob, "image.png");
 
-      // save as .png(?)
-          //OR - save background image in project folder. reuse for each (just...write text on top)
+
 
     
-    } catch (err) {
-      alert('Something went wrong');
-      console.log(err);
-    }
-  }
+    // OR...create & export an object containing a new Image object?
+
+    let image = new Image();
+    image.src = this.canvas.toDataURL();
+    const file = { path: `membershipCard.png`, content: image.src };
+    console.log('image file auth: ', file);
+       
+    
+    // mint as NFT (send img to textile & mint())
+      const imageUrl = await pushImage(file, `membershipCard.png`);
+      console.log(imageUrl);
+
+      // is .png the right file type?
+      // which mint() function to call?
+  };
 
   async componentDidLoad() {
     console.log('sw created...');
@@ -242,13 +261,16 @@ export class SkillwalletAuth {
     return (
         <div>
            <img 
-            class="hidden-element" 
+            // class="hidden-element" 
             id="test-demo-img"
-            src="https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw_background.png"
-            ref={(el) => {this.demoImg = el}}
-           />
-            <canvas id="canvas" ref={(el) => {this.canvas = el}} />
+            ref={(el) => {this.demoImg = el}} />
+
+            <canvas id="canvas" 
+            // class="hidden-element" 
+            ref={(el) => {this.canvas = el}} />
+
             <button onClick={() => this.generateMembershipNFT()}>ShowImg</button>
+
           {this.storedUsername ? 
               <button 
               // class="connect-wallet-button logged-in" 
