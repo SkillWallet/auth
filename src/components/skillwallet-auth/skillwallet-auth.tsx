@@ -99,18 +99,27 @@ export class SkillwalletAuth {
     ctx.fillText('Community Name', 25, 200);
     ctx.fillText('Pioneer #001', 25, 300);
     console.log('dimensions: ', this.canvas.height, this.canvas.width); // if these are 0, canvas export as .png will fail
-    
-    
-    var uint8Array = this.canvas.getContext('2d').getImageData(0, 0, this.canvas.width, this.canvas.height).data;
-    console.log(uint8Array);
-    var uint8View = new Uint8Array(uint8Array);
-    console.log('aaa',  uint8View);
 
-    const url = await pushImage(uint8View, 'membershipID.png');
-    console.log(url);
+    this.canvas.toBlob(async function (blob) {
+      // let blobAsBytes = blob.getBytes(1, blob.size);
+
+      // link.href = URL.createObjectURL(blob);
+      console.log(blob.stream());
+      const url = await pushImage(blob.stream(), 'membershipID.png');
+      console.log(url);
+      // console.log(link.href); // this line should be here
+    }, 'image/png');
+
+    // var uint8Array = this.canvas.getContext('2d').getImageData(0, 0, 369, 591).data;
+    // console.log(uint8Array);
+    // var uint8View = new Uint8Array(uint8Array);
+    // console.log('aaa',  uint8View);
+
+    // console.log(url);
     // OR...create & export an object containing a new Image object?
     // let image = new Image();
-    // image.src = this.canvas.toBlob();
+    // const a = this.canvas.toBlob('image/png');
+    // console.log(a);
     // const imageData = this.canvas.getImageData();
     // console.log(await this.canvas.toBlob(resolve, 'image/png');
     // const url = await pushImage(imageData.data, 'membership.png');
