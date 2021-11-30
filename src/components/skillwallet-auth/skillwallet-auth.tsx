@@ -2,7 +2,6 @@ import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil
 import { getCommunity } from '../../utils/utils';
 import { pushImage } from '../../utils/textile.hub.js';
 import * as buffer from 'buffer';
-// import {generateMembershipNFT}  from '../../utils/generateMembership.js';
 
 @Component({
   tag: 'skillwallet-auth',
@@ -18,7 +17,7 @@ export class SkillwalletAuth {
   demoImg: any = new Image();
   downloadedImg: HTMLImageElement;
 
-  @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
+  @Prop() allowCreateNewUser: string; //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
   // validateAllowCreateNewUser(newValue: string, oldValue: string) {
@@ -47,31 +46,33 @@ export class SkillwalletAuth {
   @State() isLoading: boolean = false;
 
   @Event({
-    eventName: "initSkillwalletAuth",
+    eventName: 'initSkillwalletAuth',
     composed: true,
     cancelable: false,
     bubbles: true,
-  }) initSkillwalletAuth: EventEmitter<null>;
+  })
+  initSkillwalletAuth: EventEmitter<null>;
 
   @Event({
-    eventName: "destroySkillwalletAuth",
+    eventName: 'destroySkillwalletAuth',
     composed: true,
     cancelable: false,
     bubbles: true,
-  }) destroySkillwalletAuth: EventEmitter<null>;
+  })
+  destroySkillwalletAuth: EventEmitter<null>;
 
   componentWillLoad() {
     this.getSkillWallet();
   }
 
   startDownload() {
-    let imageURL = "https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189";
-  
-    this.downloadedImg = new Image;
-    this.downloadedImg.crossOrigin = "Anonymous";
-    this.downloadedImg.addEventListener("load", this.generateMembershipNFT, false);
+    let imageURL = 'https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189';
+
+    this.downloadedImg = new Image();
+    this.downloadedImg.crossOrigin = 'Anonymous';
+    this.downloadedImg.addEventListener('load', this.generateMembershipNFT, false);
     this.downloadedImg.src = imageURL;
-  } 
+  }
 
   getSkillWallet() {
     this.skillwallet = JSON.parse(window.sessionStorage.getItem('skillWallet'));
@@ -97,34 +98,29 @@ export class SkillwalletAuth {
     ctx.fillStyle = 'white';
     ctx.fillText('Community Name', 25, 200);
     ctx.fillText('Pioneer #001', 25, 300);
-    console.log('dimensions: ', this.canvas.height, this.canvas.width);  // if these are 0, canvas export as .png will fail
+    console.log('dimensions: ', this.canvas.height, this.canvas.width); // if these are 0, canvas export as .png will fail
     
-    // download some sort of image - this works correctly, but doesn't export a .png
-      // var image = this.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
-      // window.location.href = image;
-
-    // OR...is blob better than a DataURI for Textile export? pushPath() expects an object?
-      // const imageBlob: any = await new Promise(resolve => this.canvas.toBlob(resolve, 'image/png'));
-      // let formData = new FormData();
-      // formData.append("image", imageBlob, "image.png");
-
-
-
     
+    var uint8Array = this.canvas.getContext('2d').getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+    console.log(uint8Array);
+    var uint8View = new Uint8Array(uint8Array);
+    console.log('aaa',  uint8View);
+
+    const url = await pushImage(uint8View, 'membershipID.png');
+    console.log(url);
     // OR...create & export an object containing a new Image object?
+    // let image = new Image();
+    // image.src = this.canvas.toBlob();
+    // const imageData = this.canvas.getImageData();
+    // console.log(await this.canvas.toBlob(resolve, 'image/png');
+    // const url = await pushImage(imageData.data, 'membership.png');
 
-    let image = new Image();
-    image.src = this.canvas.toDataURL();
-    const file = { path: `membershipCard.png`, content: image.src };
-    console.log('image file auth: ', file);
-       
-    
+    // console.log('image file auth: ', url);
+
     // mint as NFT (send img to textile & mint())
-      const imageUrl = await pushImage(file, `membershipCard.png`);
-      console.log(imageUrl);
 
-      // is .png the right file type?
-      // which mint() function to call?
+    // is .png the right file type?
+    // which mint() function to call?
   };
 
   async componentDidLoad() {
@@ -135,7 +131,8 @@ export class SkillwalletAuth {
     this.community = comm;
   }
 
-  disconnectedCallback() {    //componentDidUnload()
+  disconnectedCallback() {
+    //componentDidUnload()
     console.log('sw destroyed');
     this.destroySkillwalletAuth.emit();
   }
@@ -155,7 +152,7 @@ export class SkillwalletAuth {
     bubbles: true,
   })
   onSkillwalletLogin: EventEmitter<Boolean>;
-  
+
   handleHideClick() {
     if (!this.isPartner) {
       this.displayLogin = false;
@@ -211,7 +208,6 @@ export class SkillwalletAuth {
     this.getSkillWallet();
   }
 
-
   handleQRClick = () => {
     this.usersIsVisible = false;
     this.qrText = 'skillwallet';
@@ -248,84 +244,98 @@ export class SkillwalletAuth {
 
   @Listen('activateSkillwalletCommunity')
   handlePartnerFlow(event) {
-      console.log(event.detail);
-      this.communityAddress = event.detail.communityAddr;
-      this.partnersAddress = event.detail.partnersAddr;
+    console.log(event.detail);
+    this.communityAddress = event.detail.communityAddr;
+    this.partnersAddress = event.detail.partnersAddr;
 
-      this.isPartner = true;
-      this.displayLogin = true;
-      this.usersIsVisible = true;
+    this.isPartner = true;
+    this.displayLogin = true;
+    this.usersIsVisible = true;
   }
 
   render() {
     return (
-        <div>
-           <img 
-            // class="hidden-element" 
-            id="test-demo-img"
-            ref={(el) => {this.demoImg = el}} />
+      <div>
+        <img
+          // class="hidden-element"
+          id="test-demo-img"
+          ref={el => {
+            this.demoImg = el;
+          }}
+        />
 
-            <canvas id="canvas" 
-            // class="hidden-element" 
-            ref={(el) => {this.canvas = el}} />
+        <canvas
+          id="canvas"
+          // class="hidden-element"
+          ref={el => {
+            this.canvas = el;
+          }}
+        />
 
-            <button onClick={() => this.generateMembershipNFT()}>ShowImg</button>
+        <button onClick={() => this.generateMembershipNFT()}>ShowImg</button>
 
-          {this.storedUsername ? 
-              <button 
-              // class="connect-wallet-button logged-in" 
-              class="connect-wallet-button"
-              style={{backgroundColor: this.buttonColor, fontColor: this.fontColor, borderRadius: this.borderRadius}}
-              // disabled={true} 
-              onClick={() => this.logOut()}>
-                  <auth-image class="uploaded-img" image={this.icon}></auth-image>
-                  <p>{this.storedUsername}</p>
-              </button> :
+        {this.storedUsername ? (
+          <button
+            // class="connect-wallet-button logged-in"
+            class="connect-wallet-button"
+            style={{ backgroundColor: this.buttonColor, fontColor: this.fontColor, borderRadius: this.borderRadius }}
+            // disabled={true}
+            onClick={() => this.logOut()}
+          >
+            <auth-image class="uploaded-img" image={this.icon}></auth-image>
+            <p>{this.storedUsername}</p>
+          </button>
+        ) : (
+          <button
+            class="connect-wallet-button"
+            style={{ backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius }}
+            onClick={() => this.handleClick()}
+          >
+            <auth-image class="person-img" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg'}></auth-image>
+            <p>Connect Wallet</p>
+          </button>
+        )}
 
-              <button 
-                class="connect-wallet-button" 
-                style={{backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius}}
-                onClick={() => this.handleClick()}>
-                  <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
-                  <p>Connect Wallet</p>
-              </button>
-            }
-
-          {this.displayLogin ?
-              <div class="background-screen" onClick={() => this.handleHideClick()}>
-                          {this.isLoading ? 
+        {this.displayLogin ? (
+          <div class="background-screen" onClick={() => this.handleHideClick()}>
+            {this.isLoading ? (
               <div class="item">
-                <h2>Loading</h2>  
+                <h2>Loading</h2>
                 <i class="loader two"></i>
-              </div> : <div></div>}
-                <div class="topDiv">
-                  <div class="modalWindow" onClick={(event) => this.handleClickPropagation(event)}>
-              
-              {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
-
-              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
-
-              {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
-              {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
-              {this.userDetailsAreVisible === true ? 
-                  <user-details 
-                    isPartner={this.isPartner}
-                    community={this.community} 
-                    isLoading={this.isLoading}
-                    validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
-                  ></user-details> : null}
-              {this.userRoleIsVisible     === true ? <user-role 
-                  isPartner={this.isPartner} 
-                  community={this.community}
-                  partnersAddress={this.partnersAddress}
-                  communityAddress={this.communityAddress}
-                  web3Provider={this.web3Provider}
-                  validator={{user: {name: 'commitment', options: {min: 1}}}}
-              ></user-role> : null}
               </div>
+            ) : (
+              <div></div>
+            )}
+            <div class="topDiv">
+              <div class="modalWindow" onClick={event => this.handleClickPropagation(event)}>
+                {this.usersIsVisible === true ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
 
+                {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
+
+                {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
+                {this.newUserIsVisible === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
+                {this.userDetailsAreVisible === true ? (
+                  <user-details
+                    isPartner={this.isPartner}
+                    community={this.community}
+                    isLoading={this.isLoading}
+                    validator={{ user: { name: 'length', options: { min: 4, max: 17 } }, file: { name: 'file', options: [] } }}
+                  ></user-details>
+                ) : null}
+                {this.userRoleIsVisible === true ? (
+                  <user-role
+                    isPartner={this.isPartner}
+                    community={this.community}
+                    partnersAddress={this.partnersAddress}
+                    communityAddress={this.communityAddress}
+                    web3Provider={this.web3Provider}
+                    validator={{ user: { name: 'commitment', options: { min: 1 } } }}
+                  ></user-role>
+                ) : null}
+              </div>
+            </div>
           </div>
-        </div> : null}
+        ) : null}
       </div>
     );
   }
