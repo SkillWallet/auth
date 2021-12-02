@@ -97,7 +97,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
         username,
         skills: [
           {
-            name: role,
+            name: role.role,
             value: level
           }]
       }
@@ -111,7 +111,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
 
     const createTx = await contract.joinNewMember(
       url,
-      role,
+      role.roleId,
       2006,
     );
 
@@ -312,7 +312,7 @@ export const generateMembershipNFT = async (canvas, demoImg, logo, community, ro
     const mintTx = contract.create({
       "image": url,
       "title": `Membership NFT ID for joining the ${community.name} community!`,
-      "role": roleSelected
+      "role": roleSelected.role
     });
 
     console.log(mintTx);
