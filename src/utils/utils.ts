@@ -196,6 +196,8 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     } else if (!skillWallet) {
       alert('Unable to find a Skill Wallet and nickname with your ID')
     }
+    
+    return community;
   }
   } catch (error) {
     sw.dispatchEvent(event);

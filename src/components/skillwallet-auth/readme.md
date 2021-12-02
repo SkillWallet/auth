@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type      | Default     |
-| ----------- | ------------ | ----------- | --------- | ----------- |
-| `isLoading` | `is-loading` |             | `boolean` | `undefined` |
-| `isPartner` | --           |             | `Boolean` | `undefined` |
+| Property     | Attribute     | Description | Type      | Default     |
+| ------------ | ------------- | ----------- | --------- | ----------- |
+| `isLoading`  | `is-loading`  |             | `boolean` | `undefined` |
+| `isPartner`  | --            |             | `Boolean` | `undefined` |
+| `partnerKey` | `partner-key` |             | `string`  | `undefined` |
 
 
 ## Events
