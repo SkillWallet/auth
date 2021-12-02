@@ -6,12 +6,12 @@ import { Component, h, State, Prop } from '@stencil/core';
   shadow: true
 })
 export class UserRole {
-    @State() roleSelected: string = null;
     @Prop({mutable: true}) isLoading: boolean;
     @State() buttonClass: string = 'disabled';
     @Prop() community: any;
     @State() skill: number = 1;
     @Prop() isPartner: Boolean;
+    @Prop({mutable: true}) roleSelected: any;
     @Prop() communityAddress: string = null;
     @Prop() partnersAddress: string = null;
     @Prop({mutable: true}) web3Provider: any;

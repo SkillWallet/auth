@@ -83,7 +83,7 @@ export class UserDetails {
       this.files = files;
       this._imageValidator = getValidator({name: 'file', options: files});
 
-      const imageUrl = await pushImage(imageFile);
+      const imageUrl = await pushImage(imageFile, `profile.png`);
       window.sessionStorage.setItem('imageUrl', imageUrl);
       
       this.uploadImage(imageFile);

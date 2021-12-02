@@ -177,6 +177,10 @@
     background-color: black !important;
     color: white !important;
   }
+
+  .hidden-element {
+    display: none;
+  }
   
   
   /********* LOADING SPINNER *********/

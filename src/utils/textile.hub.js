@@ -26,11 +26,14 @@ export async function pushJSONDocument  (json) {
   return `https://hub.textile.io${links.path.path}`;
 }
 
-export async function pushImage(content) {
-  const buckets = await Buckets.withKeyInfo(keyInfo)
+export async function pushImage(content, path) {
+  console.log('pushing image')
+  const buckets = await Buckets.withKeyInfo(keyInfo);
   const { root } = await buckets.getOrCreate('SkillWallet')
   if (!root) throw new Error('bucket not created')
-  const path = `profile.png`
+  console.log('bucket created')
   const links = await buckets.pushPath(root.key, path, content)
+  console.log('path pushed')
+  console.log(`https://hub.textile.io${links.path.path}`)
   return `https://hub.textile.io${links.path.path}`;
 }

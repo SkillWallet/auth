@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
+
 import * as buffer from 'buffer';
 
 @Component({
@@ -9,8 +10,11 @@ import * as buffer from 'buffer';
 })
 export class SkillwalletAuth {
   @Prop() partnerKey: string;
+  @Prop() buttonColor: string;
+  @Prop() fontColor: string;
+  @Prop() borderRadius: string;
 
-  @Prop() allowCreateNewUser: string;   //prop from Partner is immutable by default
+  @Prop() allowCreateNewUser: string; //prop from Partner is immutable by default
 
   // @Watch('allowCreateNewUser')   //TODO: validate that the partner's input type is correct or throw error
   // validateAllowCreateNewUser(newValue: string, oldValue: string) {
@@ -37,20 +41,23 @@ export class SkillwalletAuth {
   @State() communityAddress: string = null;
   @State() web3Provider: any = null;
   @State() isLoading: boolean = false;
+  @State() roleSelected: any;
 
   @Event({
-    eventName: "initSkillwalletAuth",
+    eventName: 'initSkillwalletAuth',
     composed: true,
     cancelable: false,
     bubbles: true,
-  }) initSkillwalletAuth: EventEmitter<null>;
+  })
+  initSkillwalletAuth: EventEmitter<null>;
 
   @Event({
-    eventName: "destroySkillwalletAuth",
+    eventName: 'destroySkillwalletAuth',
     composed: true,
     cancelable: false,
     bubbles: true,
-  }) destroySkillwalletAuth: EventEmitter<null>;
+  })
+  destroySkillwalletAuth: EventEmitter<null>;
 
   componentWillLoad() {
     this.getSkillWallet();
@@ -66,6 +73,8 @@ export class SkillwalletAuth {
     }
   }
 
+  
+
   async componentDidLoad() {
     console.log('sw created...');
     this.initSkillwalletAuth.emit();
@@ -74,7 +83,8 @@ export class SkillwalletAuth {
     this.community = comm;
   }
 
-  disconnectedCallback() {    //componentDidUnload()
+  disconnectedCallback() {
+    //componentDidUnload()
     console.log('sw destroyed');
     this.destroySkillwalletAuth.emit();
   }
@@ -94,7 +104,7 @@ export class SkillwalletAuth {
     bubbles: true,
   })
   onSkillwalletLogin: EventEmitter<Boolean>;
-  
+
   handleHideClick() {
     if (!this.isPartner) {
       this.displayLogin = false;
@@ -150,7 +160,6 @@ export class SkillwalletAuth {
     this.getSkillWallet();
   }
 
-
   handleQRClick = () => {
     this.usersIsVisible = false;
     this.qrText = 'skillwallet';
@@ -187,69 +196,81 @@ export class SkillwalletAuth {
 
   @Listen('activateSkillwalletCommunity')
   handlePartnerFlow(event) {
-      console.log(event.detail);
-      this.communityAddress = event.detail.communityAddr;
-      this.partnersAddress = event.detail.partnersAddr;
+    console.log(event.detail);
+    this.communityAddress = event.detail.communityAddr;
+    this.partnersAddress = event.detail.partnersAddr;
 
-      this.isPartner = true;
-      this.displayLogin = true;
-      this.usersIsVisible = true;
+    this.isPartner = true;
+    this.displayLogin = true;
+    this.usersIsVisible = true;
   }
 
   render() {
     return (
-        <div>
-          {this.storedUsername ? 
-              <button 
-              // class="connect-wallet-button logged-in" 
-              class="connect-wallet-button"
-              // disabled={true} 
-              onClick={() => this.logOut()}>
-                  <auth-image class="uploaded-img" image={this.icon}></auth-image>
-                  <p>{this.storedUsername}</p>
-              </button> :
+      <div>
+        {this.storedUsername ? (
+          <button
+            // class="connect-wallet-button logged-in"
+            class="connect-wallet-button"
+            style={{ backgroundColor: this.buttonColor, fontColor: this.fontColor, borderRadius: this.borderRadius }}
+            // disabled={true}
+            onClick={() => this.logOut()}
+          >
+            <auth-image class="uploaded-img" image={this.icon}></auth-image>
+            <p>{this.storedUsername}</p>
+          </button>
+        ) : (
+          <button
+            class="connect-wallet-button"
+            style={{ backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius }}
+            onClick={() => this.handleClick()}
+          >
+            <auth-image class="person-img" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg'}></auth-image>
+            <p>Connect Wallet</p>
+          </button>
+        )}
 
-              <button class="connect-wallet-button" onClick={() => this.handleClick()}>
-                  <auth-image class="person-img" image={"https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg"}></auth-image>
-                  <p>Connect Wallet</p>
-              </button>
-            }
-
-          {this.displayLogin ?
-              <div class="background-screen" onClick={() => this.handleHideClick()}>
-                          {this.isLoading ? 
+        {this.displayLogin ? (
+          <div class="background-screen" onClick={() => this.handleHideClick()}>
+            {this.isLoading ? (
               <div class="item">
-                <h2>Loading</h2>  
+                <h2>Loading</h2>
                 <i class="loader two"></i>
-              </div> : <div></div>}
-                <div class="topDiv">
-                  <div class="modalWindow" onClick={(event) => this.handleClickPropagation(event)}>
-              
-              {(this.usersIsVisible === true) ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
-
-              {(this.loginMenuIsVisible === true) ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
-
-              {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
-              {this.newUserIsVisible      === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
-              {this.userDetailsAreVisible === true ? 
-                  <user-details 
-                    isPartner={this.isPartner}
-                    community={this.community} 
-                    isLoading={this.isLoading}
-                    validator={{user: {name: 'length', options: {min: 4, max: 17}}, file: {name: 'file', options: []}}}
-                  ></user-details> : null}
-              {this.userRoleIsVisible     === true ? <user-role 
-                  isPartner={this.isPartner} 
-                  community={this.community}
-                  partnersAddress={this.partnersAddress}
-                  communityAddress={this.communityAddress}
-                  web3Provider={this.web3Provider}
-                  validator={{user: {name: 'commitment', options: {min: 1}}}}
-              ></user-role> : null}
               </div>
+            ) : (
+              <div></div>
+            )}
+            <div class="topDiv">
+              <div class="modalWindow" onClick={event => this.handleClickPropagation(event)}>
+                {this.usersIsVisible === true ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
 
+                {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
+
+                {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText} roleSelected={this.roleSelected}></qr-modal> : null}
+                {this.newUserIsVisible === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
+                {this.userDetailsAreVisible === true ? (
+                  <user-details
+                    isPartner={this.isPartner}
+                    community={this.community}
+                    isLoading={this.isLoading}
+                    validator={{ user: { name: 'length', options: { min: 4, max: 17 } }, file: { name: 'file', options: [] } }}
+                  ></user-details>
+                ) : null}
+                {this.userRoleIsVisible === true ? (
+                  <user-role
+                    isPartner={this.isPartner}
+                    roleSelected={this.roleSelected}
+                    community={this.community}
+                    partnersAddress={this.partnersAddress}
+                    communityAddress={this.communityAddress}
+                    web3Provider={this.web3Provider}
+                    validator={{ user: { name: 'commitment', options: { min: 1 } } }}
+                  ></user-role>
+                ) : null}
+              </div>
+            </div>
           </div>
-        </div> : null}
+        ) : null}
       </div>
     );
   }

@@ -3,81 +3,74 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_partnersContract",
+        "name": "_membershipFactory",
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_owner",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_communityAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_rolesCount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_numberOfActions",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_oracle",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_chainlinkToken",
-        "type": "address"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "version",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "communityAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "address[]",
+            "name": "partnersContracts",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rolesCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "interactionContract",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "membershipContract",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "interactionsCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "coreTeamMembersCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "whitelistedTeamMembers",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address",
+            "name": "interactionsQueryServer",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct Types.PartnersAgreementData",
+        "name": "pa",
+        "type": "tuple"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkCancelled",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkFulfilled",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkRequested",
-    "type": "event"
   },
   {
     "inputs": [],
@@ -100,6 +93,32 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "member",
+        "type": "address"
+      }
+    ],
+    "name": "addNewCoreTeamMembers",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_url",
+        "type": "string"
+      }
+    ],
+    "name": "addURL",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "communityAddress",
     "outputs": [
@@ -114,7 +133,103 @@
   },
   {
     "inputs": [],
+    "name": "coreTeamMembersCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAgreementData",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "version",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "communityAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "address[]",
+            "name": "partnersContracts",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rolesCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "interactionContract",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "membershipContract",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "interactionsCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "coreTeamMembersCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "whitelistedTeamMembers",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address",
+            "name": "interactionsQueryServer",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct Types.PartnersAgreementData",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "getAllMembers",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCoreTeamMembers",
     "outputs": [
       {
         "internalType": "address[]",
@@ -171,19 +286,13 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_user",
-        "type": "address"
-      }
-    ],
-    "name": "getUserRole",
+    "inputs": [],
+    "name": "getURLs",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "string[]",
         "name": "",
-        "type": "uint256"
+        "type": "string[]"
       }
     ],
     "stateMutability": "view",
@@ -197,6 +306,57 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isCoreTeamMember",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_url",
+        "type": "string"
+      }
+    ],
+    "name": "isURLListed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "membershipAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -235,27 +395,14 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "profitSharing",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "userAddress",
-        "type": "address"
+        "internalType": "string",
+        "name": "_url",
+        "type": "string"
       }
     ],
-    "name": "queryForNewInteractions",
+    "name": "removeURL",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -277,11 +424,16 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_profitSharing",
+        "name": "user",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOfInteractions",
+        "type": "uint256"
       }
     ],
-    "name": "setProfitSharing",
+    "name": "transferInteractionNFTs",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -289,19 +441,33 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "_requestId",
-        "type": "bytes32"
-      },
-      {
         "internalType": "uint256",
-        "name": "_result",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "transferInteractionNFTs",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "urls",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]
