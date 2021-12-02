@@ -31,6 +31,7 @@ export namespace Components {
     }
     interface QrModal {
         "community": any;
+        "roleSelected": any;
         "textKey": string;
     }
     interface RolesScreenNewUser {
@@ -38,7 +39,7 @@ export namespace Components {
         "community": any;
         "isLoading": boolean;
         "isPartner": Boolean;
-        "roleSelected": string;
+        "roleSelected": any;
         "skill": number;
         "validator": string | any;
         "web3Provider": any;
@@ -50,7 +51,7 @@ export namespace Components {
         "isLoading": boolean;
         "isPartner": Boolean;
         "partnersAddress": string;
-        "roleSelected": string;
+        "roleSelected": any;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser": string;
@@ -72,6 +73,7 @@ export namespace Components {
         "isLoading": boolean;
         "isPartner": Boolean;
         "partnersAddress": string;
+        "roleSelected": any;
         "validator": string | any;
         "web3Provider": any;
     }
@@ -192,6 +194,7 @@ declare namespace LocalJSX {
     }
     interface QrModal {
         "community"?: any;
+        "roleSelected"?: any;
         "textKey"?: string;
     }
     interface RolesScreenNewUser {
@@ -201,7 +204,7 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
-        "roleSelected"?: string;
+        "roleSelected"?: any;
         "skill"?: number;
         "validator"?: string | any;
         "web3Provider"?: any;
@@ -215,7 +218,7 @@ declare namespace LocalJSX {
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "partnersAddress"?: string;
-        "roleSelected"?: string;
+        "roleSelected"?: any;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser"?: string;
@@ -245,6 +248,7 @@ declare namespace LocalJSX {
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "partnersAddress"?: string;
+        "roleSelected"?: any;
         "validator"?: string | any;
         "web3Provider"?: any;
     }

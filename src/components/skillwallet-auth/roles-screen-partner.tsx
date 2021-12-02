@@ -7,7 +7,7 @@ import { ethers } from 'ethers';
     shadow: true
 })
 export class RolesScreenPartner {
-    @Prop() roleSelected: string;
+    @Prop() roleSelected: any;
     @Prop() isLoading: boolean;
     @Prop() buttonClass: string;
     @Prop() community: any;

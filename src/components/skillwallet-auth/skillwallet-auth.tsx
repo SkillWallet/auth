@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
-import { pushImage } from '../../utils/textile.hub.js';
+
 import * as buffer from 'buffer';
 
 @Component({
@@ -13,9 +13,6 @@ export class SkillwalletAuth {
   @Prop() buttonColor: string;
   @Prop() fontColor: string;
   @Prop() borderRadius: string;
-  canvas: any;
-  demoImg: any = new Image();
-  downloadedImg: HTMLImageElement;
 
   @Prop() allowCreateNewUser: string; //prop from Partner is immutable by default
 
@@ -44,6 +41,7 @@ export class SkillwalletAuth {
   @State() communityAddress: string = null;
   @State() web3Provider: any = null;
   @State() isLoading: boolean = false;
+  @State() roleSelected: any;
 
   @Event({
     eventName: 'initSkillwalletAuth',
@@ -65,15 +63,6 @@ export class SkillwalletAuth {
     this.getSkillWallet();
   }
 
-  startDownload() {
-    let imageURL = 'https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189';
-
-    this.downloadedImg = new Image();
-    this.downloadedImg.crossOrigin = 'Anonymous';
-    this.downloadedImg.addEventListener('load', this.generateMembershipNFT, false);
-    this.downloadedImg.src = imageURL;
-  }
-
   getSkillWallet() {
     this.skillwallet = JSON.parse(window.sessionStorage.getItem('skillWallet'));
 
@@ -84,53 +73,7 @@ export class SkillwalletAuth {
     }
   }
 
-  generateMembershipNFT = async () => {
-    this.demoImg.src = 'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw_background.png';
-    this.demoImg.crossOrigin = 'Anonymous';
-    const ctx = this.canvas.getContext('2d');
-    console.log('dimensions: ', this.demoImg.height, this.demoImg.width); // if these are 0, canvas export as .png will fail
-    this.canvas.width = this.demoImg.width;
-    this.canvas.height = this.demoImg.height;
-    // @ts-ignore
-    this.canvas.crossOrigin = 'Anonymous';
-    ctx.drawImage(this.demoImg, 0, 0);
-    ctx.font = '20pt Verdana';
-    ctx.fillStyle = 'white';
-    ctx.fillText('Community Name', 25, 200);
-    ctx.fillText('Pioneer #001', 25, 300);
-    console.log('dimensions: ', this.canvas.height, this.canvas.width); // if these are 0, canvas export as .png will fail
-
-    this.canvas.toBlob(async function (blob) {
-      // let blobAsBytes = blob.getBytes(1, blob.size);
-
-      // link.href = URL.createObjectURL(blob);
-      console.log(blob.stream());
-      const url = await pushImage(blob.stream(), 'membershipID.png');
-      console.log(url);
-      // console.log(link.href); // this line should be here
-    }, 'image/png');
-
-    // var uint8Array = this.canvas.getContext('2d').getImageData(0, 0, 369, 591).data;
-    // console.log(uint8Array);
-    // var uint8View = new Uint8Array(uint8Array);
-    // console.log('aaa',  uint8View);
-
-    // console.log(url);
-    // OR...create & export an object containing a new Image object?
-    // let image = new Image();
-    // const a = this.canvas.toBlob('image/png');
-    // console.log(a);
-    // const imageData = this.canvas.getImageData();
-    // console.log(await this.canvas.toBlob(resolve, 'image/png');
-    // const url = await pushImage(imageData.data, 'membership.png');
-
-    // console.log('image file auth: ', url);
-
-    // mint as NFT (send img to textile & mint())
-
-    // is .png the right file type?
-    // which mint() function to call?
-  };
+  
 
   async componentDidLoad() {
     console.log('sw created...');
@@ -265,24 +208,6 @@ export class SkillwalletAuth {
   render() {
     return (
       <div>
-        <img
-          // class="hidden-element"
-          id="test-demo-img"
-          ref={el => {
-            this.demoImg = el;
-          }}
-        />
-
-        <canvas
-          id="canvas"
-          // class="hidden-element"
-          ref={el => {
-            this.canvas = el;
-          }}
-        />
-
-        <button onClick={() => this.generateMembershipNFT()}>ShowImg</button>
-
         {this.storedUsername ? (
           <button
             // class="connect-wallet-button logged-in"
@@ -321,7 +246,7 @@ export class SkillwalletAuth {
 
                 {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
 
-                {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText}></qr-modal> : null}
+                {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText} roleSelected={this.roleSelected}></qr-modal> : null}
                 {this.newUserIsVisible === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
                 {this.userDetailsAreVisible === true ? (
                   <user-details
@@ -334,6 +259,7 @@ export class SkillwalletAuth {
                 {this.userRoleIsVisible === true ? (
                   <user-role
                     isPartner={this.isPartner}
+                    roleSelected={this.roleSelected}
                     community={this.community}
                     partnersAddress={this.partnersAddress}
                     communityAddress={this.communityAddress}

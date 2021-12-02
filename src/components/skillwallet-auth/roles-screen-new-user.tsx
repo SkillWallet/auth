@@ -10,7 +10,8 @@ import { Validator } from '../../validators/validator.js';
 })
 export class RolesScreenNewUser {
     @State() isInvalid: boolean = false;
-    @Prop({mutable: true}) roleSelected: string;
+    @Prop({mutable: true}) roleSelected: any;
+    // @Prop({mutable: true}) roleSelected: object;
     @Prop() isLoading: boolean;
     @Prop({mutable: true}) buttonClass: string;
     @Prop() community: any;
@@ -57,7 +58,8 @@ export class RolesScreenNewUser {
     }
 
     handleRoleClick(role) {
-        this.roleSelected = role;
+        console.log('clicked', role.roleId);
+        this.roleSelected = role.roleId;
         this.buttonClass = '';
     }
 
@@ -103,15 +105,15 @@ export class RolesScreenNewUser {
         </div> :                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[0], roleId: 4})}>
                 <h4>{this.community.roles[0]}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[1], roleId: 5})}>
                 <h4>{this.community.roles[1]}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[2], roleId: 6})}>
                 <h4>{this.community.roles[2]}</h4>
             </div>
         </div>
