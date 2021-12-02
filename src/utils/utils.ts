@@ -3,7 +3,7 @@ import { pushJSONDocument, pushImage } from '../utils/textile.hub';
 import skillWalletAbi from './skillWalletAbi.json';
 import communityAbi from './communityAbi.json';
 import partnersAbi from './partnersAgreementAbi.json';
-import partnersRegistryAbi from './partnersRegistryAbi.json';
+// import partnersRegistryAbi from './partnersRegistryAbi.json';
 import partnersAgreementAbi from './partnersAgreementAbi.json';
 import membershipAbi from './membershipAbi.json';
 
