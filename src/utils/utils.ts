@@ -26,6 +26,7 @@ export const getCommunity = async (partnerKey) => {
   })
   const comm = await res.json();
   partnersAgreementAddress = comm.partnersAgreementAddress;
+  console.log('partnersA address: ', partnersAgreementAddress);
   membershipAddress = await getMembershipAddress()
   return comm;
 }
@@ -272,11 +273,9 @@ export const drawCanvas = (canvas, demoImg, logo, community) => {
 }
 
 const getMembershipAddress = async () => {
-  console.log('getting addy...');
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
-  console.log(partnersAgreementAddress);
   const contract = new ethers.Contract(
     partnersAgreementAddress,
     JSON.stringify(partnersAgreementAbi),
