@@ -7,7 +7,7 @@ import { getActivationNonce, generateMembershipNFT, drawCanvas, getLogo } from '
 export class QRModal {
   @Prop({ mutable: true }) textKey: string = null;
   @Prop() community: any;
-  @Prop() roleSelected;
+  @Prop({ mutable: true}) roleSelected: any;
   @State() canvas: any;
   @State() demoImg: any = new Image();
   logo: any = new Image();

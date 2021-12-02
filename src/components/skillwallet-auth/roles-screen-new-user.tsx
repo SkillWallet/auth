@@ -58,8 +58,8 @@ export class RolesScreenNewUser {
     }
 
     handleRoleClick(role) {
-        console.log('clicked', role.roleId);
-        this.roleSelected = role.roleId;
+        console.log('clicked', role);
+        this.roleSelected = role;
         this.buttonClass = '';
     }
 
