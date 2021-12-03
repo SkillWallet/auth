@@ -155,6 +155,14 @@ export const getActivationNonce = async (tokenId) => {
   return nonce.nonce;
 };
 
+export const fetchKeyAndPAByCommunity = async (community) => {
+  const response = await fetch(`https://api.distributed.town/api/community/${community}/key`, {
+    method: 'GET'
+  })
+  const pa = await response.json();
+  return pa;
+};
+
 export function format(first: string, middle: string, last: string): string {
   return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
 }
@@ -179,9 +187,11 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
   if (isActive) {
     const jsonUri = await contract.tokenURI(tokenId);
     const community = await contract.getActiveCommunity(tokenId);
+
+    const partnersAgreementKey = await fetchKeyAndPAByCommunity(community);
     let res = await fetch(jsonUri);
     const jsonMetadata = await res.json();
-    const isCoreTeam = await isCoreTeamMember(community.partnersAgreementAddress, signer);
+    const isCoreTeam = await isCoreTeamMember(partnersAgreementKey.partnersAgreementAddress, address);
     console.log('is core team member?', isCoreTeam);
 
     let skillWallet: any = {
@@ -189,7 +199,7 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
       nickname: jsonMetadata.properties.username,
       skills: jsonMetadata.properties.skills,
       community: community,
-      diToCredits: 2060,
+      diToCredits: 0,
       tokenId: tokenId.toString(),
       isCoreTeamMember: isCoreTeam
     };
@@ -297,8 +307,6 @@ const getMembershipAddress = async () => {
     signer,
   );
 
-  contract.addNewCoreTeamMembers('0xCa05bcE175e9c39Fe015A5fC1E98d2B735fF51d9'); // delete this
-  
   const memberAddress = await contract.membershipAddress();
   console.log('member addy', memberAddress);
   return memberAddress;

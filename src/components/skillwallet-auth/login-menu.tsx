@@ -56,6 +56,7 @@ export class LoginMenu {
       await changeNetwork();
       await ethereum.request({ method: 'eth_requestAccounts' });
       this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log('asdasdasdasda');
       this.community = await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       this.closeModalOnLogin.emit(); 
     } catch (error) {
