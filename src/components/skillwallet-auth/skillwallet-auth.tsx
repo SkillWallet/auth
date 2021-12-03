@@ -181,6 +181,16 @@ export class SkillwalletAuth {
     this.onSkillwalletLogin.emit(false);
   }
 
+  @Listen('onLogin')
+  onLogin() {
+    this.handleClick();
+  }
+
+  @Listen('onLogout')
+  onLogout() {
+    this.logOut()
+  }
+
   @Listen('showNewScreen')
   handleNewScreen(text) {
     this.usersIsVisible = false;
