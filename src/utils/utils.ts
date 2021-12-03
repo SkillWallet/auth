@@ -97,7 +97,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
         username,
         skills: [
           {
-            name: role.role,
+            name: role,
             value: level
           }]
       }

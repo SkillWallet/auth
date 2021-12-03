@@ -42,6 +42,10 @@ export class RolesScreenNewUser {
       componentWillLoad()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
       }
+
+      componentDidLoad() {
+          console.log('are there roles/skills?', this.community);
+      }
     
       componentWillUpdate()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
@@ -58,6 +62,7 @@ export class RolesScreenNewUser {
     }
 
     handleRoleClick(role) {
+        console.log('comm', this.community);
         console.log('clicked', role);
         this.roleSelected = role;
         this.buttonClass = '';
@@ -105,15 +110,15 @@ export class RolesScreenNewUser {
         </div> :                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[0], roleId: 4})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
                 <h4>{this.community.roles[0]}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[1], roleId: 5})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
                 <h4>{this.community.roles[1]}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[2], roleId: 6})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
                 <h4>{this.community.roles[2]}</h4>
             </div>
         </div>
