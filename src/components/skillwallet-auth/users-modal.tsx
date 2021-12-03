@@ -7,8 +7,9 @@ import Portis from '@portis/web3';
   tag: 'users-modal',
 })
 export class UsersModal {
-  @Prop({mutable: true}) isLoading: boolean;
   @Prop() isPartner: Boolean;
+  @Prop() partnerKey: string;
+  @Prop({mutable: true}) isLoading: boolean;
   
   @Event({
     eventName: 'showNewScreen',
@@ -83,7 +84,7 @@ export class UsersModal {
               <h4>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</h4>
             </button>
 
-            <button onClick={() => this.handleNewScreen(null)}>
+            <button onClick={() => this.handleNewScreen(null)} disabled={this.partnerKey === undefined ? true : false}>
               <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
               <h4>{this.isPartner ? 'New Partner' : 'New User'}</h4>
             </button>

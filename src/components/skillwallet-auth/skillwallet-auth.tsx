@@ -9,7 +9,7 @@ import * as buffer from 'buffer';
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop() partnerKey: string;
+  @Prop({mutable: true}) partnerKey: string;
   @Prop() buttonColor: string;
   @Prop() fontColor: string;
   @Prop() borderRadius: string;
@@ -76,11 +76,13 @@ export class SkillwalletAuth {
   
 
   async componentDidLoad() {
-    console.log('sw created...');
+    console.log('PK: ', this.partnerKey);
     this.initSkillwalletAuth.emit();
     (window as any).Buffer = buffer;
-    const comm = await getCommunity(this.partnerKey);
-    this.community = comm;
+    if (this.partnerKey) {
+      const comm = await getCommunity(this.partnerKey);
+      this.community = comm;
+    }
   }
 
   disconnectedCallback() {
@@ -179,6 +181,16 @@ export class SkillwalletAuth {
     this.onSkillwalletLogin.emit(false);
   }
 
+  @Listen('onLogin')
+  onLogin() {
+    this.handleClick();
+  }
+
+  @Listen('onLogout')
+  onLogout() {
+    this.logOut()
+  }
+
   @Listen('showNewScreen')
   handleNewScreen(text) {
     this.usersIsVisible = false;
@@ -195,10 +207,14 @@ export class SkillwalletAuth {
   }
 
   @Listen('activateSkillwalletCommunity')
-  handlePartnerFlow(event) {
+  async handlePartnerFlow(event) {
     console.log(event.detail);
     this.communityAddress = event.detail.communityAddr;
     this.partnersAddress = event.detail.partnersAddr;
+    this.partnerKey = event.detail.partnerKey
+    console.log('PK: ', this.partnerKey);
+    const comm = await getCommunity(this.partnerKey);
+    this.community = comm;
 
     this.isPartner = true;
     this.displayLogin = true;
@@ -242,9 +258,9 @@ export class SkillwalletAuth {
             )}
             <div class="topDiv">
               <div class="modalWindow" onClick={event => this.handleClickPropagation(event)}>
-                {this.usersIsVisible === true ? <users-modal isPartner={this.isPartner} isLoading={this.isLoading}></users-modal> : null}
+                {this.usersIsVisible === true ? <users-modal isPartner={this.isPartner} partnerKey={this.partnerKey} isLoading={this.isLoading}></users-modal> : null}
 
-                {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} isLoading={this.isLoading}></login-menu> : null}
+                {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} community={this.community} isLoading={this.isLoading}></login-menu> : null}
 
                 {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText} roleSelected={this.roleSelected}></qr-modal> : null}
                 {this.newUserIsVisible === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}

@@ -11,6 +11,7 @@ export namespace Components {
         "image": string;
     }
     interface LoginMenu {
+        "community": any;
         "isLoading": boolean;
         "isPartner": Boolean;
         "web3Provider": any;
@@ -80,6 +81,7 @@ export namespace Components {
     interface UsersModal {
         "isLoading": boolean;
         "isPartner": Boolean;
+        "partnerKey": string;
     }
 }
 declare global {
@@ -168,6 +170,7 @@ declare namespace LocalJSX {
         "image"?: string;
     }
     interface LoginMenu {
+        "community"?: any;
         "isLoading"?: boolean;
         "isPartner"?: Boolean;
         "onCloseModalOnLogin"?: (event: CustomEvent<any>) => void;
@@ -259,6 +262,7 @@ declare namespace LocalJSX {
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowLoginMenu"?: (event: CustomEvent<any>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
+        "partnerKey"?: string;
     }
     interface IntrinsicElements {
         "auth-image": AuthImage;

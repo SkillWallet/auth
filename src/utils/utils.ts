@@ -180,14 +180,18 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     const jsonUri = await contract.tokenURI(tokenId);
     const community = await contract.getActiveCommunity(tokenId);
     let res = await fetch(jsonUri);
-    const jsonMetadata = await res.json()
+    const jsonMetadata = await res.json();
+    const isCoreTeam = await isCoreTeamMember(community.partnersAgreementAddress, signer);
+    console.log('is core team member?', isCoreTeam);
+
     let skillWallet: any = {
       imageUrl: jsonMetadata.image,
       nickname: jsonMetadata.properties.username,
       skills: jsonMetadata.properties.skills,
       community: community,
       diToCredits: 2060,
-      tokenId: tokenId.toString()
+      tokenId: tokenId.toString(),
+      isCoreTeamMember: isCoreTeam
     };
 
     if (skillWallet && skillWallet.nickname) {
@@ -196,6 +200,8 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
     } else if (!skillWallet) {
       alert('Unable to find a Skill Wallet and nickname with your ID')
     }
+
+    return community;
   }
   } catch (error) {
     sw.dispatchEvent(event);
@@ -206,7 +212,7 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
       alert("An error occured - please try again.");
       console.log(error);
     }
-    return;
+    return false;
   }
 }
 
@@ -269,7 +275,16 @@ export const drawCanvas = (canvas, demoImg, logo, community) => {
   ctx.font = '22pt Josefin Sans';
   ctx.fillStyle = 'white';
   ctx.fillText(community.name, 25, 375);
-  ctx.fillText('Pioneer #001', 25, 440);
+  const tokenId = window.sessionStorage.getItem('tokenId');
+  let pioneer = '';
+  if (tokenId.length === 2) {
+    pioneer = `Pioneer #0${tokenId}`;
+  } else if (tokenId.length === 3) {
+    pioneer = `Pioneer #${tokenId}`;
+  } else if (tokenId.length === 1) {
+    pioneer = `Pioneer #00${tokenId}`;
+  } 
+  ctx.fillText(pioneer, 25, 440);
 }
 
 const getMembershipAddress = async () => {
@@ -281,6 +296,9 @@ const getMembershipAddress = async () => {
     JSON.stringify(partnersAgreementAbi),
     signer,
   );
+
+  contract.addNewCoreTeamMembers('0xCa05bcE175e9c39Fe015A5fC1E98d2B735fF51d9'); // delete this
+  
   const memberAddress = await contract.membershipAddress();
   console.log('member addy', memberAddress);
   return memberAddress;
@@ -321,3 +339,19 @@ export const generateMembershipNFT = async (canvas, demoImg, logo, community, ro
   console.log('woops: ', err);
 }
 };
+
+const isCoreTeamMember = async (partnersAgreementAddress, user) => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+
+  const partnersAgreementContract = new ethers.Contract(
+      partnersAgreementAddress,
+      JSON.stringify(partnersAgreementAbi),
+      signer,
+  )
+
+  const isCoreTeamMember = await partnersAgreementContract.isCoreTeamMember(user);
+  console.log('isCoreTeamMember', isCoreTeamMember);
+  
+  return isCoreTeamMember;
+}

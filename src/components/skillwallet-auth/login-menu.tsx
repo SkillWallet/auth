@@ -10,6 +10,7 @@ export class LoginMenu {
   @Prop({mutable: true}) isLoading: boolean;
   @Prop() isPartner: Boolean;
   @Prop({mutable: true}) web3Provider: any;
+  @Prop({mutable: true}) community;
   @State() buttonClass: string = 'disabled';
   
   @Event({
@@ -55,7 +56,7 @@ export class LoginMenu {
       await changeNetwork();
       await ethereum.request({ method: 'eth_requestAccounts' });
       this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-      await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
+      this.community = await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       this.closeModalOnLogin.emit(); 
     } catch (error) {
       this.onSkillwalletError.emit();
@@ -73,7 +74,7 @@ export class LoginMenu {
       });
       this.web3Provider = new ethers.providers.Web3Provider(portis.provider);
       const addresses = await this.web3Provider.listAccounts();
-      await fetchSkillWallet(this.web3Provider, addresses[0]);
+      this.community = await fetchSkillWallet(this.web3Provider, addresses[0]);
       this.closeModalOnLogin.emit(); 
     } catch (error) {
       this.onSkillwalletError.emit();
