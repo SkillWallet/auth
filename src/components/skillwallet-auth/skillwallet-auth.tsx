@@ -159,7 +159,6 @@ export class SkillwalletAuth {
     this.displayLogin = false;
     this.loginMenuIsVisible = false;
     this.getSkillWallet();
-    this.onSkillwalletLogin.emit(true);
   }
 
   handleQRClick = () => {

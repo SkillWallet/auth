@@ -58,6 +58,7 @@ export class LoginMenu {
       this.web3Provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log('asdasdasdasda');
       this.community = await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
+      console.log('sw found...', window.sessionStorage.getItem('skillWallet'));
       this.closeModalOnLogin.emit(); 
     } catch (error) {
       this.onSkillwalletError.emit();
