@@ -158,8 +158,8 @@ export class SkillwalletAuth {
   closeModalOnLogin() {
     this.displayLogin = false;
     this.loginMenuIsVisible = false;
-    this.onSkillwalletLogin.emit(true);
     this.getSkillWallet();
+    this.onSkillwalletLogin.emit(true);
   }
 
   handleQRClick = () => {
