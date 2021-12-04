@@ -70,6 +70,7 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
+        console.log('joining new member...community: ', this.community);
         const tokenId = await joinCommunity(this.web3Provider, this.community.address, window.sessionStorage.getItem('username'), this.roleSelected, this.skill);
         this.isLoadingEvent.emit(false);
         window.sessionStorage.setItem('tokenId', tokenId);

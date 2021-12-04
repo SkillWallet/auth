@@ -21,6 +21,7 @@ const event = new CustomEvent("onSkillwalletError"
 )
 
 export const getCommunity = async (partnerKey) => {
+  await changeNetwork();
   const res = await fetch(`https://api.distributed.town/api/community/key/${partnerKey}`, {
     method: 'GET'
   })
@@ -111,7 +112,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
 
     const createTx = await contract.joinNewMember(
       url,
-      role.roleId,
+      role,
       2006,
     );
 
