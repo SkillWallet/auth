@@ -53,6 +53,7 @@ export namespace Components {
         "isPartner": Boolean;
         "partnersAddress": string;
         "roleSelected": any;
+        "skill": number;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser": string;
@@ -222,6 +223,7 @@ declare namespace LocalJSX {
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "partnersAddress"?: string;
         "roleSelected"?: any;
+        "skill"?: number;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser"?: string;

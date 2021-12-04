@@ -13,6 +13,7 @@ export class RolesScreenPartner {
     @Prop() community: any;
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
+    @Prop({mutable: true}) skill: number;
     @Prop() partnersAddress: string = null;
 
     @Event({
@@ -39,6 +40,7 @@ export class RolesScreenPartner {
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.log('joining new member...community: ', this.community);
         const tokenId = await joinCommunity(provider, this.communityAddress, window.sessionStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
         this.isLoadingEvent.emit(false);

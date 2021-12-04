@@ -111,16 +111,16 @@ export class RolesScreenNewUser {
         </div> :                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[0])}>
-                <h4>{this.community.roles[0]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.skills.categories[0].subCat)}>
+                <h4>{this.community.skills.categories[0].subCat}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[1])}>
-                <h4>{this.community.roles[1]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.skills.categories[1].subCat)}>
+                <h4>{this.community.skills.categories[1].subCat}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(this.community.roles[2])}>
-                <h4>{this.community.roles[2]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick(this.community.skills.categories[2].subCat)}>
+                <h4>{this.community.skills.categories[2].subCat}</h4>
             </div>
         </div>
         }
