@@ -7,7 +7,7 @@ import { ethers } from 'ethers';
     shadow: true
 })
 export class RolesScreenPartner {
-    @Prop() roleSelected: any;
+    @Prop() roleSelected: object = {role: '', roleId: ''};;
     @Prop() isLoading: boolean;
     @Prop() buttonClass: string;
     @Prop() community: any;
@@ -58,18 +58,18 @@ export class RolesScreenPartner {
                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick(1)}>
-                <div><div class={this.roleSelected === 1 ? "filled-in-circle" : "circle"}></div></div>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Founder', roleId: 1})}>
+                <div><div class={this.roleSelected['roleId'] === 1 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Founder</p>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(2)}>
-                <div><div class={this.roleSelected === 2 ? "filled-in-circle" : "circle"}></div></div>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Contributor', roleId: 2})}>
+                <div><div class={this.roleSelected['roleId'] === 2 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Contributor</p>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick(3)}>
-            <div><div class={this.roleSelected === 3 ? "filled-in-circle" : "circle"}></div></div>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Investor', roleId: 3})}>
+            <div><div class={this.roleSelected['roleId'] === 3 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Investor</p>
             </div>
         </div>

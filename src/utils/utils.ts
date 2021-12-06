@@ -98,7 +98,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
         username,
         skills: [
           {
-            name: role,
+            name: role['role'],
             value: level
           }]
       }
@@ -112,7 +112,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
 
     const createTx = await contract.joinNewMember(
       url,
-      role,
+      role['roleId'],
       2006,
     );
 

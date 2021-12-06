@@ -52,7 +52,7 @@ export namespace Components {
         "isLoading": boolean;
         "isPartner": Boolean;
         "partnersAddress": string;
-        "roleSelected": any;
+        "roleSelected": object;
         "skill": number;
     }
     interface SkillwalletAuth {
@@ -222,7 +222,7 @@ declare namespace LocalJSX {
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "partnersAddress"?: string;
-        "roleSelected"?: any;
+        "roleSelected"?: object;
         "skill"?: number;
     }
     interface SkillwalletAuth {
