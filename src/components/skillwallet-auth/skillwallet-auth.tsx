@@ -36,7 +36,7 @@ export class SkillwalletAuth {
   @State() storedUsername: any = null;
   @State() skillwallet: object = null;
   @State() icon: any = null;
-  @State() roleSelected: any = {role: '', roleId: ''};
+  @State() roleSelected: string;
   @State() isPartner: boolean = false;
   @State() partnersAddress: string = null;
   @State() communityAddress: string = null;

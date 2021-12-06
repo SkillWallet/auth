@@ -10,8 +10,8 @@ import { Validator } from '../../validators/validator.js';
 })
 export class RolesScreenNewUser {
     @State() isInvalid: boolean = false;
-    @Prop({mutable: true}) roleSelected: any;
-    // @Prop({mutable: true}) roleSelected: object;
+    // @Prop({mutable: true}) roleSelected: any;
+    @Prop({mutable: true}) roleSelected: object = {role: '', roleId: ''};
     @Prop() isLoading: boolean;
     @Prop({mutable: true}) buttonClass: string;
     @Prop() community: any;
@@ -42,6 +42,10 @@ export class RolesScreenNewUser {
       componentWillLoad()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
       }
+
+      componentDidLoad() {
+          console.log('are there roles/skills?', this.community);
+      }
     
       componentWillUpdate()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
@@ -58,6 +62,7 @@ export class RolesScreenNewUser {
     }
 
     handleRoleClick(role) {
+        console.log('comm ', this.community);
         console.log('clicked', role);
         this.roleSelected = role;
         this.buttonClass = '';
@@ -65,7 +70,7 @@ export class RolesScreenNewUser {
 
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
-        const tokenId = await joinCommunity(this.web3Provider, this.community.address, window.sessionStorage.getItem('username'), this.roleSelected, this.skill);
+        const tokenId = await joinCommunity(this.web3Provider, this.community.address, window.sessionStorage.getItem('username'), this.roleSelected['roleId'], this.skill);
         this.isLoadingEvent.emit(false);
         window.sessionStorage.setItem('tokenId', tokenId);
         this.showNewScreen.emit('role'); 
@@ -79,11 +84,11 @@ export class RolesScreenNewUser {
                 <h3>Pick what you're the best at & be rewarded for your commitment!</h3>
             </div>
 
-        {(this.roleSelected) ? 
+        {(this.roleSelected['role'] !== '') ? 
         <div class="commitment-level-parent-div">
         <div class="commitment-level-div">
             <div class="commitment-level-text">
-                <h3>{this.roleSelected}</h3>
+                <h3>{this.roleSelected['role']}</h3>
             </div>
 
             <div class="xp-component">
@@ -105,16 +110,16 @@ export class RolesScreenNewUser {
         </div> :                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[0], roleId: 4})}>
-                <h4>{this.community.roles[0]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[0].subCat, roleId: 4})}>
+                <h4>{this.community.skills.categories[0].subCat}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[1], roleId: 5})}>
-                <h4>{this.community.roles[1]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[1].subCat, roleId: 5})}>
+                <h4>{this.community.skills.categories[1].subCat}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.roles[2], roleId: 6})}>
-                <h4>{this.community.roles[2]}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[2].subCat, roleId: 6})}>
+                <h4>{this.community.skills.categories[2].subCat}</h4>
             </div>
         </div>
         }

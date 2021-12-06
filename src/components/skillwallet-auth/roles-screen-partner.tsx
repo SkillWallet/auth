@@ -13,6 +13,7 @@ export class RolesScreenPartner {
     @Prop() community: any;
     @Prop() isPartner: Boolean;
     @Prop() communityAddress: string = null;
+    @Prop({mutable: true}) skill: number;
     @Prop() partnersAddress: string = null;
 
     @Event({
@@ -39,6 +40,7 @@ export class RolesScreenPartner {
     async handleUserQRClick() {
         this.isLoadingEvent.emit(true);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.log('joining new member...community: ', this.community);
         const tokenId = await joinCommunity(provider, this.communityAddress, window.sessionStorage.getItem('username'), this.roleSelected, 10);
         const active = await activatePA(this.partnersAddress);
         this.isLoadingEvent.emit(false);
@@ -56,17 +58,17 @@ export class RolesScreenPartner {
                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Founder', roleId: 1})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(1)}>
                 <div><div class={this.roleSelected === "Founder" ? "filled-in-circle" : "circle"}></div></div>
                 <p>Founder</p>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Contributor', roleId: 2})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(2)}>
                 <div><div class={this.roleSelected === "Contributor" ? "filled-in-circle" : "circle"}></div></div>
                 <p>Contributor</p>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: 'Investor', roleId: 3})}>
+            <div class="role-button" onClick={() => this.handleRoleClick(3)}>
             <div><div class={this.roleSelected === "Investor" ? "filled-in-circle" : "circle"}></div></div>
                 <p>Investor</p>
             </div>

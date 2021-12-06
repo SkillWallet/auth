@@ -40,7 +40,7 @@ export namespace Components {
         "community": any;
         "isLoading": boolean;
         "isPartner": Boolean;
-        "roleSelected": any;
+        "roleSelected": object;
         "skill": number;
         "validator": string | any;
         "web3Provider": any;
@@ -53,6 +53,7 @@ export namespace Components {
         "isPartner": Boolean;
         "partnersAddress": string;
         "roleSelected": any;
+        "skill": number;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser": string;
@@ -207,7 +208,7 @@ declare namespace LocalJSX {
         "isPartner"?: Boolean;
         "onIsLoadingEvent"?: (event: CustomEvent<Boolean>) => void;
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
-        "roleSelected"?: any;
+        "roleSelected"?: object;
         "skill"?: number;
         "validator"?: string | any;
         "web3Provider"?: any;
@@ -222,6 +223,7 @@ declare namespace LocalJSX {
         "onShowNewScreen"?: (event: CustomEvent<any>) => void;
         "partnersAddress"?: string;
         "roleSelected"?: any;
+        "skill"?: number;
     }
     interface SkillwalletAuth {
         "allowCreateNewUser"?: string;
