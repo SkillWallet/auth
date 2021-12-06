@@ -59,17 +59,17 @@ export class RolesScreenPartner {
         
         <div class="role-fields">
             <div class="role-button" onClick={() => this.handleRoleClick(1)}>
-                <div><div class={this.roleSelected === "Founder" ? "filled-in-circle" : "circle"}></div></div>
+                <div><div class={this.roleSelected === 1 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Founder</p>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(2)}>
-                <div><div class={this.roleSelected === "Contributor" ? "filled-in-circle" : "circle"}></div></div>
+                <div><div class={this.roleSelected === 2 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Contributor</p>
             </div>
 
             <div class="role-button" onClick={() => this.handleRoleClick(3)}>
-            <div><div class={this.roleSelected === "Investor" ? "filled-in-circle" : "circle"}></div></div>
+            <div><div class={this.roleSelected === 3 ? "filled-in-circle" : "circle"}></div></div>
                 <p>Investor</p>
             </div>
         </div>

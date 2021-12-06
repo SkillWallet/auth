@@ -10,7 +10,7 @@ import { Validator } from '../../validators/validator.js';
 })
 export class RolesScreenNewUser {
     @State() isInvalid: boolean = false;
-    // @Prop({mutable: true}) roleSelected: any;
+    @State() memberRoles: any = [];
     @Prop({mutable: true}) roleSelected: object = {role: '', roleId: ''};
     @Prop() isLoading: boolean;
     @Prop({mutable: true}) buttonClass: string;
@@ -41,14 +41,21 @@ export class RolesScreenNewUser {
 
       componentWillLoad()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
-      }
 
-      componentDidLoad() {
-          console.log('are there roles/skills?', this.community);
+        if (this.community.roles.roles.length > 0) {
+          this.filterUserRoles(this.community.roles.roles);
+        }
       }
     
       componentWillUpdate()  {
         this._commitmentValidator = getValidator(this.validator['commitment']);
+      }
+
+      filterUserRoles(rolesMetadata) {
+          const filteredRoles = rolesMetadata.filter(r => {
+              return r['isCoreTeamMember'] === false;
+          });
+        this.memberRoles = filteredRoles;
       }
 
     updateValue(event: Event) {
@@ -110,16 +117,16 @@ export class RolesScreenNewUser {
         </div> :                     
         
         <div class="role-fields">
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[0].subCat, roleId: 4})}>
-                <h4>{this.community.skills.categories[0].subCat}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.memberRoles[0]['roleName'], roleId: 4})}>
+                <h4>{this.memberRoles[0]['roleName']}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[1].subCat, roleId: 5})}>
-                <h4>{this.community.skills.categories[1].subCat}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.memberRoles[1]['roleName'], roleId: 5})}>
+                <h4>{this.memberRoles[1]['roleName']}</h4>
             </div>
 
-            <div class="role-button" onClick={() => this.handleRoleClick({role: this.community.skills.categories[2].subCat, roleId: 6})}>
-                <h4>{this.community.skills.categories[2].subCat}</h4>
+            <div class="role-button" onClick={() => this.handleRoleClick({role: this.memberRoles[2]['roleName'], roleId: 6})}>
+                <h4>{this.memberRoles[2]['roleName']}</h4>
             </div>
         </div>
         }
