@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.91-alpha",
+  "version": "0.0.92-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "DiTo Labs <team@distributed.town>",
   "keywords": [
@@ -30,7 +30,7 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "test": "jest",
     "test:watch": "jest — watch",
