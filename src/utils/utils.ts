@@ -254,7 +254,7 @@ export const activatePA = async (partnersAddress) => {
     //   } else {
     //     throw new Error('Something went wrong');
     //   }
-    // } 
+    // }
     return true;
   }
   catch (err) {
@@ -294,7 +294,7 @@ export const drawCanvas = (canvas, demoImg, logo, community) => {
     pioneer = `Pioneer #${tokenId}`;
   } else if (tokenId.length === 1) {
     pioneer = `Pioneer #00${tokenId}`;
-  } 
+  }
   ctx.fillText(pioneer, 25, 440);
 }
 
@@ -343,13 +343,13 @@ export const generateMembershipNFT = async (canvas, demoImg, logo, community, ro
     });
 
     console.log(mintTx);
-      
+
 } catch (err) {
   console.log('woops: ', err);
 }
 };
 
-const isCoreTeamMember = async (partnersAgreementAddress, user) => {
+export const isCoreTeamMember = async (partnersAgreementAddress, user) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
@@ -361,6 +361,6 @@ const isCoreTeamMember = async (partnersAgreementAddress, user) => {
 
   const isCoreTeamMember = await partnersAgreementContract.isCoreTeamMember(user);
   console.log('isCoreTeamMember', isCoreTeamMember);
-  
+
   return isCoreTeamMember;
 }
