@@ -2,7 +2,7 @@ import { Component, h, State, Prop } from '@stencil/core';
 
 @Component({
   tag: 'user-role',
-  styleUrl: 'skillwallet-auth.css',
+  styleUrl: 'skillwallet-auth.scss',
   shadow: true
 })
 export class UserRole {
@@ -22,7 +22,7 @@ export class UserRole {
     render() {
         return (
             <div class="user-role-modal-window-child">
-                {this.isPartner ? 
+                {this.isPartner ?
                 <roles-screen-partner
                     community={this.community}
                     isPartner={this.isPartner}
@@ -31,8 +31,8 @@ export class UserRole {
                     roleSelected={this.roleSelected}
                     communityAddress={this.communityAddress}
                     partnersAddress={this.partnersAddress}
-                ></roles-screen-partner> : 
-                
+                ></roles-screen-partner> :
+
                 <roles-screen-new-user
                 skill={this.skill}
                 community={this.community}

@@ -1,0 +1,64 @@
+$transition: border-width 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, max-height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+$primary-color: #000000; // primary color for all components
+$foreground-color: #ffffff;
+$secondary-color: #9c27b0;
+$disabled-color: #cccccc;
+$link-color: #000000; // link color
+$success-color: #52c41a; // success state color
+$warning-color: #faad14; // warning state color
+$error-color: #f44336; // error state color
+$font-size-base: 14px; // major text font size
+$heading-color: rgba(0, 0, 0, 0.85); // heading text color
+$text-color: rgba(0, 0, 0, 0.65); // major text color
+$text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
+$border-radius-base: 2px; // major border radius
+$border-color-base: white; // major border color
+$box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+$transition: border-width 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, max-height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+$transition-func: cubic-bezier(0.4, 0, 0.2, 1) !important;
+$transition-duration: 150ms !important;
+
+button {
+  transition: $transition;
+  display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0px;
+    margin: 0px 0px 48px;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    border-radius: 0px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+    line-height: 0;
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    width: 100%;
+    height: 85px;
+  &:hover {
+    color: $foreground-color;
+    background-color: $primary-color;
+  }
+}

@@ -1,18 +1,19 @@
 import { Component, Event, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import { getCommunity } from '../../utils/utils';
-
+import PersonIcon from './assets/person.svg';
 import * as buffer from 'buffer';
 
 @Component({
   tag: 'skillwallet-auth',
-  styleUrl: 'skillwallet-auth.css',
+  styleUrl: 'skillwallet-auth.scss',
   shadow: true,
 })
 export class SkillwalletAuth {
-  @Prop({mutable: true}) partnerKey: string;
+  @Prop({ mutable: true }) partnerKey: string;
   @Prop() buttonColor: string;
   @Prop() fontColor: string;
   @Prop() borderRadius: string;
+  @Prop() buttonMode: string;
 
   @Prop() allowCreateNewUser: string; //prop from Partner is immutable by default
 
@@ -73,7 +74,7 @@ export class SkillwalletAuth {
     }
   }
 
-  
+
 
   async componentDidLoad() {
     console.log('PK: ', this.partnerKey);
@@ -222,13 +223,10 @@ export class SkillwalletAuth {
 
   render() {
     return (
-      <div>
+      <div class="skillwallet-auth">
         {this.storedUsername ? (
           <button
-            // class="connect-wallet-button logged-in"
-            class="connect-wallet-button"
-            style={{ backgroundColor: this.buttonColor, fontColor: this.fontColor, borderRadius: this.borderRadius }}
-            // disabled={true}
+            class={`${this.buttonMode} connect-wallet-button`}
             onClick={() => this.logOut()}
           >
             <auth-image class="uploaded-img" image={this.icon}></auth-image>
@@ -236,17 +234,16 @@ export class SkillwalletAuth {
           </button>
         ) : (
           <button
-            class="connect-wallet-button"
-            style={{ backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius }}
+            class={`${this.buttonMode} connect-wallet-button`}
             onClick={() => this.handleClick()}
           >
-            <auth-image class="person-img" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/user.svg'}></auth-image>
+            <div class="sw-auth-icon" innerHTML={PersonIcon}></div>
             <p>Connect Wallet</p>
           </button>
         )}
 
         {this.displayLogin ? (
-          <div class="background-screen" onClick={() => this.handleHideClick()}>
+          <div class="background-screen skillwallet-auth dark" onClick={() => this.handleHideClick()}>
             {this.isLoading ? (
               <div class="item">
                 <h2>Loading</h2>
