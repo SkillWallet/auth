@@ -274,7 +274,7 @@ export const drawCanvas = (canvas, demoImg, logo, community) => {
   demoImg.width = 369;
   demoImg.height = 591;
   demoImg.crossOrigin = 'Anonymous';
-  demoImg.src = 'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw_bg_image.png';
+  demoImg.src = 'https://dito-assets.s3.eu-west-1.amazonaws.com/sw_bg_image.png';
   const ctx = canvas.getContext('2d');
   canvas.width = 369;
   canvas.height = 591;

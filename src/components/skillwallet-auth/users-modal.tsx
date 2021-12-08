@@ -74,7 +74,7 @@ export class UsersModal {
     return (
         <div class="modal-window-child">
           <div class="wallet-header">
-            <auth-image class="white-wallet" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/wallet-white.svg'}></auth-image>
+            <auth-image class="white-wallet" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/wallet-white.svg'}></auth-image>
             <h2>{this.isPartner ? 'I am a...' : 'Login with'}</h2>
           </div>
 
@@ -85,7 +85,7 @@ export class UsersModal {
             </button>
 
             <button onClick={() => this.handleNewScreen(null)} disabled={this.partnerKey === undefined ? true : false}>
-              <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/plus-button-white.svg'}></auth-image>
+              <auth-image image={'https://dito-assets.s3.eu-west-1.amazonaws.com/plus-button-white.svg'}></auth-image>
               <h4>{this.isPartner ? 'New Partner' : 'New User'}</h4>
             </button>
           </div>

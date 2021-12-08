@@ -5,7 +5,7 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class AuthImage {
 
-  @Prop({mutable: true}) image = "https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/sw-logo-revised.svg";
+  @Prop({mutable: true}) image = "https://dito-assets.s3.eu-west-1.amazonaws.com/sw-logo-revised.svg";
 
   render() {
    return <img src={this.image} />

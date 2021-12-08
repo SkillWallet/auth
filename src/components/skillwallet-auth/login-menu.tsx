@@ -95,14 +95,14 @@ export class LoginMenu {
             <div class="login-menu-buttons-container">
                 <button onClick={() => this.handleMetamaskClick()}>
                     <div>
-                        <auth-image class="metamask" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
+                        <auth-image class="metamask" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/metamask.svg'}></auth-image>
                         <h4>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</h4>
                     </div>
                 </button>
 
                 <button onClick={() => this.handlePortisClick()}>
                     <div>
-                        <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
+                        <auth-image class="portis" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/portis_icon.svg'}></auth-image>
                         <h4>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</h4>
                     </div>
                 </button>

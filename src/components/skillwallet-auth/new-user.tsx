@@ -95,14 +95,14 @@ export class NewUser {
 
         <div class="wallet-modal-button new-user">
           <button onClick={() => this.handleMetamaskClick()} class={this.isAccount === 'metamask' ? 'activeSelection'  : this.isAccount === null ? '' : 'inactiveSelection'}>
-            <auth-image image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/metamask.svg'}></auth-image>
+            <auth-image image={'https://dito-assets.s3.eu-west-1.amazonaws.com/metamask.svg'}></auth-image>
             <h4>Inject from Metamask</h4>
           </button>
 
           <button class={this.isAccount === 'portis' ? 'activeSelection' : this.isAccount === null ? '' : 'inactiveSelection'}
            onClick={() => this.handlePortisClick()}
           >
-            <auth-image class="portis" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/portis_icon.svg'}></auth-image>
+            <auth-image class="portis" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/portis_icon.svg'}></auth-image>
             <h4>Create Social Account</h4>
           </button>
         </div>

@@ -240,7 +240,7 @@ export class SkillwalletAuth {
             style={{ backgroundColor: this.buttonColor, color: this.fontColor, borderRadius: this.borderRadius }}
             onClick={() => this.handleClick()}
           >
-            <auth-image class="person-img" image={'https://skillwallet-demo-images.s3.us-east-2.amazonaws.com/user.svg'}></auth-image>
+            <auth-image class="person-img" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/user.svg'}></auth-image>
             <p>Connect Wallet</p>
           </button>
         )}
