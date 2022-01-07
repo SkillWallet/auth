@@ -1,13 +1,29 @@
 import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { joinCommunity, activatePA } from '../../utils/utils';
 import { ethers } from 'ethers';
+
+
+const partnerRoles = [
+  {
+    role: 'Founder',
+    roleId: 1,
+  },
+  {
+    role: 'Contributor',
+    roleId: 2,
+  },
+  {
+    role: 'Investor',
+    roleId: 3,
+  },
+];
 @Component({
   tag: 'roles-screen-partner',
   styleUrl: 'skillwallet-auth.scss',
-  shadow: true
+  shadow: true,
 })
 export class RolesScreenPartner {
-  @Prop() roleSelected: object = { role: '', roleId: '' };;
+  @Prop() roleSelected: object = { role: '', roleId: '' };
   @Prop() isLoading: boolean;
   @Prop() buttonClass: string;
   @Prop() community: any;
@@ -56,32 +72,22 @@ export class RolesScreenPartner {
           <p>Pick your Role in your Community - and let it be known for the generations to come!</p>
         </div>
 
-
         <div class="role-fields">
-          <div class="role-button" onClick={() => this.handleRoleClick({ role: 'Founder', roleId: 1 })}>
-            <div><div class={this.roleSelected['roleId'] === 1 ? "filled-in-circle" : "circle"}></div></div>
-            <p>Founder</p>
-          </div>
-
-          <div class="role-button" onClick={() => this.handleRoleClick({ role: 'Contributor', roleId: 2 })}>
-            <div><div class={this.roleSelected['roleId'] === 2 ? "filled-in-circle" : "circle"}></div></div>
-            <p>Contributor</p>
-          </div>
-
-          <div class="role-button" onClick={() => this.handleRoleClick({ role: 'Investor', roleId: 3 })}>
-            <div><div class={this.roleSelected['roleId'] === 3 ? "filled-in-circle" : "circle"}></div></div>
-            <p>Investor</p>
-          </div>
+          {partnerRoles.map(({ role, roleId }) => {
+            return (
+              <button class={`role-button ${this.roleSelected['roleId'] === roleId ? 'activeSelection' : ''}`} onClick={() => this.handleRoleClick({ role, roleId })}>
+                <h4>{role}</h4>
+              </button>
+            );
+          })}
         </div>
-
 
         <div class="step-btn-wrapper">
-          <button
-            onClick={() => this.handleUserQRClick()}
-            class={`${this.buttonClass} step-button`} disabled={this.isLoading}>That's it - join this community!</button>
+          <button onClick={() => this.handleUserQRClick()} class={`${this.buttonClass} step-button`} disabled={this.isLoading}>
+            That's it - join this community!
+          </button>
         </div>
-
       </div>
-    )
+    );
   }
 }

@@ -225,20 +225,14 @@ export class SkillwalletAuth {
     return (
       <div class="skillwallet-auth">
         {this.storedUsername ? (
-          <button
-            class={`${this.buttonMode} connect-wallet-button`}
-            onClick={() => this.logOut()}
-          >
+          <button class={`${this.buttonMode} connect-wallet-button`} onClick={() => this.logOut()}>
             <auth-image class="uploaded-img" image={this.icon}></auth-image>
             <p>{this.storedUsername}</p>
           </button>
         ) : (
-          <button
-            class={`${this.buttonMode} connect-wallet-button`}
-            onClick={() => this.handleClick()}
-          >
+          <button class={`${this.buttonMode} connect-wallet-button`} onClick={() => this.handleClick()}>
             <div class="sw-auth-icon" innerHTML={PersonIcon}></div>
-            <p>Connect Wallet</p>
+            <p>Connect</p>
           </button>
         )}
 
@@ -256,7 +250,9 @@ export class SkillwalletAuth {
               <div class="modalWindow" onClick={event => this.handleClickPropagation(event)}>
                 {this.usersIsVisible === true ? <users-modal isPartner={this.isPartner} partnerKey={this.partnerKey} isLoading={this.isLoading}></users-modal> : null}
 
-                {this.loginMenuIsVisible === true ? <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} community={this.community} isLoading={this.isLoading}></login-menu> : null}
+                {this.loginMenuIsVisible === true ? (
+                  <login-menu isPartner={this.isPartner} web3Provider={this.web3Provider} community={this.community} isLoading={this.isLoading}></login-menu>
+                ) : null}
 
                 {this.qrIsVisible === true ? <qr-modal community={this.community} textKey={this.qrText} roleSelected={this.roleSelected}></qr-modal> : null}
                 {this.newUserIsVisible === true ? <new-user isPartner={this.isPartner} community={this.community} web3Provider={this.web3Provider}></new-user> : null}
