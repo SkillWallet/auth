@@ -12,7 +12,7 @@ const rolesIds = {
 
 @Component({
   tag: 'roles-screen-new-user',
-  styleUrl: 'skillwallet-auth.css',
+  styleUrl: 'skillwallet-auth.scss',
   shadow: true
 })
 export class RolesScreenNewUser {
@@ -82,7 +82,7 @@ export class RolesScreenNewUser {
         }
         return curr;
       });
-      console.log('Members Roles: ----', this.memberRoles);
+    console.log('Members Roles: ----', this.memberRoles);
   }
 
   handleRoleClick(role) {
@@ -135,18 +135,24 @@ export class RolesScreenNewUser {
 
           <div class="role-fields">
             {this.memberRoles.map(({ roleName, roleId }) => {
-              return (<div class="role-button" onClick={() => this.handleRoleClick({ role: roleName, roleId })}>
+              return (<button class="role-button" onClick={() => this.handleRoleClick({ role: roleName, roleId })}>
                 <h4>{roleName}</h4>
-              </div>)
+              </button>)
             })}
           </div>
         }
 
-        <button
-          onClick={() => this.handleUserQRClick()}
-          class={this.buttonClass}
-          disabled={!this.roleSelected || this.isInvalid || this.isLoading}
-        >That's it - join this community!</button>
+
+        <div class="step-btn-wrapper">
+          <button
+            onClick={() => this.handleUserQRClick()}
+            class={`${this.buttonClass} step-button`}
+            disabled={this.roleSelected['role'] === '' || this.isInvalid || this.isLoading}
+
+          >
+            That's it - join this community!</button>
+        </div>
+
       </div>
     )
   }

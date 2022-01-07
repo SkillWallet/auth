@@ -82,7 +82,7 @@ export class QRModal {
 
         <div class="wallet-text">
           <p>{this.qrText[this.textKey]}</p>
-          <button onClick={() => generateMembershipNFT(this.canvas, this.demoImg, this.logo, this.community, this.roleSelected)}>Generate Membership (TEST)</button>
+          <button class="small" onClick={() => generateMembershipNFT(this.canvas, this.demoImg, this.logo, this.community, this.roleSelected)}>Generate Membership (TEST)</button>
         </div>
       </div>
     );

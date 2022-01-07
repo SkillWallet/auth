@@ -2,17 +2,18 @@ import { Component, h, Event, EventEmitter, State, Prop } from '@stencil/core';
 import Portis from '@portis/web3';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 import { ethers } from 'ethers';
-
+import MetamasIcon from './assets/metamask.svg';
+import PortisIcon from './assets/portis_icon.svg';
 @Component({
   tag: 'login-menu',
 })
 export class LoginMenu {
-  @Prop({mutable: true}) isLoading: boolean;
+  @Prop({ mutable: true }) isLoading: boolean;
   @Prop() isPartner: Boolean;
-  @Prop({mutable: true}) web3Provider: any;
-  @Prop({mutable: true}) community;
+  @Prop({ mutable: true }) web3Provider: any;
+  @Prop({ mutable: true }) community;
   @State() buttonClass: string = 'disabled';
-  
+
   @Event({
     eventName: 'showNewScreen',
     composed: true,
@@ -59,7 +60,7 @@ export class LoginMenu {
       console.log('asdasdasdasda');
       this.community = await fetchSkillWallet(this.web3Provider, ethereum.selectedAddress);
       console.log('sw found...', window.sessionStorage.getItem('skillWallet'));
-      this.closeModalOnLogin.emit(); 
+      this.closeModalOnLogin.emit();
     } catch (error) {
       this.onSkillwalletError.emit();
       this.isLoadingEvent.emit(false);
@@ -77,7 +78,7 @@ export class LoginMenu {
       this.web3Provider = new ethers.providers.Web3Provider(portis.provider);
       const addresses = await this.web3Provider.listAccounts();
       this.community = await fetchSkillWallet(this.web3Provider, addresses[0]);
-      this.closeModalOnLogin.emit(); 
+      this.closeModalOnLogin.emit();
     } catch (error) {
       this.onSkillwalletError.emit();
       alert(error);
@@ -87,37 +88,31 @@ export class LoginMenu {
 
   render() {
     return (
-        <div class="modal-window-child">
-          <div class="wallet-header login-menu">
-            <h2>Welcome back! 🙌</h2>
-          </div>
-
-            <div class="login-menu-buttons-container">
-                <button onClick={() => this.handleMetamaskClick()}>
-                    <div>
-                        <auth-image class="metamask" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/metamask.svg'}></auth-image>
-                        <h4>{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</h4>
-                    </div>
-                </button>
-
-                <button onClick={() => this.handlePortisClick()}>
-                    <div>
-                        <auth-image class="portis" image={'https://dito-assets.s3.eu-west-1.amazonaws.com/portis_icon.svg'}></auth-image>
-                        <h4>{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</h4>
-                    </div>
-                </button>
-
-                <button 
-                // onClick={() => this.handleMetamaskClick()}
-                disabled={true}
-                class={this.buttonClass}
-                >
-                    <div>
-                        <h4>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</h4>
-                    </div>
-                </button>
-            </div>
+      <div class="modal-window-child">
+        <div class="wallet-header login-menu">
+          <h2>Welcome back! 🙌</h2>
         </div>
+
+        <div class="login-menu-buttons-container">
+          <button class="large" onClick={() => this.handleMetamaskClick()}>
+            <div class="sw-icon" innerHTML={MetamasIcon}></div>
+            <h4 class="btn-label">{this.isPartner ? 'Login with Metamask' : 'Login with Metamask'}</h4>
+          </button>
+
+          <button class="large" onClick={() => this.handlePortisClick()}>
+            <div class="sw-icon" innerHTML={PortisIcon}></div>
+            <h4 class="btn-label">{this.isPartner ? 'Use Your Password' : 'Use Your Password'}</h4>
+          </button>
+
+          <button
+            // onClick={() => this.handleMetamaskClick()}
+            disabled={true}
+            class={`${this.buttonClass} large`}
+          >
+            <h4>{this.isPartner ? 'Scan QR Code' : 'Scan QR Code'}</h4>
+          </button>
+        </div>
+      </div>
     )
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@skill-wallet/auth",
-  "version": "0.0.92-alpha",
+  "version": "0.0.93-alpha",
   "description": "Create a SkillWallet by authenticating your Metamask wallet through your browser window.",
   "author": "DiTo Labs <team@distributed.town>",
   "keywords": [
@@ -54,7 +54,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@stencil/sass": "^1.5.2",
     "@types/jquery": "^3.5.9",
-    "rollup-plugin-node-polyfills": "^0.2.1"
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "stencil-inline-svg": "^1.1.0"
   }
 }

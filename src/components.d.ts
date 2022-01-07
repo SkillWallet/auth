@@ -59,6 +59,7 @@ export namespace Components {
         "allowCreateNewUser": string;
         "borderRadius": string;
         "buttonColor": string;
+        "buttonMode": string;
         "fontColor": string;
         "partnerKey": string;
     }
@@ -229,6 +230,7 @@ declare namespace LocalJSX {
         "allowCreateNewUser"?: string;
         "borderRadius"?: string;
         "buttonColor"?: string;
+        "buttonMode"?: string;
         "fontColor"?: string;
         "onDestroySkillwalletAuth"?: (event: CustomEvent<null>) => void;
         "onInitSkillwalletAuth"?: (event: CustomEvent<null>) => void;

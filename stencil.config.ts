@@ -1,6 +1,8 @@
 import { Config } from '@stencil/core';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 import dotenvPlugin from 'rollup-plugin-dotenv';
+import { sass } from '@stencil/sass';
+import { inlineSvg } from 'stencil-inline-svg';
 
 export const config: Config = {
   namespace: 'skillwallet-auth',
@@ -10,6 +12,8 @@ export const config: Config = {
   },
   plugins: [
     dotenvPlugin(),
+    sass(),
+    inlineSvg()
   ],
   rollupPlugins: {
     after: [

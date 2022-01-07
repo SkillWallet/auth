@@ -1,0 +1,1077 @@
+@import url('../../global/base.scss');
+@import url('../../global/style-overrides.scss');
+
+$transition: border-width 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, max-height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+$primary-color: #000000 !default; // primary color for all components
+$foreground-color: #ffffff;
+$secondary-color: #9c27b0;
+$disabled-color: #cccccc;
+$link-color: #000000; // link color
+$success-color: #52c41a; // success state color
+$warning-color: #faad14; // warning state color
+$error-color: #f44336; // error state color
+$font-size-base: 14px; // major text font size
+$heading-color: rgba(0, 0, 0, 0.85); // heading text color
+$text-color: rgba(0, 0, 0, 0.65); // major text color
+$text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
+$border-radius-base: 2px; // major border radius
+$border-color-base: white; // major border color
+$box-shadow-base: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px; // major shadow for layers
+$transition: border-width 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, max-height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+$transition-func: cubic-bezier(0.4, 0, 0.2, 1) !important;
+$transition-duration: 150ms !important;
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  outline: 0px;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 6px 16px;
+  border-radius: 0px;
+  transition: $transition;
+  box-shadow: $box-shadow-base;
+  cursor: pointer;
+  line-height: 0;
+  white-space: nowrap;
+  width: 100%;
+
+  &.large {
+    color: $foreground-color;
+    height: 75px;
+    background-color: $primary-color;
+    border: 2px solid $foreground-color;
+    fill: $foreground-color;
+    max-width: 320px;
+
+    .sw-icon svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .btn-label {
+      min-width: 75%;
+    }
+
+    h4 {
+      min-width: 75%;
+      font-size: 18px;
+      text-transform: initial;
+    }
+
+    &:not(:disabled):not(.inactiveSelection):hover,
+    &.activeSelection {
+      color: $primary-color;
+      border-color: $primary-color;
+      background-color: $foreground-color;
+      fill: $primary-color;
+    }
+  }
+
+  &.small {
+    height: 40px;
+    font-size: 18px;
+    text-transform: inherit;
+    border-color: $primary-color;
+    background-color: $foreground-color;
+    &:not(:disabled):not(.inactiveSelection):hover,
+    &.activeSelection {
+      color: $foreground-color;
+      border-color: $foreground-color;
+      background-color: $primary-color;
+    }
+  }
+
+  &.connect-wallet-button {
+    min-width: 155px;
+    max-width: 155px;
+    height: 45px;
+    font-size: 18px;
+    text-transform: inherit;
+
+    color: $foreground-color;
+    border-color: $foreground-color;
+    background-color: $primary-color;
+    &:not(:disabled):not(.inactiveSelection):hover,
+    &.activeSelection {
+      color: $primary-color;
+      border-color: $primary-color;
+      background-color: $foreground-color;
+
+      .sw-auth-icon svg {
+        fill: $primary-color;
+      }
+    }
+
+    .sw-auth-icon {
+      width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      margin-bottom: 3px;
+      svg {
+        width: 16px;
+        height: 16px;
+        fill: $foreground-color;
+      }
+    }
+
+    &.light {
+      color: $primary-color;
+      border-color: $primary-color;
+      background-color: $foreground-color;
+      &:not(:disabled):not(.inactiveSelection):hover,
+      &.activeSelection {
+        color: $foreground-color;
+        border-color: $foreground-color;
+        background-color: $primary-color;
+
+        .sw-auth-icon svg {
+          fill: $foreground-color;
+        }
+      }
+
+      .sw-auth-icon {
+        svg {
+          fill: $primary-color;
+        }
+      }
+    }
+  }
+
+  &.role-button {
+    height: 55px;
+    width: 220px;
+    font-size: 18px;
+    text-transform: inherit;
+    border-color: $primary-color;
+    background-color: $foreground-color;
+    &:not(:disabled):not(.inactiveSelection):hover,
+    &.activeSelection {
+      color: $foreground-color;
+      border-color: $foreground-color;
+      background-color: $primary-color;
+    }
+  }
+
+  &.step-button {
+    height: 60px;
+    margin: 15px auto;
+    width: 320px;
+    font-size: 18px;
+    text-transform: inherit;
+    border-color: $primary-color;
+    background-color: $foreground-color;
+
+    &:not(:disabled):not(.inactiveSelection):hover,
+    &.activeSelection {
+      color: $foreground-color;
+      border-color: $foreground-color;
+      background-color: $primary-color;
+    }
+  }
+
+  &:disabled,
+  &.inactiveSelection {
+    background-color: $disabled-color !important;
+  }
+}
+
+.step-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sw-logo-icon {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  svg {
+    height: 50px;
+  }
+}
+
+.wallet-modal-button,
+.login-menu-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 30px;
+}
+
+.modalWindow {
+  min-width: 420px;
+  min-height: 460px;
+}
+
+.qr-modal-window-child,
+.roles-screen-new-user,
+.user-role-modal-window-child,
+.user-details-modal-window-child,
+.new-user-modal-window-child {
+  min-width: 420px;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .user-role-header,
+  .user-details-header,
+  .new-user-header {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    text-align: center;
+    color: white;
+    text-align: center;
+    align-items: center;
+
+    h3 {
+      max-width: 80%;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .user-details-header {
+    margin-bottom: 45px;
+  }
+}
+
+.modal-window-child {
+  min-width: 420px;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .wallet-header,
+  .login-menu-buttons-container,
+  .wallet-modal-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .wallet-header {
+    justify-content: center;
+  }
+}
+
+.commitment-level-parent-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commitment-level-div {
+  color: white;
+  text-align: center;
+  height: 100%;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+  border: 2px solid;
+  width: calc(100% - 110px);
+  justify-content: space-around;
+  padding: 25px 0;
+
+  h3 {
+    margin: 0;
+  }
+
+  .xp-component {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: unset;
+    justify-content: center;
+    h4 {
+      margin: 10px 0;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 12px;
+    }
+  }
+
+  .commitment-level-text {
+    height: 40px;
+    width: 220px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border: 2px solid;
+
+    h3 {
+    }
+  }
+}
+
+.user-details-fields {
+  color: white;
+  padding: 0 40px;
+  h4 {
+    margin: 0;
+  }
+
+  .field-wrapper-avatar,
+  .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    & > p {
+      margin: 0;
+      margin: 8px 0 0;
+      text-align: right;
+    }
+
+    .validation-error {
+      color: red;
+      font-weight: bold;
+      text-align: right;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+  }
+
+  .field-wrapper-avatar {
+    align-items: center;
+  }
+
+  .username-field {
+    color: #0d0d0b;
+    height: 50px;
+    background-color: #fff;
+    font-size: 0.875rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    cursor: text;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    border-radius: 0px;
+    width: 100%;
+
+    input {
+      font: inherit;
+      letter-spacing: inherit;
+      color: currentcolor;
+      border: 0px;
+      box-sizing: content-box;
+      background: none;
+      height: 1.4375em;
+      margin: 0px;
+      display: block;
+      min-width: 0px;
+      width: 100%;
+      animation-name: mui-auto-fill-cancel;
+      animation-duration: 10ms;
+      padding: 16.5px 14px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.sw-uploader-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+
+  &:hover {
+    cursor: pointer !important;
+  }
+  .MuiAvatar-root {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: border-width 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, max-height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    backface-visibility: hidden;
+    border: 3px solid white;
+    border-radius: 0;
+    background: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .sw-upload-action {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+
+    .MuiAvatar-fallback {
+      fill: $primary-color;
+    }
+
+    .MuiSvgIcon-root {
+      width: 1.5em;
+      height: 1.5em;
+
+      &.remove {
+        color: $error-color;
+      }
+
+      &.upload {
+        fill: $foreground-color;
+      }
+    }
+  }
+
+  &:hover .MuiAvatar-root {
+    opacity: 0.3;
+    border-color: $foreground-color;
+    cursor: pointer;
+  }
+
+  &:hover .sw-upload-action {
+    opacity: 1;
+  }
+
+  #image-preview {
+    width: 100%;
+    background-size: cover;
+    height: 100%;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space: pre;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+    overflow: hidden !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.role-fields {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 12px;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+// .modal-window-child {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   padding-top: 14px;
+//   padding-bottom: 14px;
+//   width: 75%;
+//   margin: 0 auto;
+// }
+
+// .wallet-modal-button > button > h4 {
+//   margin-left: 55px;
+// }
+
+// .login-menu-buttons-container > button  {
+//   background: black;
+//   color: white;
+//   display: flex;
+//   width: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   border: 1px solid white;
+//   padding: 10px 10px;
+//   margin: 20px 0;
+// }
+
+// .login-menu-buttons-container > button:hover {
+//   cursor: pointer;
+// }
+
+// .login-menu-buttons-container > button:active {
+//   background-color: white;
+//   color: black;
+// }
+
+// .login-menu-buttons-container > button > div {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+//   width: 60%;
+//   margin: 0 auto;
+// }
+
+// .login-menu-buttons-container > button:last-child > div > h4 {
+//   margin: 20px auto;
+// }
+
+// .login-menu-buttons-container > button > div > *:first-child {
+//   margin-right: 20px;
+//   /* margin-left: 20px; */
+// }
+
+// .portis > img, .metamask > img {
+//   padding: 5px;
+//   width: 35px;
+// }
+
+// .wallet-modal-button {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+// }
+
+// .wallet-modal-button > button > *:first-child {
+//   width: 70px;
+// }
+
+// .wallet-modal-button button {
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   border: 1px solid white;
+//   background-color: black;
+//   color: white;
+//   padding: 0 10px;
+//   width: 100%;
+//   margin: 10px 0;
+// }
+
+// .wallet-modal-button button:hover {
+//   cursor: pointer;
+//   background-color: #36454F;
+// }
+
+// .wallet-modal-button button:active {
+//   background-color: white;
+//   color: black;
+// }
+
+// .wallet-modal-button.new-user {
+//   width: 89%;
+// }
+
+// .intro-button {
+//   height: 50px;
+//   background-color: white !important;
+//   color: black !important;
+//   justify-content: center !important;
+// }
+
+// .disabled.intro-button {
+//   color: #D3D3D3 !important;
+// }
+
+// .activeSelection {
+//   background-color: grey !important;
+//   margin-top: 0.5px !important;
+// }
+
+// .activeSelection:hover {
+//   background-color: grey;
+//   cursor: default !important;
+// }
+
+// .inactiveSelection > h4 {
+//   color: #282828;
+// }
+
+// .inactiveSelection:hover {
+//   cursor: default !important;
+//   background-color: black !important;
+// }
+
+// #topQRDiv {
+//   display: 'block';
+//   position: 'fixed';
+//   z-index: 2;
+//   left: 0;
+//   top: 0;
+//   width: '100%';
+//   height: '100%';
+//   overflow: 'auto';
+//   background-color: 'rgba(0,0,0,0.8)';
+// }
+
+.wallet-qr {
+  background-color: white;
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.qr-modal-window-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.wallet-text {
+  margin-top: 30px;
+  max-width: 70%;
+  background-color: white;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+// .new-user-header > h2 {
+//   color: white;
+//   text-align: center;
+//   font-weight: 300;
+// }
+
+// .new-user-header > h3 {
+//   color: white;
+//   text-align: center;
+//   font-weight: 300;
+//   width: 80%;
+//   margin: 20px auto;
+// }
+
+// .new-user-modal-window-child {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   padding-top: 14px;
+//   padding-bottom: 14px;
+//   width: 75%;
+//   margin: 0 auto;
+// }
+
+// .wallet-modal-button > button > *:first-child {
+//   margin-left: 20px;
+// }
+
+// .new-user-modal-window-child > .wallet-modal-button > button > *:last-child {
+//   max-height: 100px;
+//   margin-left: 15px;
+// }
+
+// .new-user-modal-window-child > button {
+//   background-color: white;
+//   width: 89%;
+//   height: 65px;
+//   margin: 20px auto;
+//   font-size: 20px;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0 10px;
+//   margin: 10px 0;
+// }
+
+// .new-user-modal-window-child > button:hover {
+//   cursor: pointer;
+// }
+
+// .new-user-modal-window-child > button:active {
+//   background-color: black;
+//   color: white;
+// }
+
+// .user-details-header, .user-role-header {
+//   text-align: center;
+//   width: 75%;
+//   margin: 0 auto;
+// }
+
+// .user-details-header h2, .user-details-header p, .user-role-header h2, .user-role-header p {
+//   color: white;
+// }
+
+// .user-details-fields > div {
+//   /* border-radius: 30px; */
+//   width: 100%;
+//   min-height: 60px;
+//   text-align: center;
+//   margin: 2px auto 20px auto !important;
+// }
+
+// .user-details-fields > div {
+//   background-color: white;
+// }
+
+// .username-div > div {
+//   max-width: 200px;
+//   margin: auto auto;
+// }
+
+// .username-div > div > * {
+//   padding: 10px 10px;
+// }
+
+// .username-div > div > p {
+//   color: black;
+//   font-size: 11px;
+//   margin-top: -1px;
+//   /* margin-right: 3%; */
+// }
+
+// .username-div > div > form > input  {
+//   margin-top: 10%;
+//   background-color: #DCDCDC;
+//   border: 2.5px solid black;
+//   width: 80%;
+//   height: 35px;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .user-details-fields > div > form > input {
+//   background-color: #DCDCDC;
+//   border-radius: 30px;
+//   width: 90%;
+//   min-height: 60px;
+//   padding-left: 10%;
+// }
+
+// .user-details-fields > div > form > p {
+//   font-size: 8px;
+// }
+
+// .user-details-fields  > h4 {
+//   text-decoration: underline;
+//   font-weight: bold;
+//   color: white;
+//   margin: 15px 0px 2px 0px !important;
+// }
+
+// .user-details-fields {
+//   display: flex;
+//   flex-direction: column;
+//   width: 75%;
+//   margin: 0 auto;
+// }
+
+// .user-details-fields > button:hover:disabled {
+//   cursor: default;
+// }
+
+// .user-details-modal-window-child {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .user-details-modal-window-child > button, .roles-screen-new-user > button, .roles-screen-partner > button {
+//   background-color: white;
+//   width: 75%;
+//   height: 80px;
+//   margin: 20px auto;
+//   font-size: 20px;
+// }
+
+// .roles-screen-new-user > button {
+//   width: 85%;
+// }
+
+// .user-details-modal-window-child > button:hover, .roles-screen-new-user > button:hover, .roles-screen-partner > button:hover {
+//   cursor: pointer;
+// }
+
+// .user-details-modal-window-child > button:hover:disabled, .roles-screen-new-user > button:hover:disabled, .roles-screen-partner > button:hover:disabled {
+//   cursor: default;
+// }
+
+// .user-details-modal-window-child > button:active, .roles-screen-new-user > button:active, .roles-screen-partner > button:active {
+//   background-color: black;
+//   color: white;
+// }
+
+// .username-div {
+//   align-items: center;
+//   text-align: center;
+// }
+
+// .avatar-div, .username-div {
+//   display: flex;
+//   justify-content: space-evenly;
+//   border-radius: 30px;
+// }
+
+// .avatar-div > p, .username-div > p {
+//   max-width: 40%;
+//   font-size: 13.3333px;
+//   color:rgba(109, 109, 109, 0.95);
+// }
+
+// .avatar-div > p {
+//   margin-top: 10%;
+// }
+
+// .username-div > p {
+//   margin-left: 10%;
+// }
+
+// .avatar-img {
+//   border-radius: 100%;
+//   width: 40px;
+//   height: 40px;
+//   margin: 10px 0 0 0;
+//   border: 1px solid black;
+// }
+
+// .user-role-modal-window-child, .roles-screen-partner, .roles-screen-new-user {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// .role-fields {
+//   width: 85%;
+//   background-color: white;
+//   /* border-radius: 20px; */
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin: 20px auto;
+// }
+
+// .role-button, .role-button-clicked {
+//   /* border-radius: 60px; */
+//   border: 2px solid black;
+//   width: 65%;
+//   height: 50px;
+//   margin: 10px 0;
+//   display: flex;
+//   align-items: center;;
+// }
+
+// .role-fields > *:first-child  {
+//   margin-top: 20px;
+// }
+
+// .role-fields > *:last-child {
+//   margin-bottom: 20px;
+// }
+
+// .role-button > h4, .role-button-clicked > h4 {
+//   margin: 0 auto;
+// }
+
+// .role-button-clicked {
+//   height: 90px;
+// }
+
+// .commitment-level-parent-div {
+//   width: 85%;
+//   padding: 20px 0;
+//   background-color: #DCDCDC;
+// }
+
+// .commitment-level-div {
+//   background-color: #DCDCDC;
+//   border: 2.5px solid black;
+//   width: 75%;
+//   margin: 0 auto;
+// }
+
+// .commitment-level-div > p {
+//   text-align: center;
+//   background-color: black;
+//   color: white;
+//   padding: 10px 0;
+//   margin: -1px -1px 0 -1px !important;
+// }
+
+// .commitment-level-text{
+//   background-color: black;
+//   width: 100%;
+//   text-align: center;
+//   border: 1px solid black;
+// }
+
+// .commitment-level-text > h3 {
+//   margin: 0 !important;
+//   padding: 10px;
+// }
+
+// .role-button:hover {
+//   cursor: pointer;
+// }
+
+// .role-button:active {
+//   background-color: black;
+//   color: white;
+// }
+
+// .role-button > *, .role-button-clicked > * {
+//   font-size: large;
+//   font-weight: bold;
+// }
+
+// .role-button > div, .role-button-clicked > div {
+//   margin-left: 20px;
+//   margin-right: 20px;
+//   width: 20px;
+//   height: 20px;
+// }
+
+// .role-button-clicked {
+//   background-color: white;
+//   width: 100%;
+//   height: 70px;
+//   margin-bottom: -35px;
+//   align-items: flex-start;
+//   padding-top: 10px;
+// }
+
+// .role-button-clicked > div {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .circle {
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 100%;
+//   border: 2px solid black;
+// }
+
+// .filled-in-circle {
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 100%;
+//   border: 1px solid black;
+//   margin: 0 auto;
+//   background-color: black;
+// }
+
+// .xp-component {
+//   z-index: 5;
+//   padding: 0 20px;
+//   height: 190px;
+//   text-align: left;
+// }
+
+// .xp-component > * {
+//   width: 90%;
+// }
+
+// .xp-component h3 {
+//   font-size: medium;
+// }
+
+// .xp-component p {
+//   font-size: 12px;
+//   margin-bottom: 25px;
+// }
+
+// .page {
+// 	margin: auto;
+// }
+
+// .header {
+// 	margin-bottom: 4vmin;
+// }
+
+// .header-title {
+// 	font-size: 3.75vmin;
+// }
+
+// .header-subtitle {
+// 	font-size: 2vmin;
+// 	text-transform: uppercase;
+// 	opacity: 0.6;
+// }
+
+// .inactiveSelection {
+//   color:rgba(0, 0, 0, 0.12);
+// }
+
+// .inactiveSelection:hover {
+//   cursor: default;
+// }
+
+// .inactiveSelection:active {
+//   background-color: black !important;
+//   color: white !important; ;
+// }
+
+// /********* RESPONSIVE STYLES ***********/
+
+// /*** DESKTOP ONLY ***/
+// @media only screen and (min-width: 1500px) {
+//   .wallet-modal-button.users-modal {
+//     flex-direction: row !important;
+//     justify-content: center !important;
+//   }
+
+//   .wallet-modal-button.users-modal > button {
+//     margin: 10px 15px !important;
+//     justify-content: center !important;
+//   }
+
+// }
+
+// /*** TABLET ONLY ***/
+
+// @media only screen and (min-width: 640px) and (max-width: 1000px) {
+//   .modalWindow {
+//     width: 60%;
+//   }
+// }
+
+// /*** MOBILE ONLY ***/
+// @media only screen and (max-width: 640px) {
+//   .modalWindow {
+//     width: 100%;
+//     height: 100%;
+//   }
+// }

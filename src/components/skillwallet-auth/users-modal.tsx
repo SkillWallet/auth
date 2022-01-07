@@ -2,6 +2,8 @@ import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
 import { changeNetwork, fetchSkillWallet } from '../../utils/utils';
 import { ethers } from 'ethers';
 import Portis from '@portis/web3';
+import SwLogo from './assets/sw-logo-icon.svg';
+import CreateIcon from './assets/create-unsel.svg';
 
 @Component({
   tag: 'users-modal',
@@ -10,7 +12,7 @@ export class UsersModal {
   @Prop() isPartner: Boolean;
   @Prop() partnerKey: string;
   @Prop({mutable: true}) isLoading: boolean;
-  
+
   @Event({
     eventName: 'showNewScreen',
     composed: true,
@@ -62,7 +64,7 @@ export class UsersModal {
       const web3Provider = new ethers.providers.Web3Provider(portis.provider);
       const addresses = await web3Provider.listAccounts();
       await fetchSkillWallet(web3Provider, addresses[0]);
-      this.closeModalOnLogin.emit(); 
+      this.closeModalOnLogin.emit();
 
     } catch (error) {
       this.isLoadingEvent.emit(false);
@@ -79,14 +81,14 @@ export class UsersModal {
           </div>
 
           <div class="wallet-modal-button users-modal">
-            <button onClick={() => this.showLoginMenu.emit()}>
-              <auth-image></auth-image>
-              <h4>{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</h4>
+            <button class="large" onClick={() => this.showLoginMenu.emit()}>
+              <div class="sw-logo-icon" innerHTML={SwLogo}></div>
+              <h4 class="btn-label">{this.isPartner ? 'Existing Partner' : 'SkillWallet'}</h4>
             </button>
 
-            <button onClick={() => this.handleNewScreen(null)} disabled={this.partnerKey === undefined ? true : false}>
-              <auth-image image={'https://dito-assets.s3.eu-west-1.amazonaws.com/plus-button-white.svg'}></auth-image>
-              <h4>{this.isPartner ? 'New Partner' : 'New User'}</h4>
+            <button class="large" onClick={() => this.handleNewScreen(null)} disabled={this.partnerKey === undefined ? true : false}>
+              <div class="sw-icon" innerHTML={CreateIcon}></div>
+              <h4 class="btn-label">{this.isPartner ? 'New Partner' : 'New User'}</h4>
             </button>
           </div>
         </div>
