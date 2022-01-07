@@ -71,7 +71,7 @@ export class RolesScreenNewUser {
     const newUserRolesBaseId = 4;
     console.log('isCoreMember: -----', isCoreMember);
     this.memberRoles = roles
-      .filter(({ isCoreTeamMember }) => isCoreTeamMember !== isCoreMember)
+      .filter(r => r.isCoreTeamMember === isCoreMember)
       .map((curr, index) => {
         const roleName = curr.roleName;
         const id = rolesIds[roleName];
