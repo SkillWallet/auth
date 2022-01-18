@@ -3,6 +3,7 @@ import { pushJSONDocument, pushImage } from '../utils/textile.hub';
 import skillWalletAbi from './skillWalletAbi.json';
 import communityAbi from './communityAbi.json';
 import partnersAbi from './partnersAgreementAbi.json';
+import diToAbi from './distributedTownAbi.json';
 // import partnersRegistryAbi from './partnersRegistryAbi.json';
 import partnersAgreementAbi from './partnersAgreementAbi.json';
 import membershipAbi from './membershipAbi.json';
@@ -67,10 +68,10 @@ export const changeNetwork = async () => {
 
 export const getSkillwalletAddress = async () => {
   const res = await fetch('https://api.skillwallet.id/api/skillwallet/config', {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-      }
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
   });
   const swAddress = await res.json();
   return swAddress;
@@ -171,49 +172,66 @@ export function format(first: string, middle: string, last: string): string {
 export const fetchSkillWallet = async (provider: any, address: string) => {
   try {
 
-  console.log('fetching...');
+    console.log('fetching...');
 
-  const skillWalletAddress = await getSkillwalletAddress();
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(
-    skillWalletAddress.skillWalletAddress,
-    skillWalletAbi,
-    signer,
-  );
+    const skillWalletAddress = await getSkillwalletAddress();
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      skillWalletAddress.skillWalletAddress,
+      skillWalletAbi,
+      signer,
+    );
 
-  const tokenId = await contract.getSkillWalletIdByOwner(address);
-  console.log(tokenId);
+    const tokenId = await contract.getSkillWalletIdByOwner(address);
+    console.log(tokenId);
 
-  const isActive = contract.isSkillWalletActivated(tokenId);
-  if (isActive) {
-    const jsonUri = await contract.tokenURI(tokenId);
-    const community = await contract.getActiveCommunity(tokenId);
+    const isActive = contract.isSkillWalletActivated(tokenId);
+    if (isActive) {
+      const jsonUri = await contract.tokenURI(tokenId);
+      const community = await contract.getActiveCommunity(tokenId);
+      const communityContract = new ethers.Contract(
+        community,
+        communityAbi,
+        signer,
+      );
 
-    const partnersAgreementKey = await fetchKeyAndPAByCommunity(community);
-    let res = await fetch(jsonUri);
-    const jsonMetadata = await res.json();
-    const isCoreTeam = await isCoreTeamMember(partnersAgreementKey.partnersAgreementAddress, address);
-    console.log('is core team member?', isCoreTeam);
 
-    let skillWallet: any = {
-      imageUrl: jsonMetadata.image,
-      nickname: jsonMetadata.properties.username,
-      skills: jsonMetadata.properties.skills,
-      community: community,
-      diToCredits: 0,
-      tokenId: tokenId.toString(),
-      isCoreTeamMember: isCoreTeam
-    };
+      const ditoAddress = communityContract.distributedTownAddr();
+      const ditoContract = new ethers.Contract(
+        ditoAddress,
+        diToAbi,
+        signer,
+      );
 
-    if (skillWallet && skillWallet.nickname) {
-      console.log('setting local storage with SW');
-      window.sessionStorage.setItem('skillWallet', JSON.stringify(skillWallet));
-    } else if (!skillWallet) {
-      alert('Unable to find a Skill Wallet and nickname with your ID')
+      const isDiToNative = await ditoContract.isDiToNativeCommunity(community);
+      let isCoreTeam = false;
+      if (!isDiToNative) {
+        const partnersAgreementKey = await fetchKeyAndPAByCommunity(community);
+        const isCoreTeam = await isCoreTeamMember(partnersAgreementKey.partnersAgreementAddress, address);
+        console.log('is core team member?', isCoreTeam);
+      }
+      let res = await fetch(jsonUri);
+      const jsonMetadata = await res.json();
+
+      let skillWallet: any = {
+        imageUrl: jsonMetadata.image,
+        nickname: jsonMetadata.properties.username,
+        skills: jsonMetadata.properties.skills,
+        community: community,
+        diToCredits: 0,
+        tokenId: tokenId.toString(),
+        isCoreTeamMember: isCoreTeam
+      };
+
+      if (skillWallet && skillWallet.nickname) {
+        console.log('setting local storage with SW');
+        window.sessionStorage.setItem('skillWallet', JSON.stringify(skillWallet));
+      } else if (!skillWallet) {
+        alert('Unable to find a Skill Wallet and nickname with your ID')
+      }
+
+      return community;
     }
-
-    return community;
-  }
   } catch (error) {
     sw.dispatchEvent(event);
     if (error.data && error.data.message.includes("invalid")) {
@@ -347,9 +365,9 @@ export const generateMembershipNFT = async (canvas, demoImg, logo, community, ro
 
     console.log(mintTx);
 
-} catch (err) {
-  console.log('woops: ', err);
-}
+  } catch (err) {
+    console.log('woops: ', err);
+  }
 };
 
 export const isCoreTeamMember = async (partnersAgreementAddress, user) => {
@@ -357,9 +375,9 @@ export const isCoreTeamMember = async (partnersAgreementAddress, user) => {
   const signer = provider.getSigner();
 
   const partnersAgreementContract = new ethers.Contract(
-      partnersAgreementAddress,
-      JSON.stringify(partnersAgreementAbi),
-      signer,
+    partnersAgreementAddress,
+    JSON.stringify(partnersAgreementAbi),
+    signer,
   )
 
   const isCoreTeamMember = await partnersAgreementContract.isCoreTeamMember(user);
