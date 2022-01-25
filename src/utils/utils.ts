@@ -113,8 +113,7 @@ export const joinCommunity = async (provider, communityAddress, username, role, 
 
     const createTx = await contract.joinNewMember(
       url,
-      role['roleId'],
-      2006,
+      role['roleId']
     );
 
     const communityTransactionResult = await createTx.wait();
@@ -207,7 +206,7 @@ export const fetchSkillWallet = async (provider: any, address: string) => {
       let isCoreTeam = false;
       if (!isDiToNative) {
         const partnersAgreementKey = await fetchKeyAndPAByCommunity(community);
-        const isCoreTeam = await isCoreTeamMember(partnersAgreementKey.partnersAgreementAddress, address);
+        const isCoreTeam = await isCoreTeamMember(partnersAgreementKey.communityAddress, address);
         console.log('is core team member?', isCoreTeam);
       }
       let res = await fetch(jsonUri);
@@ -370,17 +369,17 @@ export const generateMembershipNFT = async (canvas, demoImg, logo, community, ro
   }
 };
 
-export const isCoreTeamMember = async (partnersAgreementAddress, user) => {
+export const isCoreTeamMember = async (communityAddress, user) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
-  const partnersAgreementContract = new ethers.Contract(
-    partnersAgreementAddress,
-    JSON.stringify(partnersAgreementAbi),
+  const communityContract = new ethers.Contract(
+    communityAddress,
+    JSON.stringify(communityAbi),
     signer,
   )
 
-  const isCoreTeamMember = await partnersAgreementContract.isCoreTeamMember(user);
+  const isCoreTeamMember = await communityContract.isCoreTeamMember(user);
   console.log('isCoreTeamMember', isCoreTeamMember);
 
   return isCoreTeamMember;
