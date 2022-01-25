@@ -66,7 +66,8 @@ export class RolesScreenNewUser {
   }
 
   async assignMemberRoles() {
-    const isCoreMember = await isCoreTeamMember(this.community.partnersAgreementAddress, window.ethereum.selectedAddress);
+    console.log(this.community);
+    const isCoreMember = await isCoreTeamMember(this.community.address, window.ethereum.selectedAddress);
     const roles = this.community?.roles?.roles || [];
     const newUserRolesBaseId = 4;
     console.log('isCoreMember: -----', isCoreMember);
